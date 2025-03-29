@@ -63,12 +63,8 @@ def list_of_files(
     **kwargs,
 ):
     if cloud:
-        from bluer_objects.storage import instance as storage
-
-        return storage.list_of_objects(
-            object_name,
-            **kwargs,
-        )
+        # TODO
+        return []
 
     return file.list_of(
         os.path.join(
