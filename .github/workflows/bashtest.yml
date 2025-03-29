@@ -27,14 +27,14 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          BLUE_PLUGIN_SECRET: ${{ secrets.BLUE_PLUGIN_SECRET }}
+          BLUER_OBJECTS_SECRET: ${{ secrets.BLUER_OBJECTS_SECRET }}
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
           echo "AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID"
           echo "AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY"
-          echo "BLUE_PLUGIN_SECRET: $BLUE_PLUGIN_SECRET"
+          echo "BLUER_OBJECTS_SECRET: $BLUER_OBJECTS_SECRET"
           echo "DATABRICKS_HOST: $DATABRICKS_HOST"
           echo "DATABRICKS_TOKEN: $DATABRICKS_TOKEN"
 
-          ./.github/workflows/bashtest.sh blue_plugin
+          ./.github/workflows/bashtest.sh bluer_objects

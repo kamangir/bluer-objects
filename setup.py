@@ -1,6 +1,5 @@
+from bluer_objects import NAME, VERSION, DESCRIPTION, REPO_NAME
 from blueness.pypi import setup
-
-from blue_plugin import NAME, VERSION, DESCRIPTION, REPO_NAME
 
 setup(
     filename=__file__,
@@ -10,9 +9,20 @@ setup(
     description=DESCRIPTION,
     packages=[
         NAME,
+        f"{NAME}.file",
+        f"{NAME}.graphics",
         f"{NAME}.help",
-        f"{NAME}.help.node",
-        f"{NAME}.node",
+        f"{NAME}.host",
+        f"{NAME}.logger",
+        f"{NAME}.metadata",
+        f"{NAME}.mlflow",
+        f"{NAME}.mysql",
+        f"{NAME}.mysql.cache",
+        f"{NAME}.mysql.relations",
+        f"{NAME}.mysql.tags",
+        f"{NAME}.README",
+        f"{NAME}.storage",
+        f"{NAME}.tests",
     ],
     include_package_data=True,
     package_data={
@@ -21,5 +31,8 @@ setup(
             "sample.env",
             ".abcli/**/*.sh",
         ],
+    },
+    extras_require={
+        "opencv": ["opencv-python"],
     },
 )

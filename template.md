@@ -1,43 +1,18 @@
-# 🌀 blue-plugin
+# 🌀 bluer-objects
 
-🌀 `@plugin` is a git template for an 🪄 [`awesome-bash-cli`](https://github.com/kamangir/awesome-bash-cli) (`abcli`) plugin, to build [things like these](https://github.com/kamangir?tab=repositories), that out-of-the-box support,
+🌀 `bluer-objects` are the inputs and outputs of [AI algo](https://github.com/kamangir/giza). They are maintained in cloud storage and their metadata is tracked by [MLflow](https://mlflow.org/).
 
-- a [github repo](https://github.com/) with [actions](https://github.com/features/actions).
-- [pylint](https://pypi.org/project/pylint/).
-- [pytest](https://docs.pytest.org/).
-- a pip-installable python + bash package published to [pypi](https://pypi.org/).
-- a bash [command interface](./blue_plugin/.abcli/blue_plugin.sh).
-- [bash testing](./.github/workflows/bashtest.yml).
-- secret management through [ssm](https://docs.aws.amazon.com/secretsmanager/).
-- in-repo [compiled](https://github.com/kamangir/blue-objects/tree/main/blue_objects/README) READMEs. example: [template.md](https://github.com/kamangir/palisades/blob/main/palisades/docs/damage-analytics-template.md) -> [README.md](https://github.com/kamangir/palisades/blob/main/palisades/docs/damage-analytics.md).
-- [object management](https://github.com/kamangir/blue-objects) on [Amazon S3](https://aws.amazon.com/s3/) with metadata tracking by [MLflow](https://mlflow.org/).
-- [workflow management](https://github.com/kamangir/notebooks-and-scripts/tree/main/blueflow/workflow) on [AWS Batch](https://aws.amazon.com/batch/).
-- [docker](https://github.com/kamangir/notebooks-and-scripts/blob/main/blueflow/.abcli/docker.sh) and [SageMaker](https://github.com/kamangir/notebooks-and-scripts/blob/main/blueflow/.abcli/sagemaker.sh) enabled.
-
-## installation
+For example, the Sentinel-2 [datacube](https://github.com/kamangir/blue-geo/tree/main/blue_geo/datacube) `datacube-EarthSearch-sentinel_2_l1c-S2A_10UDC_20240731_0_L1C` and 🌐 [`@geo watch` outputs](https://github.com/kamangir/blue-geo/tree/main/blue_geo/watch) are `bluer-objects`.
 
 ```bash
-pip install blue-plugin
+pip install bluer-objects
 ```
 
-## creating a blue-plugin
+Also home to [blue README](./bluer_objects/README/).
 
-1️⃣ create a new repository from [this template](https://github.com/kamangir/blue-plugin),
+---
 
-2️⃣ complete `<repo-name>` and `<plugin-name>` and run,
-
-```bash
-@git clone <repo-name> cd
-
-@plugins transform <repo-name>
-
-@init
-<plugin-name> help
-```
-
-## features
-
-items:::
+> 🌀 [`blue-objects`](https://github.com/kamangir/blue-objects) for the [Global South](https://github.com/kamangir/blue-south).
 
 ---
 
