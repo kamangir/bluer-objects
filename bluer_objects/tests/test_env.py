@@ -1,10 +1,10 @@
-from abcli.tests.test_env import test_abcli_env
+from bluer_ai.tests.test_env import test_bluer_ai_env
 
 from bluer_objects import env
 
 
 def test_required_env():
-    test_abcli_env()
+    test_bluer_ai_env()
 
 
 def test_bluer_objects_env():
