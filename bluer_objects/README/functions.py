@@ -6,13 +6,15 @@ from blueness import module
 from bluer_options import fullname
 
 from bluer_objects import NAME as MY_NAME, ICON as MY_ICON
-from bluer_objects.env import ABCLI_PUBLIC_PREFIX
 from bluer_objects.metadata import get_from_object
 from bluer_objects import file
 from bluer_objects import markdown
 from bluer_objects.logger import logger
 
 MY_NAME = module.name(__file__, MY_NAME)
+
+
+ABCLI_PUBLIC_PREFIX = "to-be-removed"
 
 
 def build(
