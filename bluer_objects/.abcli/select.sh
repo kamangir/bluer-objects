@@ -4,7 +4,6 @@ function abcli_select() {
     local object_name=$(abcli_clarify_object "$1" $(abcli_string_timestamp))
 
     local options=$2
-    local update_trail=$(abcli_option_int "$options" trail 1)
     local do_open=$(abcli_option_int "$options" open 0)
     local type_name=$(abcli_option "$options" type object)
 
@@ -20,15 +19,13 @@ function abcli_select() {
     export abcli_${type_name}_path=$object_path
     mkdir -p $object_path
 
-    if [ "$type_name" == object ]; then
+    [[ "$type_name" == object ]] &&
         cd $object_path
-
-        [[ "$update_trail" == 1 ]] &&
-            abcli_trail $object_path/$object_name
-    fi
 
     abcli_log "📂 $type_name :: $object_name"
 
     [[ "$do_open" == 1 ]] &&
         open $object_path
+
+    return 0
 }
