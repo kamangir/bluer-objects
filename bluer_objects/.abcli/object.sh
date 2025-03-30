@@ -22,33 +22,7 @@ function abcli_clarify_object() {
         object_name=${!object_var_prev2}
     fi
 
-    if [ "$(abcli_keyword_is $object_name validate)" == true ]; then
-        local object_name="validate"
-    fi
-
     mkdir -p $ABCLI_OBJECT_ROOT/$object_name
 
     echo $object_name
-}
-
-function abcli_object() {
-    local task=$(abcli_unpack_keyword $1 void)
-
-    if [ "$task" == "open" ]; then
-        local object_name=$(abcli_clarify_object $2 .)
-
-        abcli_download - $object_name
-
-        rm -v ../$object_name.tar.gz
-        aws s3 rm "$ABCLI_S3_OBJECT_PREFIX/$object_name.tar.gz"
-
-        abcli_tags set $object_name ~solid
-
-        abcli_upload - $object_name
-
-        return
-    fi
-
-    abcli_log_error "@object: $task: command not found."
-    return 1
 }

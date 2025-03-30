@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 function abcli_mlflow_cache() {
-    local task=$(abcli_unpack_keyword $1 help)
+    local task=$1
 
     local keyword=$2
 

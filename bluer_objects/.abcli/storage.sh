@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 function abcli_storage() {
-    local task=$(abcli_unpack_keyword $1 void)
+    local task=$1
 
     local function_name=abcli_storage_$task
     if [[ $(type -t $function_name) == "function" ]]; then

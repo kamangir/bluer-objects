@@ -3,7 +3,7 @@
 export MLFLOW_TRACKING_URI="databricks"
 
 function abcli_mlflow() {
-    local task=$(abcli_unpack_keyword $1 help)
+    local task=$1
 
     local function_name=abcli_mlflow_$task
     if [[ $(type -t $function_name) == "function" ]]; then

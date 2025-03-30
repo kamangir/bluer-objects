@@ -1,5 +1,7 @@
 #! /usr/bin/env bash
 
+alias @ai=blue_ai
+
 alias @download=abcli_download
 
 alias @gif=abcli_gif
@@ -24,8 +26,6 @@ alias @metadata=abcli_metadata
 alias @mlflow=abcli_mlflow
 
 alias @mysql=abcli_mysql
-
-alias @object=abcli_object
 
 alias @objects=bluer_objects
 

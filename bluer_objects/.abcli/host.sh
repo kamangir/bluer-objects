@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 function abcli_host() {
-    local task=$(abcli_unpack_keyword $1 void)
+    local task=$1
     local options=$2
 
     if [ $task == "get" ]; then

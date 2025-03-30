@@ -22,7 +22,8 @@ function abcli_publish() {
         aws s3 cp \
             $ABCLI_S3_OBJECT_PREFIX/$object_name.tar.gz \
             s3://$ABCLI_AWS_S3_PUBLIC_BUCKET_NAME/$public_object_name.tar.gz
-        abcli_object open $object_name
+        aws s3 rm \
+            $ABCLI_S3_OBJECT_PREFIX/$object_name.tar.gz
 
         abcli_log "🔗 $ABCLI_PUBLIC_PREFIX/$public_object_name.tar.gz"
         return
