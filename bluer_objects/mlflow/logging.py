@@ -4,7 +4,7 @@ import glob
 import mlflow
 
 from blueness import module
-from blue_options.logger import crash_report
+from bluer_options.logger import crash_report
 
 from bluer_objects import file, objects, NAME
 from bluer_objects.mlflow.runs import start_run, end_run

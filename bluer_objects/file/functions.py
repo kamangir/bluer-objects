@@ -6,8 +6,8 @@ import os
 import shutil
 
 from blueness import module
-from blue_options import string
-from blue_options.logger import crash_report
+from bluer_options import string
+from bluer_options.logger import crash_report
 
 from bluer_objects import NAME
 from bluer_objects.env import abcli_object_path

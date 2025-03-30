@@ -1,4 +1,4 @@
-from blue_options.string import random
+from bluer_options.string import random
 
 from bluer_objects.markdown import generate_table
 

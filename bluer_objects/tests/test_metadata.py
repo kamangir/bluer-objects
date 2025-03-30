@@ -1,7 +1,7 @@
 import pytest
 from typing import Callable
 
-from blue_options.string import random
+from bluer_options.string import random
 
 from bluer_objects import file
 from bluer_objects.objects import unique_object, object_path, path_of

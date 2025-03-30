@@ -1,8 +1,8 @@
 import mlflow
 
 from blueness import module
-from blue_options import string
-from blue_options.logger import crash_report
+from bluer_options import string
+from bluer_options.logger import crash_report
 
 from bluer_objects import NAME, VERSION
 from bluer_objects.mlflow.objects import get_id

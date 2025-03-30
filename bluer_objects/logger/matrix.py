@@ -5,8 +5,8 @@ import math
 import cv2
 
 from blueness import module
-from blue_options import string
-from abcli.host import signature
+from bluer_options import string
+from blue_ai.host import signature
 
 from bluer_objects import NAME
 from bluer_objects import file

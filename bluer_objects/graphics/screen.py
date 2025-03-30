@@ -2,7 +2,7 @@ import os
 from typing import Tuple
 
 from blueness import module
-from blue_options.host.functions import (
+from bluer_options.host.functions import (
     is_rpi,
     is_headless,
     is_mac,

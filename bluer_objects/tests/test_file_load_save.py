@@ -2,7 +2,7 @@ import pytest
 from typing import Callable, Union, Tuple, List
 import numpy as np
 
-from blue_options import string
+from bluer_options import string
 
 from bluer_objects import file, objects, env
 from bluer_objects.file.load import (

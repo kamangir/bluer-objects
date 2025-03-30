@@ -4,7 +4,7 @@ from blueness import module
 from blueness.argparse.generic import sys_exit
 
 from bluer_objects import NAME, file
-from blue_options.host import signature as host_signature
+from bluer_options.host import signature as host_signature
 from bluer_objects.graphics import add_signature
 from bluer_objects.objects import signature as object_signature
 from bluer_objects.logger import logger

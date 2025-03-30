@@ -6,9 +6,9 @@ import dill
 import pandas as pd
 
 from blueness import module
-from blue_options.logger import crash_report
-from blue_options import string
-from blue_options.host import is_jupyter
+from bluer_options.logger import crash_report
+from bluer_options import string
+from bluer_options.host import is_jupyter
 
 from bluer_objects import NAME
 from bluer_objects.file.classes import JsonEncoder

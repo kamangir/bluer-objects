@@ -5,7 +5,7 @@ function abcli_host() {
     local options=$2
 
     if [ $task == "get" ]; then
-        python3 -m blue_options.host \
+        python3 -m bluer_options.host \
             get \
             --keyword "$2" \
             "${@:3}"

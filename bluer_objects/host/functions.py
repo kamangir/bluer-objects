@@ -2,7 +2,7 @@ import os
 from typing import Union, Tuple, List
 
 from blueness import module
-from blue_options.logger import crash_report
+from bluer_options.logger import crash_report
 
 from bluer_objects import NAME, file
 from bluer_objects.logger import logger

@@ -3,7 +3,7 @@ from tqdm import tqdm
 
 from blueness import module
 from blueness.argparse.generic import sys_exit
-from blue_options import string
+from bluer_options import string
 
 from bluer_objects import file, NAME
 from bluer_objects.logger import logger

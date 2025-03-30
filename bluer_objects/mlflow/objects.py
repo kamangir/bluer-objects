@@ -3,7 +3,7 @@ import mlflow
 from mlflow.tracking import MlflowClient
 
 from blueness import module
-from blue_options.logger import crash_report
+from bluer_options.logger import crash_report
 
 from bluer_objects import NAME
 from bluer_objects.env import ABCLI_MLFLOW_EXPERIMENT_PREFIX

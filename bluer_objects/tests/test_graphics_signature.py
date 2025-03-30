@@ -2,7 +2,7 @@ import pytest
 from typing import Union, List
 import numpy as np
 
-from blue_options import string
+from bluer_options import string
 
 from bluer_objects.env import DUMMY_TEXT
 from bluer_objects.graphics.signature import add_signature, justify_text

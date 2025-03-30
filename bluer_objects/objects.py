@@ -1,6 +1,6 @@
 import os
 
-from blue_options import string
+from bluer_options import string
 
 from bluer_objects import file, path
 from bluer_objects.env import (

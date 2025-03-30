@@ -3,8 +3,8 @@ from mlflow.tracking import MlflowClient
 from mlflow.entities import ViewType
 
 from blueness import module
-from blue_options.options import Options
-from blue_options.logger import crash_report
+from bluer_options.options import Options
+from bluer_options.logger import crash_report
 
 from bluer_objects import NAME
 from bluer_objects.mlflow.objects import to_experiment_name, to_object_name

@@ -3,7 +3,7 @@ import os
 import yaml
 
 from blueness import module
-from blue_options import fullname
+from bluer_options import fullname
 
 from bluer_objects import NAME as MY_NAME, ICON as MY_ICON
 from bluer_objects.env import ABCLI_PUBLIC_PREFIX

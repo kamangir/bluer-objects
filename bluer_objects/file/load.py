@@ -4,8 +4,8 @@ import json
 import numpy as np
 
 from blueness import module
-from blue_options import string
-from blue_options.logger import crash_report
+from bluer_options import string
+from bluer_options.logger import crash_report
 
 from bluer_objects import NAME
 from bluer_objects.logger import logger

@@ -1,7 +1,7 @@
 import pytest
 
-from blue_options.options import Options
-from blue_options import string
+from bluer_options.options import Options
+from bluer_options import string
 
 from bluer_objects.objects import unique_object
 from bluer_objects.mlflow import cache
