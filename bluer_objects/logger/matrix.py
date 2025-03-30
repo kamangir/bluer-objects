@@ -6,7 +6,7 @@ import cv2
 
 from blueness import module
 from bluer_options import string
-from blue_ai.host import signature
+from bluer_ai.host import signature
 
 from bluer_objects import NAME
 from bluer_objects import file

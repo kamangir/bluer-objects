@@ -6,9 +6,9 @@ function bashtest() {
     local plugin_name=$1
 
     cd ..
-    git clone https://github.com/kamangir/blue-ai.git
+    git clone https://github.com/kamangir/bluer-ai.git
 
-    source $(pwd)/blue-ai/blue_ai/.abcli/blue_ai.sh ~terraform \
+    source $(pwd)/bluer-ai/bluer_ai/.abcli/bluer_ai.sh ~terraform \
         $plugin_name test
 
     return

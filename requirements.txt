@@ -1,4 +1,4 @@
-abcli
+bluer_ai
 
 dill
 mlflow

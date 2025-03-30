@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-alias @ai=blue_ai
+alias @ai=bluer_ai
 
 alias @download=abcli_download
 
