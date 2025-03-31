@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_storage_status() {
+function bluer_ai_storage_status() {
     local options=$1
     local count=$(abcli_option_int "$options" count 10)
     local depth=$(abcli_option_int "$options" depth 2)

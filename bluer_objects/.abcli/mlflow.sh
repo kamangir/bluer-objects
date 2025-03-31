@@ -26,4 +26,4 @@ function abcli_mlflow() {
     return 1
 }
 
-abcli_source_caller_suffix_path /mlflow
+bluer_ai_source_caller_suffix_path /mlflow

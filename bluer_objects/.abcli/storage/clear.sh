@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_storage_clear() {
+function bluer_ai_storage_clear() {
     local options=$1
     local do_dryrun=$(abcli_option_int "$options" dryrun 1)
 
@@ -17,7 +17,7 @@ function abcli_storage_clear() {
     fi
 
     local recent_projects=$(python3 -c "from bluer_objects import file; print('+'.join(file.load_yaml('$recent_filename')[1]))")
-    abcli_log_list "$recent_projects" \
+    bluer_ai_log_list "$recent_projects" \
         --delim + \
         --after "object(s) to keep."
 

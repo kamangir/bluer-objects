@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_storage_exists() {
+function bluer_ai_storage_exists() {
     python3 -m bluer_objects.storage \
         exists \
         --object_name "$1" \

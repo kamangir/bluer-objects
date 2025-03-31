@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_publish() {
+function bluer_ai_publish() {
     local options=$1
     local do_download=$(abcli_option_int "$options" download 1)
     local do_tar=$(abcli_option_int "$options" tar 0)

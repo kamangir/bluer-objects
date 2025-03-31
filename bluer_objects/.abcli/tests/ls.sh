@@ -1,13 +1,13 @@
 #! /usr/bin/env bash
 
 function test_bluer_objects_ls() {
-    abcli_select
+    bluer_ai_select
 
     abcli_upload
 
-    abcli_ls cloud
+    bluer_ai_ls cloud
 
-    abcli_ls local
+    bluer_ai_ls local
 
-    abcli_ls "$abcli_path_bash/tests/*.sh"
+    bluer_ai_ls "$abcli_path_bash/tests/*.sh"
 }

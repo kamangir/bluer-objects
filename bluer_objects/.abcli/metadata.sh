@@ -13,4 +13,4 @@ function abcli_metadata() {
     return 1
 }
 
-abcli_source_caller_suffix_path /metadata
+bluer_ai_source_caller_suffix_path /metadata

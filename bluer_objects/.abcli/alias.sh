@@ -19,7 +19,7 @@ alias @file=bluer_objects_file
 
 alias @host=abcli_host
 
-alias @ls=abcli_ls
+alias @ls=bluer_ai_ls
 
 alias @metadata=abcli_metadata
 
@@ -29,8 +29,8 @@ alias @mysql=abcli_mysql
 
 alias @objects=bluer_objects
 
-alias @publish=abcli_publish
+alias @publish=bluer_ai_publish
 
-alias @select=abcli_select
+alias @select=bluer_ai_select
 
 alias @upload=abcli_upload

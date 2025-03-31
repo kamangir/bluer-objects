@@ -75,7 +75,7 @@ function test_bluer_objects_help() {
         \
         "bluer_objects"; do
         abcli_eval ,$options \
-            abcli_help $module
+            bluer_ai_help $module
         [[ $? -ne 0 ]] && return 1
 
         abcli_hr

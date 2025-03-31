@@ -13,4 +13,4 @@ function abcli_mlflow_tags() {
     return 1
 }
 
-abcli_source_caller_suffix_path /tags
+bluer_ai_source_caller_suffix_path /tags

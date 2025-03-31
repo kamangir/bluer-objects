@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_storage_rm() {
+function bluer_ai_storage_rm() {
     local options=$1
     local do_dryrun=$(abcli_option_int "$options" dryrun 1)
 

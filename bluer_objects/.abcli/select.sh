@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_select() {
+function bluer_ai_select() {
     local object_name=$(abcli_clarify_object "$1" $(abcli_string_timestamp))
 
     local options=$2

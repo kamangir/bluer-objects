@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_ls() {
+function bluer_ai_ls() {
     local options=$1
     local on_cloud=$(abcli_option_int "$options" cloud 0)
     local on_local=$(abcli_option_int "$options" local 0)

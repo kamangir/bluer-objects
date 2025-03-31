@@ -32,5 +32,5 @@ function abcli_mlflow_browse() {
         fi
     fi
 
-    abcli_browse $url
+    bluer_ai_browse $url
 }
