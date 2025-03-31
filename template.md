@@ -12,7 +12,7 @@ Also home to [blue README](./bluer_objects/README/).
 
 ---
 
-> 🌀 [`blue-objects`](https://github.com/kamangir/blue-objects) for the [Global South](https://github.com/kamangir/blue-south).
+> 🌀 [`blue-objects`](https://github.com/kamangir/blue-objects) for the [Global South](https://github.com/kamangir/bluer-south).
 
 ---
 
