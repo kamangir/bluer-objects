@@ -8,7 +8,7 @@ function bashtest() {
     cd ..
     git clone https://github.com/kamangir/bluer-ai.git
 
-    source $(pwd)/bluer-ai/bluer_ai/.abcli/bluer_ai.sh ~terraform \
+    source $(pwd)/bluer-ai/bluer_ai/.abcli/bluer_ai.sh ~terraform,verbose \
         $plugin_name test
 
     return
