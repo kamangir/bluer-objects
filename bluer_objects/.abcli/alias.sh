@@ -8,9 +8,9 @@ alias @gif=abcli_gif
 
 alias @assets=abcli_assets
 
-alias @cache=abcli_cache
-alias @ref="abcli_cache read"
-alias @tags=abcli_mlflow_tags
+alias @cache=bluer_objects_mlflow_cache
+alias @ref="bluer_objects_mlflow_cache read"
+alias @tags=bluer_objects_mlflow_tags
 
 alias @clone=bluer_objects_clone
 alias @cp=bluer_objects_clone
@@ -23,7 +23,7 @@ alias @ls=bluer_ai_ls
 
 alias @metadata=bluer_objects_metadata
 
-alias @mlflow=abcli_mlflow
+alias @mlflow=bluer_objects_mlflow
 
 alias @mysql=abcli_mysql
 

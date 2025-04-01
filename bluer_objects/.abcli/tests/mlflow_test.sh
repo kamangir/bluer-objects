@@ -3,5 +3,5 @@
 function test_bluer_objects_mlflow_test() {
     local options=$1
 
-    abcli_mlflow_test "$@"
+    bluer_objects_mlflow_test "$@"
 }

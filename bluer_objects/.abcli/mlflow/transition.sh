@@ -2,7 +2,7 @@
 
 export ABCLI_MLFLOW_STAGES="Staging|Production|Archived"
 
-function abcli_mlflow_transition() {
+function bluer_objects_mlflow_transition() {
     local options=$1
     local model_name=$(abcli_option "$options" model)
     local stage_name=$(abcli_option_choice "$options" $(echo $ABCLI_MLFLOW_STAGES | tr \| ,) Staging)

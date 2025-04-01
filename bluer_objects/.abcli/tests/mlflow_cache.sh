@@ -4,11 +4,11 @@ function test_bluer_objects_mlflow_cache() {
     local keyword="test-keyword-$(abcli_string_timestamp_short)"
     local value="test-value-$(abcli_string_timestamp_short)"
 
-    abcli mlflow cache write \
+    bluer_objects_mlflow cache write \
         $keyword $value
     [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        $(abcli mlflow cache read $keyword) \
+        $(bluer_objects_mlflow cache read $keyword) \
         $value
 }

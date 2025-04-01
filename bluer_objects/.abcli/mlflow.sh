@@ -2,10 +2,10 @@
 
 export MLFLOW_TRACKING_URI=$HOME/mlruns
 
-function abcli_mlflow() {
+function bluer_objects_mlflow() {
     local task=$1
 
-    local function_name=abcli_mlflow_$task
+    local function_name=bluer_objects_mlflow_$task
     if [[ $(type -t $function_name) == "function" ]]; then
         $function_name "${@:2}"
         return

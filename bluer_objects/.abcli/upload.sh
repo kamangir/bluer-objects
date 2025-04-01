@@ -16,6 +16,6 @@ function bluer_objects_upload() {
     [[ $? -ne 0 ]] && return 1
 
     if [[ -z "$filename" ]]; then
-        abcli_mlflow_log_run $object_name
+        bluer_objects_mlflow_log_run $object_name
     fi
 }

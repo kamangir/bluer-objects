@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_mlflow_tags_clone() {
+function bluer_objects_mlflow_tags_clone() {
     local source_object=$(abcli_clarify_object $1 ..)
 
     local destination_object=$(abcli_clarify_object $2 .)

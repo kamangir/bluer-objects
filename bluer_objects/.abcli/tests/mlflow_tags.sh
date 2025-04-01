@@ -5,25 +5,25 @@ function test_bluer_objects_mlflow_tags_validation() {
     local tag="test-tag-$(abcli_string_timestamp_short)"
     local value="test-value-$(abcli_string_timestamp_short)"
 
-    abcli mlflow tags set \
+    bluer_objects_mlflow tags set \
         $object_name \
         $tag=$value
     [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        "$(abcli mlflow tags get $object_name --tag $tag)" \
+        "$(bluer_objects_mlflow tags get $object_name --tag $tag)" \
         $value
     [[ $? -ne 0 ]] && return 1
 
     abcli_assert \
-        "$(abcli mlflow tags get $object_name --tag some-tag)" \
+        "$(bluer_objects_mlflow tags get $object_name --tag some-tag)" \
         - empty
 }
 
 function test_bluer_objects_mlflow_tags_search() {
     local options=$1
 
-    abcli_mlflow_tags search \
+    bluer_objects_mlflow_tags search \
         cloned.firms_area-template-v1=True \
         --log 0
 }

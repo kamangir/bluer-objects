@@ -36,12 +36,12 @@ function bluer_objects_clone() {
     fi
 
     [[ "$clone_tags" == 1 ]] &&
-        abcli_mlflow_tags clone \
+        bluer_objects_mlflow_tags clone \
             $object_1_name \
             $object_2_name
 
     [[ "$do_relate" == 1 ]] &&
-        abcli_mlflow_tags set \
+        bluer_objects_mlflow_tags set \
             $object_2_name \
             cloned.$object_1_name
 

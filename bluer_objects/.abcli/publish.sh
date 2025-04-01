@@ -11,7 +11,7 @@ function bluer_ai_publish() {
     [[ "$do_download" == 1 ]] &&
         bluer_objects_download - $object_name
 
-    abcli_mlflow_tags set $object_name published
+    bluer_objects_mlflow_tags set $object_name published
 
     local public_object_name=$(abcli_option "$options" as $object_name)
 

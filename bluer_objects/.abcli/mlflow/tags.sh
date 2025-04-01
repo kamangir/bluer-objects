@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 
-function abcli_mlflow_tags() {
+function bluer_objects_mlflow_tags() {
     local task=$1
 
-    local function_name=abcli_mlflow_tags_$task
+    local function_name=bluer_objects_mlflow_tags_$task
     if [[ $(type -t $function_name) == "function" ]]; then
         $function_name "${@:2}"
         return

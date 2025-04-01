@@ -1,13 +1,13 @@
 #! /usr/bin/env bash
 
-function abcli_mlflow_cache() {
+function bluer_objects_mlflow_cache() {
     local task=$1
 
     local keyword=$2
 
     if [ "$task" == "read" ]; then
 
-        abcli_mlflow_tags get \
+        bluer_objects_mlflow_tags get \
             $keyword \
             --tag referent \
             "${@:3}"
@@ -18,7 +18,7 @@ function abcli_mlflow_cache() {
     if [ "$task" == "write" ]; then
         local value=$3
 
-        abcli_mlflow_tags set \
+        bluer_objects_mlflow_tags set \
             $keyword \
             referent=$value \
             "${@:4}"

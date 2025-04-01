@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_mlflow_browse() {
+function bluer_objects_mlflow_browse() {
     local options=$1
     local browse_experiment=$(abcli_option_int "$options" experiment 0)
 
@@ -15,7 +15,7 @@ function abcli_mlflow_browse() {
     else
         local object_name=$(abcli_clarify_object $2 .)
 
-        local experiment_id=$(abcli_mlflow get_id $object_name)
+        local experiment_id=$(bluer_objects_mlflow get_id $object_name)
         if [ -z "$experiment_id" ]; then
             abcli_log_error "@mlflow: browse: $object_name: object not found."
             return 1
@@ -25,7 +25,7 @@ function abcli_mlflow_browse() {
         url="$url/experiments/$experiment_id"
 
         if [[ "$browse_experiment" == 0 ]]; then
-            local last_run_id=$(abcli_mlflow get_run_id $object_name --count 1)
+            local last_run_id=$(bluer_objects_mlflow get_run_id $object_name --count 1)
             abcli_log "last run id: $last_run_id"
 
             url="$url/runs/$last_run_id"
