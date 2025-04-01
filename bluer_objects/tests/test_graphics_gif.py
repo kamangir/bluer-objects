@@ -2,6 +2,7 @@ import pytest
 import glob
 
 from bluer_objects import objects
+from bluer_objects import storage
 from bluer_objects.graphics.gif import generate_animated_gif
 
 
@@ -16,7 +17,7 @@ def test_graphics_gif_generate_animated_gif(
     object_name: str,
     scale: int,
 ):
-    assert objects.download(object_name)
+    assert storage.download(object_name)
 
     list_of_images = list(glob.glob(objects.path_of("*.png", object_name)))
     if object_name != "void":

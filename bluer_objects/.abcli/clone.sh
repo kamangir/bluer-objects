@@ -22,12 +22,12 @@ function abcli_clone() {
         [[ $? -ne 0 ]] && return 1
 
         [[ "$do_relate" == 1 ]] &&
-            abcli_tags set \
+            abcli_mlflow_tags set \
                 $object_name \
                 cloned.$s3_uri
 
         [[ "$do_upload" == 1 ]] &&
-            abcli_upload - $object_name
+            bluer_objects_upload - $object_name
 
         return 0
     fi
@@ -43,7 +43,7 @@ function abcli_clone() {
     abcli_log "$object_1_name -clone:$transfer_mechanism-> $object_2_name"
 
     [[ "$do_download" == 1 ]] &&
-        abcli_download - $object_1_name
+        bluer_objects_download - $object_1_name
 
     local object_1_path=$ABCLI_OBJECT_ROOT/$object_1_name
     local object_2_path=$ABCLI_OBJECT_ROOT/$object_2_name
@@ -64,12 +64,12 @@ function abcli_clone() {
     fi
 
     [[ "$clone_tags" == 1 ]] &&
-        abcli_tags clone \
+        abcli_mlflow_tags clone \
             $object_1_name \
             $object_2_name
 
     [[ "$do_relate" == 1 ]] &&
-        abcli_tags set \
+        abcli_mlflow_tags set \
             $object_2_name \
             cloned.$object_1_name
 
@@ -88,7 +88,7 @@ function abcli_clone() {
             $object_2_path/metadata-$object_1_name.yaml
 
     [[ "$do_upload" == 1 ]] &&
-        abcli_upload - $object_2_name
+        bluer_objects_upload - $object_2_name
 
     return 0
 }

@@ -15,7 +15,6 @@ parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,
-    default="get",
     help="add_signature",
 )
 parser.add_argument(

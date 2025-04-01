@@ -2,7 +2,7 @@ from typing import Any
 
 
 from bluer_objects import file
-from bluer_objects import objects
+from bluer_objects import storage
 from bluer_objects.metadata.enums import MetadataSourceType
 
 
@@ -59,7 +59,7 @@ def get_from_object(
     download: bool = False,
     **kwargs,
 ) -> Any:
-    if download and not objects.download(
+    if download and not storage.download(
         object_name=object_name,
         filename="metadata.yaml",
     ):

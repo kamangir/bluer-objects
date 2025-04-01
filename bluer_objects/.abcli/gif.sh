@@ -9,7 +9,7 @@ function abcli_gif() {
     local object_name=$(abcli_clarify_object $2 .)
 
     [[ "$do_download" == 1 ]] &&
-        abcli_download - $object_name
+        bluer_objects_download - $object_name
 
     abcli_log "generating animated gif: $object_name ..."
 
@@ -21,7 +21,7 @@ function abcli_gif() {
     local status="$?"
 
     [[ "$do_upload" == 1 ]] &&
-        abcli_upload - $object_name
+        bluer_objects_upload - $object_name
 
     return $status
 }

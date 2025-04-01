@@ -2,7 +2,7 @@
 
 alias @ai=bluer_ai
 
-alias @download=abcli_download
+alias @download=bluer_objects_download
 
 alias @gif=abcli_gif
 
@@ -10,7 +10,7 @@ alias @assets=abcli_assets
 
 alias @cache=abcli_cache
 alias @ref="abcli_cache read"
-alias @tags=abcli_tags
+alias @tags=abcli_mlflow_tags
 
 alias @clone=abcli_clone
 alias @cp=abcli_clone
@@ -33,4 +33,4 @@ alias @publish=bluer_ai_publish
 
 alias @select=bluer_ai_select
 
-alias @upload=abcli_upload
+alias @upload=bluer_objects_upload

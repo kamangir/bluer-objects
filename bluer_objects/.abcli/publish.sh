@@ -9,16 +9,16 @@ function bluer_ai_publish() {
 
     local object_name=$(abcli_clarify_object $2 .)
     [[ "$do_download" == 1 ]] &&
-        abcli_download - $object_name
+        bluer_objects_download - $object_name
 
-    abcli_tags set $object_name published
+    abcli_mlflow_tags set $object_name published
 
     local public_object_name=$(abcli_option "$options" as $object_name)
 
     if [ "$do_tar" == 1 ]; then
         abcli_log "publishing $object_name -> $public_object_name.tar.gz"
 
-        abcli_upload ~open,solid $object_name
+        bluer_objects_upload ~open,solid $object_name
         aws s3 cp \
             $ABCLI_S3_OBJECT_PREFIX/$object_name.tar.gz \
             s3://$ABCLI_AWS_S3_PUBLIC_BUCKET_NAME/$public_object_name.tar.gz

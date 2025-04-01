@@ -3,7 +3,7 @@
 function test_bluer_objects_ls() {
     bluer_ai_select
 
-    abcli_upload
+    bluer_objects_upload
 
     bluer_ai_ls cloud
 

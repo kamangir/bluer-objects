@@ -7,6 +7,7 @@ from blueness import module
 from bluer_objects.metadata.enums import MetadataSourceType
 from bluer_objects import NAME, file
 from bluer_objects import objects
+from bluer_objects import storage
 from bluer_objects.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -65,7 +66,7 @@ def post_to_object(
     upload: bool = False,
     **kwargs,
 ) -> bool:
-    if download and not objects.download(
+    if download and not storage.download(
         object_name=object_name,
         filename="metadata.yaml",
     ):

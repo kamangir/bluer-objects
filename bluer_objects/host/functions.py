@@ -61,6 +61,19 @@ def unzip(
         output_folder = file.path(zip_filename)
 
     return shell(
-        command=f'unzip -q -o "{zip_filename}" -d "{output_folder}"',
+        command=f'unzip -o "{zip_filename}" -d "{output_folder}"',
+        log=log,
+    )
+
+
+def zip(
+    zip_filename: str,
+    input_folder: str = "",
+    work_dir: str = ".",
+    log: bool = False,
+) -> bool:
+    return shell(
+        command=f'zip -r "{zip_filename}" "{input_folder}"',
+        work_dir=work_dir,
         log=log,
     )

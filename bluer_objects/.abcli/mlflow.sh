@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-export MLFLOW_TRACKING_URI="databricks"
+export MLFLOW_TRACKING_URI=$abcli_path_git/mlruns
 
 function abcli_mlflow() {
     local task=$1
