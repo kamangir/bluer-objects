@@ -32,6 +32,14 @@ class WebDAVzipInterface(StorageInterface):
         zip_filename = f"{object_path}.zip"
 
         try:
+            if not self.client.check(remote_path=f"{object_name}.zip"):
+                logger.warning(f"{object_name} doesn't exist.")
+                return True
+        except Exception as e:
+            logger.error(e)
+            return False
+
+        try:
             self.client.download_sync(
                 remote_path=f"{object_name}.zip",
                 local_path=zip_filename,

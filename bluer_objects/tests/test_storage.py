@@ -35,7 +35,7 @@ def test_storage():
             filename=filename,
         )
 
-    assert objects.upload(object_name=object_name)
+    assert storage.upload(object_name=object_name)
 
     for filename in [
         "this.yaml",
@@ -46,4 +46,4 @@ def test_storage():
             filename=filename,
         )
 
-    assert objects.download(object_name=object_name)
+    assert storage.download(object_name=object_name)

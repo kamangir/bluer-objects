@@ -3,28 +3,25 @@ import glob
 
 from bluer_objects import objects
 from bluer_objects import storage
+from bluer_objects.tests.test_objects import test_object
 from bluer_objects.graphics.gif import generate_animated_gif
 
 
 @pytest.mark.parametrize(
-    ["object_name", "scale"],
+    ["scale"],
     [
-        ["void", 1],
-        ["2024-05-07-18-45-13-31678", 2],
+        [1],
+        [2],
     ],
 )
 def test_graphics_gif_generate_animated_gif(
-    object_name: str,
+    test_object,
     scale: int,
 ):
-    assert storage.download(object_name)
-
-    list_of_images = list(glob.glob(objects.path_of("*.png", object_name)))
-    if object_name != "void":
-        assert list_of_images
+    list_of_images = list(glob.glob(objects.path_of("*.png", test_object)))
 
     assert generate_animated_gif(
         list_of_images,
-        objects.path_of("test.gif", object_name),
+        objects.path_of("test.gif", test_object),
         scale=scale,
     )

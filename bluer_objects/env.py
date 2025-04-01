@@ -30,12 +30,8 @@ abcli_path_git = get_env(
 
 ABCLI_PATH_STATIC = get_env("ABCLI_PATH_STATIC")
 
-VANWATCH_TEST_OBJECT = get_env("VANWATCH_TEST_OBJECT")
-
 # https://www.randomtextgenerator.com/
 DUMMY_TEXT = "This is some dummy text. This is some dummy text. This is some dummy text. This is some dummy text. This is some dummy text. This is some dummy text. This is some dummy text. This is some dummy text. This is some dummy text. This is some dummy text."
-
-DATABRICKS_WORKSPACE = get_env("DATABRICKS_WORKSPACE")
 
 ABCLI_MLFLOW_EXPERIMENT_PREFIX = get_env("ABCLI_MLFLOW_EXPERIMENT_PREFIX")
 

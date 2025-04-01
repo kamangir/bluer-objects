@@ -9,5 +9,5 @@ function test_bluer_objects_gif() {
         --frame_duration 200 \
         --output_filename test.gif \
         --scale 2 \
-        --suffix .jpg
+        --suffix .png
 }

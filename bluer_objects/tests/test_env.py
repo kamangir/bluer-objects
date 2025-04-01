@@ -10,10 +10,6 @@ def test_required_env():
 
 
 def test_bluer_objects_env():
-    assert env.VANWATCH_TEST_OBJECT
-
-    assert env.DATABRICKS_WORKSPACE
-
     assert env.ABCLI_MLFLOW_EXPERIMENT_PREFIX
 
     assert env.BLUER_OBJECTS_STORAGE_INTERFACE in [

@@ -81,7 +81,7 @@ def post_to_object(
     ):
         return False
 
-    return not upload or objects.upload(
+    return not upload or storage.upload(
         object_name=object_name,
         filename="metadata.yaml",
     )

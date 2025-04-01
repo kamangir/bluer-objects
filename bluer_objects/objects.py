@@ -12,51 +12,6 @@ from bluer_objects.host import shell
 from bluer_objects.logger import logger
 
 
-def download(
-    object_name: str,
-    filename: str = "",
-    overwrite: bool = False,
-) -> bool:
-    if not ABCLI_S3_OBJECT_PREFIX:
-        logger.error("ABCLI_S3_OBJECT_PREFIX is not set.")
-        return False
-
-    if not object_name:
-        logger.error("object_name not found.")
-        return False
-
-    if (
-        filename
-        and not overwrite
-        and file.exists(
-            path_of(
-                object_name=object_name,
-                filename=filename,
-            )
-        )
-    ):
-        return True
-
-    return (
-        shell(
-            "aws s3 cp {}/{}/{} {}".format(
-                ABCLI_S3_OBJECT_PREFIX,
-                object_name,
-                filename,
-                object_path(object_name, create=True),
-            )
-        )
-        if filename
-        else shell(
-            "aws s3 sync {}/{}/ {}".format(
-                ABCLI_S3_OBJECT_PREFIX,
-                object_name,
-                object_path(object_name, create=True),
-            )
-        )
-    )
-
-
 def list_of_files(
     object_name: str,
     cloud: bool = False,
@@ -130,34 +85,3 @@ def unique_object(
     logger.info(f"📂 {object_name}")
 
     return object_name
-
-
-def upload(
-    object_name: str,
-    filename: str = "",
-) -> bool:
-    if not ABCLI_S3_OBJECT_PREFIX:
-        logger.error("ABCLI_S3_OBJECT_PREFIX is not set.")
-        return False
-
-    if not object_name:
-        logger.error("object_name not found.")
-        return False
-
-    return (
-        shell(
-            "aws s3 cp {} {}/{}/".format(
-                path_of(filename=filename, object_name=object_name),
-                ABCLI_S3_OBJECT_PREFIX,
-                object_name,
-            )
-        )
-        if filename
-        else shell(
-            "aws s3 sync {} {}/{}/".format(
-                object_path(object_name, create=True),
-                ABCLI_S3_OBJECT_PREFIX,
-                object_name,
-            )
-        )
-    )
