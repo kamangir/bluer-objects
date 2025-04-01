@@ -37,9 +37,6 @@ DUMMY_TEXT = "This is some dummy text. This is some dummy text. This is some dum
 
 DATABRICKS_WORKSPACE = get_env("DATABRICKS_WORKSPACE")
 
-DATABRICKS_HOST = get_env("DATABRICKS_HOST")
-DATABRICKS_TOKEN = get_env("DATABRICKS_TOKEN")
-
 ABCLI_MLFLOW_EXPERIMENT_PREFIX = get_env("ABCLI_MLFLOW_EXPERIMENT_PREFIX")
 
 ABCLI_S3_OBJECT_PREFIX = "to-be-removed"

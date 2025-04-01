@@ -1,21 +1,23 @@
 import pytest
-from typing import Callable, Union, Tuple, List
+from typing import Callable, Union, Tuple
 import numpy as np
 
 from bluer_options import string
 
-from bluer_objects import file, objects, env
+from bluer_objects import file, objects
 from bluer_objects.file.load import (
     load_image,
     load_json,
     load_matrix,
     load_text,
+    load_yaml,
 )
 from bluer_objects.file.save import (
     save_image,
     save_json,
     save_matrix,
     save_text,
+    save_yaml,
 )
 from bluer_objects.tests.test_objects import test_object
 
@@ -29,18 +31,23 @@ from bluer_objects.tests.test_objects import test_object
     [
         [
             load_image,
-            "Victoria41East.jpg",
+            "test-00.png",
             save_image,
         ],
         [
             load_json,
-            "vancouver.json",
+            "test.json",
             save_json,
         ],
         [
             load_text,
-            "vancouver.json",
+            "test.yaml",
             save_text,
+        ],
+        [
+            load_yaml,
+            "test.yaml",
+            save_yaml,
         ],
     ],
 )

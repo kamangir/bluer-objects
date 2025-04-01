@@ -18,11 +18,5 @@ jobs:
           pip install -r requirements.txt
           pip install -e .[opencv]
       - name: Run bash tests
-        env:
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
-          echo "DATABRICKS_HOST: $DATABRICKS_HOST"
-          echo "DATABRICKS_TOKEN: $DATABRICKS_TOKEN"
-
           ./.github/workflows/bashtest.sh bluer_objects
