@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_metadata_get() {
+function bluer_objects_metadata_get() {
     local options=$1
     local source_type=$(abcli_option_choice "$options" object,path,filename object)
 

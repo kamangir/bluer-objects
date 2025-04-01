@@ -21,7 +21,7 @@ alias @host=abcli_host
 
 alias @ls=bluer_ai_ls
 
-alias @metadata=abcli_metadata
+alias @metadata=bluer_objects_metadata
 
 alias @mlflow=abcli_mlflow
 

@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 
-function abcli_metadata() {
+function bluer_objects_metadata() {
     local task=${1:-help}
 
-    local function_name="abcli_metadata_$task"
+    local function_name="bluer_objects_metadata_$task"
     if [[ $(type -t $function_name) == "function" ]]; then
         $function_name "${@:2}"
         return

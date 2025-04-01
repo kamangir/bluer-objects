@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_metadata_post() {
+function bluer_objects_metadata_post() {
     local key=$1
 
     local value=$2

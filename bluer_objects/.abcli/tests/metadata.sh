@@ -11,21 +11,21 @@ function test_bluer_objects_metadata() {
         local value=$(abcli_string_random)
 
         [[ "$post_func" == 1 ]] &&
-            abcli metadata post \
+            bluer_objects_metadata post \
                 $key $value \
                 filename \
                 $filename \
                 --verbose 1
 
         [[ "$post_func" == 2 ]] &&
-            abcli metadata post \
+            bluer_objects_metadata post \
                 $key $value \
                 object,filename=metadata.yaml \
                 $object_name \
                 --verbose 1
 
         [[ "$post_func" == 3 ]] &&
-            abcli metadata post \
+            bluer_objects_metadata post \
                 $key $value \
                 path,filename=metadata.yaml \
                 $object_path \
@@ -33,17 +33,17 @@ function test_bluer_objects_metadata() {
 
         for get_func in {1..3}; do
             [[ "$get_func" == 1 ]] &&
-                returned_value=$(abcli metadata get \
+                returned_value=$(bluer_objects_metadata get \
                     key=$key,filename \
                     $filename)
 
             [[ "$get_func" == 2 ]] &&
-                returned_value=$(abcli metadata get \
+                returned_value=$(bluer_objects_metadata get \
                     key=$key,filename=metadata.yaml,object \
                     $object_name)
 
             [[ "$get_func" == 3 ]] &&
-                returned_value=$(abcli metadata get \
+                returned_value=$(bluer_objects_metadata get \
                     key=$key,filename=metadata.yaml,path \
                     $object_path)
 
