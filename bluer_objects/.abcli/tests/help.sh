@@ -58,9 +58,6 @@ function test_bluer_objects_help() {
         "@mlflow test" \
         "@mlflow transition" \
         \
-        "@object" \
-        "@object open" \
-        \
         "@publish" \
         \
         "@select" \

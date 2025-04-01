@@ -10,7 +10,7 @@ function test_bluer_objects_gif() {
         --object_name $source_object_name
     [[ $? -ne 0 ]] && return 1
 
-    abcli_gif \
+    bluer_objects_gif \
         ~upload,$options \
         $source_object_name \
         --frame_duration 200 \

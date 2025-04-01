@@ -4,9 +4,9 @@ alias @ai=bluer_ai
 
 alias @download=bluer_objects_download
 
-alias @gif=abcli_gif
+alias @gif=bluer_objects_gif
 
-alias @assets=abcli_assets
+alias @assets=bluer_objects_assets
 
 alias @cache=bluer_objects_mlflow_cache
 alias @ref="bluer_objects_mlflow_cache read"
@@ -17,7 +17,7 @@ alias @cp=bluer_objects_clone
 
 alias @file=bluer_objects_file
 
-alias @host=abcli_host
+alias @host=bluer_objects_host
 
 alias @ls=bluer_ai_ls
 

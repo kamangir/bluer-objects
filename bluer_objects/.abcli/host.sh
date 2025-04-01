@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-function abcli_host() {
+function bluer_objects_host() {
     local task=$1
     local options=$2
 
