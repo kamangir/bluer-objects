@@ -11,6 +11,8 @@ function test_bluer_objects_help() {
         "@assets" \
         "@assets publish" \
         \
+        "@cp" \
+        \
         "@objects" \
         \
         "@objects pypi" \

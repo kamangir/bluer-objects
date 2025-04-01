@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,
-    help="create_a_file | replace | size",
+    help="replace | size",
 )
 parser.add_argument(
     "--filename",
@@ -38,15 +38,7 @@ parser.add_argument(
 args = parser.parse_args()
 
 success = False
-if args.task == "create_a_file":
-    success = file.save_yaml(
-        args.filename,
-        {
-            string.random(length=args.size): string.random(length=args.size)
-            for _ in range(args.size)
-        },
-    )
-elif args.task == "replace":
+if args.task == "replace":
     logger.info(f"{NAME}.{args.task}: {args.this} -> {args.that} in {args.filename}")
 
     success, content = file.load_text(args.filename)

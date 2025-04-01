@@ -12,8 +12,8 @@ alias @cache=abcli_cache
 alias @ref="abcli_cache read"
 alias @tags=abcli_mlflow_tags
 
-alias @clone=abcli_clone
-alias @cp=abcli_clone
+alias @clone=bluer_objects_clone
+alias @cp=bluer_objects_clone
 
 alias @file=bluer_objects_file
 

@@ -7,25 +7,22 @@ function test_bluer_objects_storage() {
     local object_path=$ABCLI_OBJECT_ROOT/$object_name
     mkdir -pv $object_path
 
-    local suffix
-    local extension=yaml
-    for suffix in this.$extension that.$extension subfolder/this.$extension subfolder/that.$extension; do
-        python3 -m bluer_objects.file \
-            create_a_file \
-            --filename $object_path/$suffix
-    done
+    python3 -m bluer_objects.testing \
+        create_test_asset \
+        --object_name $object_name
+    [[ $? -ne 0 ]] && return 1
 
     # testing upload
     abcli_hr
 
     bluer_objects_upload \
-        filename=this.$extension \
+        filename=this.yaml \
         $object_name
     [[ $? -ne 0 ]] && return 1
     abcli_hr
 
     bluer_objects_upload \
-        filename=subfolder/this.$extension \
+        filename=subfolder/this.yaml \
         $object_name
     [[ $? -ne 0 ]] && return 1
     abcli_hr
@@ -43,13 +40,13 @@ function test_bluer_objects_storage() {
     # testing download
 
     bluer_objects_download \
-        filename=this.$extension \
+        filename=this.yaml \
         $object_name
     [[ $? -ne 0 ]] && return 1
     abcli_hr
 
     bluer_objects_download \
-        filename=subfolder/this.$extension \
+        filename=subfolder/this.yaml \
         $object_name
     [[ $? -ne 0 ]] && return 1
     abcli_hr

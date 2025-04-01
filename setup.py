@@ -18,6 +18,7 @@ setup(
         f"{NAME}.mlflow",
         f"{NAME}.README",
         f"{NAME}.storage",
+        f"{NAME}.testing",
         f"{NAME}.tests",
     ],
     include_package_data=True,

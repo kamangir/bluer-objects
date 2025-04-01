@@ -1,45 +1,15 @@
 import pytest
-import numpy as np
-
-from bluer_options import string
 
 from bluer_objects import file, path, objects
-from bluer_objects import storage
+from bluer_objects.testing import create_test_asset
 from bluer_objects.logger import logger
 
 
 @pytest.fixture
 def test_object():
     object_name = objects.unique_object("test_object")
-    for suffix in range(10):
-        assert file.save_image(
-            objects.path_of(
-                object_name=object_name,
-                filename=f"test-{suffix:02d}.png",
-            ),
-            (np.random.rand(512, 512, 3) * 255).astype(np.uint8),
-        )
 
-    depth = 10
-    data = {
-        string.random(length=depth): string.random(length=depth) for _ in range(depth)
-    }
-
-    assert file.save_yaml(
-        objects.path_of(
-            object_name=object_name,
-            filename="test.yaml",
-        ),
-        data,
-    )
-
-    assert file.save_json(
-        objects.path_of(
-            object_name=object_name,
-            filename="test.json",
-        ),
-        data,
-    )
+    assert create_test_asset(object_name)
 
     yield object_name
 
