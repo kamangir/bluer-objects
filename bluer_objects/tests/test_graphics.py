@@ -10,4 +10,4 @@ def test_image():
 
     yield matrix
 
-    logger.info(f"deleting test_image ...")
+    logger.info("deleting test_image ...")

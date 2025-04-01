@@ -43,7 +43,7 @@ def test_object():
 
     yield object_name
 
-    logger.info(f"deleting test_object ...")
+    logger.info("deleting test_object ...")
 
 
 @pytest.mark.parametrize(
