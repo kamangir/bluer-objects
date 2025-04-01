@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-export MLFLOW_TRACKING_URI=$abcli_path_git/mlruns
+export MLFLOW_TRACKING_URI=$HOME/mlruns
 
 function abcli_mlflow() {
     local task=$1
