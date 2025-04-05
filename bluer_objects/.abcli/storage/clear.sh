@@ -12,7 +12,7 @@ function bluer_ai_storage_clear() {
 
     local recent_filename=$ABCLI_OBJECT_ROOT/QGIS-recent.yaml
     if [[ ! -f "$recent_filename" ]]; then
-        abcli_log_warning "run \"QGIS.list_recent_projects\" first."
+        bluer_ai_log_warning "run \"QGIS.list_recent_projects\" first."
         return 1
     fi
 
@@ -30,7 +30,7 @@ function bluer_ai_storage_clear() {
         if [[ "+$recent_projects+" == *"+$object_name+"* ]]; then
             abcli_log "will keep $object_name ..."
         else
-            abcli_log_warning "will delete $object_name ..."
+            bluer_ai_log_warning "will delete $object_name ..."
 
             [[ "$do_dryrun" == 0 ]] &&
                 rm -rfv $object_name
