@@ -90,11 +90,11 @@ class WebDAVzipInterface(StorageInterface):
             try:
                 if self.client.check(remote_path=f"{object_name}.zip"):
                     return True, [f"{object_name}.zip"]
-                else:
-                    return True, []
             except Exception as e:
                 logger.error(e)
                 return False, []
+
+            return True, []
 
         logger.error(f"Unknown 'where': {where}")
         return False, []
