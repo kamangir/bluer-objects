@@ -29,8 +29,6 @@ alias @mysql=abcli_mysql
 
 alias @objects=bluer_objects
 
-alias @publish=bluer_ai_publish
-
 alias @select=bluer_ai_select
 
 alias @upload=bluer_objects_upload
