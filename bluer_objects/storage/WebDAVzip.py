@@ -85,7 +85,8 @@ class WebDAVzipInterface(StorageInterface):
                 )
                 if os.path.isfile(filename)
             ]
-        elif where == "cloud":
+
+        if where == "cloud":
             try:
                 if self.client.check(remote_path=f"{object_name}.zip"):
                     return True, [f"{object_name}.zip"]
@@ -94,9 +95,9 @@ class WebDAVzipInterface(StorageInterface):
             except Exception as e:
                 logger.error(e)
                 return False, []
-        else:
-            logger.error(f"Unknown 'where': {where}")
-            return False, []
+
+        logger.error(f"Unknown 'where': {where}")
+        return False, []
 
     def upload(
         self,
