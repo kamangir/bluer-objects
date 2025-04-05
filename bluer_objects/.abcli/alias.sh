@@ -19,7 +19,7 @@ alias @file=bluer_objects_file
 
 alias @host=bluer_objects_host
 
-alias @ls=bluer_ai_ls
+alias @ls=bluer_objects_ls
 
 alias @metadata=bluer_objects_metadata
 

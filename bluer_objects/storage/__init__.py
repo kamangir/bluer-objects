@@ -1,3 +1,5 @@
+from typing import Tuple, List
+
 from bluer_objects.storage.base import StorageInterface
 from bluer_objects.storage.WebDAV import WebDAVInterface
 from bluer_objects.storage.WebDAVzip import WebDAVzipInterface
@@ -24,6 +26,16 @@ def download(
         object_name=object_name,
         filename=filename,
         log=log,
+    )
+
+
+def ls(
+    object_name: str,
+    where: str = "local",
+) -> Tuple[bool, List[str]]:
+    return interface.ls(
+        object_name=object_name,
+        where=where,
     )
 
 

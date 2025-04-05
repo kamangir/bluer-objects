@@ -1,3 +1,6 @@
+import glob
+import os
+from typing import Tuple, List
 from webdav3.client import Client
 
 from bluer_objects.storage.base import StorageInterface
@@ -59,6 +62,41 @@ class WebDAVzipInterface(StorageInterface):
             object_name=object_name,
             log=log,
         )
+
+    def ls(
+        self,
+        object_name: str,
+        where: str = "local",
+    ) -> Tuple[bool, List[str]]:
+        if where == "local":
+            object_path = objects.object_path(
+                object_name=object_name,
+            )
+
+            return True, [
+                os.path.relpath(filename, start=object_path)
+                for filename in glob.glob(
+                    os.path.join(
+                        object_path,
+                        "**",
+                        "*",
+                    ),
+                    recursive=True,
+                )
+                if os.path.isfile(filename)
+            ]
+        elif where == "cloud":
+            try:
+                if self.client.check(remote_path=f"{object_name}.zip"):
+                    return True, [f"{object_name}.zip"]
+                else:
+                    return True, []
+            except Exception as e:
+                logger.error(e)
+                return False, []
+        else:
+            logger.error(f"Unknown 'where': {where}")
+            return False, []
 
     def upload(
         self,
