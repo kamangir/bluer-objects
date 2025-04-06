@@ -1,3 +1,4 @@
+from typing import List, Tuple
 from webdav3.client import Client
 
 from bluer_objects.storage.base import StorageInterface
@@ -80,6 +81,13 @@ class WebDAVInterface(StorageInterface):
             filename=filename,
             log=log,
         )
+
+    def ls(
+        self,
+        object_name: str,
+        where: str = "local",
+    ) -> Tuple[bool, List[str]]:
+        assert False, "not implemented"
 
     def upload(
         self,

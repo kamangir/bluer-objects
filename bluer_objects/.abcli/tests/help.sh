@@ -31,6 +31,8 @@ function test_bluer_objects_help() {
         \
         "@gif" \
         \
+        "@ls" \
+        \
         "@host" \
         "@host get" \
         "@host reboot" \
@@ -57,8 +59,6 @@ function test_bluer_objects_help() {
         "@mlflow tags set" \
         "@mlflow test" \
         "@mlflow transition" \
-        \
-        "@publish" \
         \
         "@select" \
         \

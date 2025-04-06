@@ -1,3 +1,5 @@
+from typing import Tuple, List
+
 from bluer_objects.logger import logger
 
 
@@ -18,6 +20,13 @@ class StorageInterface:
             )
 
         return True
+
+    def ls(
+        self,
+        object_name: str,
+        where: str = "local",
+    ) -> Tuple[bool, List[str]]:
+        return True, []
 
     def upload(
         self,
