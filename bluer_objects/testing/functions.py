@@ -17,7 +17,7 @@ def create_test_asset(
 ) -> bool:
     logger.info(f"{NAME}.create_test_asset: {object_name}")
 
-    for suffix in range(10):
+    for suffix in range(depth):
         if not file.save_image(
             objects.path_of(
                 object_name=object_name,
