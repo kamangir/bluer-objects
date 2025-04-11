@@ -13,13 +13,13 @@ function bluer_objects_host() {
     fi
 
     if [ $task == "reboot" ]; then
-        abcli_eval ,$options \
+        bluer_ai_eval ,$options \
             sudo reboot
         return
     fi
 
     if [ $task == "shutdown" ]; then
-        abcli_eval ,$options \
+        bluer_ai_eval ,$options \
             sudo shutdown -h now
         return
     fi

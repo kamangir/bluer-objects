@@ -3,6 +3,6 @@
 function test_bluer_objects_README() {
     local options=$1
 
-    abcli_eval ,$options \
+    bluer_ai_eval ,$options \
         bluer_objects build_README
 }

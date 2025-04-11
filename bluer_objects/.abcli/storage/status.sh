@@ -6,6 +6,6 @@ function bluer_ai_storage_status() {
     local depth=$(abcli_option_int "$options" depth 2)
     local do_dryrun=$(abcli_option_int "$options" dryrun 0)
 
-    abcli_eval dryrun=$do_dryrun,path=$ABCLI_PATH_STORAGE \
+    bluer_ai_eval dryrun=$do_dryrun,path=$ABCLI_PATH_STORAGE \
         "du -hc -d $depth | sort -h -r | head -n $count"
 }

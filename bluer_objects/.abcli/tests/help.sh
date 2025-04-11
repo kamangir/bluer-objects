@@ -72,12 +72,14 @@ function test_bluer_objects_help() {
         \
         "@upload" \
         \
+        "@wait" \
+        \
         "bluer_objects"; do
-        abcli_eval ,$options \
+        bluer_ai_eval ,$options \
             bluer_ai_help $module
         [[ $? -ne 0 ]] && return 1
 
-        abcli_hr
+        bluer_ai_hr
     done
 
     return 0

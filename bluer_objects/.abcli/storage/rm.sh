@@ -6,6 +6,6 @@ function bluer_ai_storage_rm() {
 
     local object_name=$(abcli_clarify_object $2 void)
 
-    abcli_eval dryrun=$do_dryrun \
+    bluer_ai_eval dryrun=$do_dryrun \
         rm -rfv $ABCLI_OBJECT_ROOT/$object_name
 }

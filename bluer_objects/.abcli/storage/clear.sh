@@ -5,7 +5,7 @@ function bluer_ai_storage_clear() {
     local do_dryrun=$(abcli_option_int "$options" dryrun 1)
 
     if [[ "$abcli_is_rpi" == true ]]; then
-        abcli_eval dryrun=$do_dryrun \
+        bluer_ai_eval dryrun=$do_dryrun \
             rm -rfv $ABCLI_OBJECT_ROOT
         return
     fi

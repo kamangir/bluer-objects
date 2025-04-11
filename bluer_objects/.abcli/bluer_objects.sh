@@ -3,7 +3,7 @@
 function bluer_objects() {
     local task=$1
 
-    abcli_generic_task \
+    bluer_ai_generic_task \
         plugin=bluer_objects,task=$task \
         "${@:2}"
 }

@@ -21,7 +21,7 @@ function bluer_objects_clone() {
     local object_2_path=$ABCLI_OBJECT_ROOT/$object_2_name
 
     if [[ "$copy_content" == 1 ]]; then
-        abcli_eval - \
+        bluer_ai_eval - \
             rsync \
             -avv \
             $object_1_path/ \
