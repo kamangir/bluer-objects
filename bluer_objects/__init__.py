@@ -4,7 +4,7 @@ ICON = "🌀"
 
 DESCRIPTION = f"{ICON} data objects for Bash."
 
-VERSION = "6.53.1"
+VERSION = "6.54.1"
 
 REPO_NAME = "bluer-objects"
 
