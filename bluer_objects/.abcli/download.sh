@@ -4,7 +4,7 @@ function bluer_objects_download() {
     local options=$1
     local filename=$(abcli_option "$options" filename)
 
-    local object_name=$(abcli_clarify_object $2 .)
+    local object_name=$(bluer_ai_clarify_object $2 .)
 
     python3 -m bluer_objects.storage \
         download \

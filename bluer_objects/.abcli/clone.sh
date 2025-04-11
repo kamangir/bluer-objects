@@ -9,8 +9,8 @@ function bluer_objects_clone() {
     local do_download=$(abcli_option_int "$options" download 1)
     local transfer_mechanism=$(abcli_option_choice "$options" cp,mv mv)
 
-    local object_1_name=$(abcli_clarify_object $2 ..)
-    local object_2_name=$(abcli_clarify_object $3 .)
+    local object_1_name=$(bluer_ai_clarify_object $2 ..)
+    local object_2_name=$(bluer_ai_clarify_object $3 .)
 
     abcli_log "$object_1_name -clone:$transfer_mechanism-> $object_2_name"
 

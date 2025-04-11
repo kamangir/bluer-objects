@@ -6,7 +6,7 @@ function bluer_objects_metadata_get() {
 
     local source=$2
     [[ "$source_type" == object ]] &&
-        source=$(abcli_clarify_object $2 .)
+        source=$(bluer_ai_clarify_object $2 .)
 
     local key=$(abcli_option "$options" key)
     local default=$(abcli_option "$options" default)

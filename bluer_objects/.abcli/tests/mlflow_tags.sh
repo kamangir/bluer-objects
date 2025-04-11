@@ -10,12 +10,12 @@ function test_bluer_objects_mlflow_tags_validation() {
         $tag=$value
     [[ $? -ne 0 ]] && return 1
 
-    abcli_assert \
+    bluer_ai_assert \
         "$(bluer_objects_mlflow tags get $object_name --tag $tag)" \
         $value
     [[ $? -ne 0 ]] && return 1
 
-    abcli_assert \
+    bluer_ai_assert \
         "$(bluer_objects_mlflow tags get $object_name --tag some-tag)" \
         - empty
 }

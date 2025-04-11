@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 function bluer_objects_mlflow_tags_set() {
-    local object_name=$(abcli_clarify_object $1 .)
+    local object_name=$(bluer_ai_clarify_object $1 .)
 
     local tags=$2
 
