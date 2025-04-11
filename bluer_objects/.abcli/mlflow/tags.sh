@@ -9,7 +9,7 @@ function bluer_objects_mlflow_tags() {
         return
     fi
 
-    abcli_log_error "@mlflow: tags: $task: command not found."
+    bluer_ai_log_error "@mlflow: tags: $task: command not found."
     return 1
 }
 
