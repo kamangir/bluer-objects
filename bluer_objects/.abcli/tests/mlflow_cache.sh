@@ -8,7 +8,7 @@ function test_bluer_objects_mlflow_cache() {
         $keyword $value
     [[ $? -ne 0 ]] && return 1
 
-    abcli_assert \
+    bluer_ai_assert \
         $(bluer_objects_mlflow cache read $keyword) \
         $value
 }

@@ -10,7 +10,7 @@ function bluer_objects_metadata_post() {
 
     local source=$4
     [[ "$source_type" == object ]] &&
-        source=$(abcli_clarify_object $4 .)
+        source=$(bluer_ai_clarify_object $4 .)
 
     python3 -m bluer_objects.metadata post \
         --filename $(abcli_option "$options" filename metadata.yaml) \

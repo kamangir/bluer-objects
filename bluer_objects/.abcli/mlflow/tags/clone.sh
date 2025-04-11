@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 
 function bluer_objects_mlflow_tags_clone() {
-    local source_object=$(abcli_clarify_object $1 ..)
+    local source_object=$(bluer_ai_clarify_object $1 ..)
 
-    local destination_object=$(abcli_clarify_object $2 .)
+    local destination_object=$(bluer_ai_clarify_object $2 .)
 
     abcli_log "mlflow: tags: clone: $source_object -> $destination_object ..."
 

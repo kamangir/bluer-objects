@@ -13,7 +13,7 @@ function bluer_objects_mlflow_browse() {
     elif [ $(abcli_option_int "$options" models 0) == 1 ]; then
         url="$url/models"
     else
-        local object_name=$(abcli_clarify_object $2 .)
+        local object_name=$(bluer_ai_clarify_object $2 .)
 
         local experiment_id=$(bluer_objects_mlflow get_id $object_name)
         if [ -z "$experiment_id" ]; then

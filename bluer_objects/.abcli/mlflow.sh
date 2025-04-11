@@ -12,7 +12,7 @@ function bluer_objects_mlflow() {
     fi
 
     if [[ ",get_id,get_run_id,rm," == *",$task,"* ]]; then
-        local object_name=$(abcli_clarify_object $2 .)
+        local object_name=$(bluer_ai_clarify_object $2 .)
 
         python3 -m bluer_objects.mlflow \
             $task \

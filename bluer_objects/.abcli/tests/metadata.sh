@@ -47,7 +47,10 @@ function test_bluer_objects_metadata() {
                     key=$key,filename=metadata.yaml,path \
                     $object_path)
 
-            abcli_assert "$value" "$returned_value"
+            bluer_ai_assert "$value" "$returned_value"
+            [[ $? -ne 0 ]] && return 1
         done
     done
+
+    return 0
 }
