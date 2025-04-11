@@ -13,7 +13,7 @@ function bluer_objects_gif() {
 
     abcli_log "generating animated gif: $object_name ..."
 
-    abcli_eval dryrun=$do_dryrun \
+    bluer_ai_eval dryrun=$do_dryrun \
         python3 -m bluer_objects.graphics \
         generate_animated_gif \
         --object_name $object_name \

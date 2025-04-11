@@ -13,29 +13,29 @@ function test_bluer_objects_storage() {
     [[ $? -ne 0 ]] && return 1
 
     # testing upload
-    abcli_hr
+    bluer_ai_hr
 
     bluer_objects_upload \
         filename=this.yaml \
         $object_name
     [[ $? -ne 0 ]] && return 1
-    abcli_hr
+    bluer_ai_hr
 
     bluer_objects_upload \
         filename=subfolder/this.yaml \
         $object_name
     [[ $? -ne 0 ]] && return 1
-    abcli_hr
+    bluer_ai_hr
 
     bluer_objects_upload \
         - \
         $object_name
     [[ $? -ne 0 ]] && return 1
-    abcli_hr
+    bluer_ai_hr
 
     # clean-up
     rm -rfv $object_path
-    abcli_hr
+    bluer_ai_hr
 
     # testing download
 
@@ -43,13 +43,13 @@ function test_bluer_objects_storage() {
         filename=this.yaml \
         $object_name
     [[ $? -ne 0 ]] && return 1
-    abcli_hr
+    bluer_ai_hr
 
     bluer_objects_download \
         filename=subfolder/this.yaml \
         $object_name
     [[ $? -ne 0 ]] && return 1
-    abcli_hr
+    bluer_ai_hr
 
     bluer_objects_download \
         - \

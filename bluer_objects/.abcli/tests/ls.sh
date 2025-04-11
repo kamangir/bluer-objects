@@ -7,19 +7,19 @@ function test_bluer_objects_ls() {
         create_test_asset \
         --object_name $object_name
     [[ $? -ne 0 ]] && return 1
-    abcli_hr
+    bluer_ai_hr
 
     bluer_objects_upload - $object_name
     [[ $? -ne 0 ]] && return 1
-    abcli_hr
+    bluer_ai_hr
 
     bluer_objects_ls cloud $object_name
     [[ $? -ne 0 ]] && return 1
-    abcli_hr
+    bluer_ai_hr
 
     bluer_objects_ls local $object_name
     [[ $? -ne 0 ]] && return 1
-    abcli_hr
+    bluer_ai_hr
 
     bluer_objects_ls $abcli_path_bash/tests/
 }
