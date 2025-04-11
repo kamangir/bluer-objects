@@ -17,7 +17,7 @@ function bluer_objects_mlflow_browse() {
 
         local experiment_id=$(bluer_objects_mlflow get_id $object_name)
         if [ -z "$experiment_id" ]; then
-            abcli_log_error "@mlflow: browse: $object_name: object not found."
+            bluer_ai_log_error "@mlflow: browse: $object_name: object not found."
             return 1
         fi
         abcli_log "experiment id: $experiment_id"
