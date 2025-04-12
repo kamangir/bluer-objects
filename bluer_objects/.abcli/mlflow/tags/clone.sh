@@ -5,7 +5,7 @@ function bluer_objects_mlflow_tags_clone() {
 
     local destination_object=$(bluer_ai_clarify_object $2 .)
 
-    abcli_log "mlflow: tags: clone: $source_object -> $destination_object ..."
+    bluer_ai_log "mlflow: tags: clone: $source_object -> $destination_object ..."
 
     python3 -m bluer_objects.mlflow \
         clone_tags \

@@ -3,12 +3,12 @@
 function test_bluer_objects_metadata() {
     local returned_value
     for post_func in {1..3}; do
-        local object_name=$(abcli_string_timestamp)
+        local object_name=$(bluer_ai_string_timestamp)
         local object_path=$ABCLI_OBJECT_ROOT/$object_name
         local filename=$object_path/metadata.yaml
 
-        local key=$(abcli_string_random)
-        local value=$(abcli_string_random)
+        local key=$(bluer_ai_string_random)
+        local value=$(bluer_ai_string_random)
 
         [[ "$post_func" == 1 ]] &&
             bluer_objects_metadata post \

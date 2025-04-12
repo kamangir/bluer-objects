@@ -11,7 +11,7 @@ function bluer_objects_gif() {
     [[ "$do_download" == 1 ]] &&
         bluer_objects_download - $object_name
 
-    abcli_log "generating animated gif: $object_name ..."
+    bluer_ai_log "generating animated gif: $object_name ..."
 
     bluer_ai_eval dryrun=$do_dryrun \
         python3 -m bluer_objects.graphics \

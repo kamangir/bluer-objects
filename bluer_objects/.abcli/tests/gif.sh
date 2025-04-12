@@ -3,7 +3,7 @@
 function test_bluer_objects_gif() {
     local options=$1
 
-    local source_object_name=test_bluer_objects_clone-$(abcli_string_timestamp_short)
+    local source_object_name=test_bluer_objects_clone-$(bluer_ai_string_timestamp_short)
 
     python3 -m bluer_objects.testing \
         create_test_asset \
