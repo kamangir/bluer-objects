@@ -2,7 +2,7 @@
 
 function bluer_objects_upload() {
     local options=$1
-    local filename=$(abcli_option "$options" filename)
+    local filename=$(bluer_ai_option "$options" filename)
 
     local object_name=$(bluer_ai_clarify_object $2 .)
     local object_path=$ABCLI_OBJECT_ROOT/$object_name

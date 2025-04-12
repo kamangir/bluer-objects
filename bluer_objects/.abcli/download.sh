@@ -2,7 +2,7 @@
 
 function bluer_objects_download() {
     local options=$1
-    local filename=$(abcli_option "$options" filename)
+    local filename=$(bluer_ai_option "$options" filename)
 
     local object_name=$(bluer_ai_clarify_object $2 .)
 
@@ -13,7 +13,7 @@ function bluer_objects_download() {
     [[ $? -ne 0 ]] && return 1
 
     local open_options=$3
-    local do_open=$(abcli_option_int "$open_options" open 0)
+    local do_open=$(bluer_ai_option_int "$open_options" open 0)
     [[ "$do_open" == 0 ]] &&
         return 0
 
