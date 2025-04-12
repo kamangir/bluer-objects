@@ -2,9 +2,9 @@ NAME = "bluer_objects"
 
 ICON = "🌀"
 
-DESCRIPTION = f"{ICON} data objects for Bash."
+DESCRIPTION = f"{ICON} Object management in Bash."
 
-VERSION = "6.75.1"
+VERSION = "6.76.1"
 
 REPO_NAME = "bluer-objects"
 
