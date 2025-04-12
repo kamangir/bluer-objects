@@ -19,4 +19,4 @@ Also home to 🌀 [bluer README](./bluer_objects/README/).
 
 [![pylint](https://github.com/kamangir/bluer-objects/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/bluer-objects/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/bluer-objects/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/bluer-objects.svg)](https://pypi.org/project/bluer-objects/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/bluer-objects)](https://pypistats.org/packages/bluer-objects)
 
-built by 🌀 [`bluer README`](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README), based on 🌀 [`bluer_objects-6.67.1`](https://github.com/kamangir/bluer-objects).
+built by 🌀 [`bluer README`](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README), based on 🌀 [`bluer_objects-6.68.1`](https://github.com/kamangir/bluer-objects).
