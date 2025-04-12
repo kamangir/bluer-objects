@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 function bluer_ai_select() {
-    local object_name=$(bluer_ai_clarify_object "$1" $(abcli_string_timestamp))
+    local object_name=$(bluer_ai_clarify_object "$1" $(bluer_ai_string_timestamp))
 
     local options=$2
     local do_open=$(abcli_option_int "$options" open 0)
@@ -22,7 +22,7 @@ function bluer_ai_select() {
     [[ "$type_name" == object ]] &&
         cd $object_path
 
-    abcli_log "📂 $type_name :: $object_name"
+    bluer_ai_log "📂 $type_name :: $object_name"
 
     [[ "$do_open" == 1 ]] &&
         open $object_path

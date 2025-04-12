@@ -12,7 +12,7 @@ function bluer_objects_clone() {
     local object_1_name=$(bluer_ai_clarify_object $2 ..)
     local object_2_name=$(bluer_ai_clarify_object $3 .)
 
-    abcli_log "$object_1_name -clone:$transfer_mechanism-> $object_2_name"
+    bluer_ai_log "$object_1_name -clone:$transfer_mechanism-> $object_2_name"
 
     [[ "$do_download" == 1 ]] &&
         bluer_objects_download - $object_1_name

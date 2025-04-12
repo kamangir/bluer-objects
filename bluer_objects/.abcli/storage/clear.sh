@@ -28,7 +28,7 @@ function bluer_ai_storage_clear() {
         object_name=$(basename "$folder")
 
         if [[ "+$recent_projects+" == *"+$object_name+"* ]]; then
-            abcli_log "will keep $object_name ..."
+            bluer_ai_log "will keep $object_name ..."
         else
             bluer_ai_log_warning "will delete $object_name ..."
 

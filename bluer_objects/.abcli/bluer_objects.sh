@@ -8,4 +8,4 @@ function bluer_objects() {
         "${@:2}"
 }
 
-abcli_log $(bluer_objects version --show_icon 1)
+bluer_ai_log $(bluer_objects version --show_icon 1)

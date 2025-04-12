@@ -20,13 +20,13 @@ function bluer_objects_mlflow_browse() {
             bluer_ai_log_error "@mlflow: browse: $object_name: object not found."
             return 1
         fi
-        abcli_log "experiment id: $experiment_id"
+        bluer_ai_log "experiment id: $experiment_id"
 
         url="$url/experiments/$experiment_id"
 
         if [[ "$browse_experiment" == 0 ]]; then
             local last_run_id=$(bluer_objects_mlflow get_run_id $object_name --count 1)
-            abcli_log "last run id: $last_run_id"
+            bluer_ai_log "last run id: $last_run_id"
 
             url="$url/runs/$last_run_id"
         fi

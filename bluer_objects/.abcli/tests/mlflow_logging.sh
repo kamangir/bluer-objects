@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 function test_bluer_objects_mlflow_logging() {
-    local object_name="test-object-$(abcli_string_timestamp_short)"
+    local object_name="test-object-$(bluer_ai_string_timestamp_short)"
 
     bluer_objects_clone \
         upload \

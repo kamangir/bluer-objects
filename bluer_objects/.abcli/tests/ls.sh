@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
 function test_bluer_objects_ls() {
-    local object_name=test_bluer_objects_ls-$(abcli_string_timestamp_short)
+    local object_name=test_bluer_objects_ls-$(bluer_ai_string_timestamp_short)
 
     python3 -m bluer_objects.testing \
         create_test_asset \
