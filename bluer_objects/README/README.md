@@ -1,4 +1,4 @@
-# bluer README
+# 🌀 bluer README
 
 ```python
 assets:::<object-name>/<filename>

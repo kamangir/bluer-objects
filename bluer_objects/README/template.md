@@ -1,4 +1,4 @@
-# bluer README
+# 🌀 bluer README
 
 ```python
 ignore::: assets:::<object-name>/<filename>
