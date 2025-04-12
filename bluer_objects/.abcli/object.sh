@@ -1,7 +1,5 @@
 #! /usr/bin/env bash
 
-export ABCLI_S3_OBJECT_PREFIX=s3://$ABCLI_AWS_S3_BUCKET_NAME/$ABCLI_AWS_S3_PREFIX
-
 function bluer_ai_clarify_object() {
     local object_name=$1
     local default=${2:-$(bluer_ai_string_timestamp)}

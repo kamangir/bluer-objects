@@ -6,9 +6,7 @@ from bluer_objects import file, path
 from bluer_objects.env import (
     ABCLI_OBJECT_ROOT,
     abcli_object_name,
-    ABCLI_S3_OBJECT_PREFIX,
 )
-from bluer_objects.host import shell
 from bluer_objects.logger import logger
 
 
