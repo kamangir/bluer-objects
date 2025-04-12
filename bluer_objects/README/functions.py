@@ -3,7 +3,6 @@ import os
 import yaml
 
 from blueness import module
-from bluer_options import fullname
 
 from bluer_objects import NAME as MY_NAME, ICON as MY_ICON
 from bluer_objects.metadata import get_from_object
@@ -73,8 +72,8 @@ def build(
         "",
         "built by {} [`{}`]({}), based on {}[`{}-{}`]({}).".format(
             MY_ICON,
-            fullname(),
-            "https://github.com/kamangir/awesome-bash-cli",
+            "bluer README",
+            "https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README",
             f"{ICON} " if ICON else "",
             NAME,
             VERSION,

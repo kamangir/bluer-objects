@@ -8,7 +8,7 @@ For example, the Sentinel-2 [datacube](https://github.com/kamangir/blue-geo/tree
 pip install bluer-objects
 ```
 
-Also home to [blue README](./bluer_objects/README/).
+Also home to [bluer README](./bluer_objects/README/).
 
 ---
 
