@@ -2,7 +2,7 @@
 
 function bluer_ai_storage_clear() {
     local options=$1
-    local do_dryrun=$(abcli_option_int "$options" dryrun 1)
+    local do_dryrun=$(bluer_ai_option_int "$options" dryrun 1)
 
     if [[ "$abcli_is_rpi" == true ]]; then
         bluer_ai_eval dryrun=$do_dryrun \

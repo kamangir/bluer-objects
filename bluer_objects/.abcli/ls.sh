@@ -2,7 +2,7 @@
 
 function bluer_objects_ls() {
     local options=$1
-    local where=$(abcli_option_choice "$options" cloud,local)
+    local where=$(bluer_ai_option_choice "$options" cloud,local)
 
     if [[ -z "$where" ]]; then
         ls -1 "$@"

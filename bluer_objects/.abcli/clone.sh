@@ -2,12 +2,12 @@
 
 function bluer_objects_clone() {
     local options=$1
-    local do_relate=$(abcli_option_int "$options" relate 1)
-    local do_upload=$(abcli_option_int "$options" upload 0)
-    local clone_tags=$(abcli_option_int "$options" tags 1)
-    local copy_content=$(abcli_option_int "$options" content 1)
-    local do_download=$(abcli_option_int "$options" download 1)
-    local transfer_mechanism=$(abcli_option_choice "$options" cp,mv mv)
+    local do_relate=$(bluer_ai_option_int "$options" relate 1)
+    local do_upload=$(bluer_ai_option_int "$options" upload 0)
+    local clone_tags=$(bluer_ai_option_int "$options" tags 1)
+    local copy_content=$(bluer_ai_option_int "$options" content 1)
+    local do_download=$(bluer_ai_option_int "$options" download 1)
+    local transfer_mechanism=$(bluer_ai_option_choice "$options" cp,mv mv)
 
     local object_1_name=$(bluer_ai_clarify_object $2 ..)
     local object_2_name=$(bluer_ai_clarify_object $3 .)

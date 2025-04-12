@@ -4,8 +4,8 @@ function bluer_ai_select() {
     local object_name=$(bluer_ai_clarify_object "$1" $(bluer_ai_string_timestamp))
 
     local options=$2
-    local do_open=$(abcli_option_int "$options" open 0)
-    local type_name=$(abcli_option "$options" type object)
+    local do_open=$(bluer_ai_option_int "$options" open 0)
+    local type_name=$(bluer_ai_option "$options" type object)
 
     local object_name_var_prev=abcli_${type_name}_name_prev
     export abcli_${type_name}_name_prev2=${!object_name_var_prev}
