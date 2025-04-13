@@ -8,9 +8,6 @@ function test_bluer_objects_help() {
 
     local module
     for module in \
-        "@assets" \
-        "@assets publish" \
-        \
         "@cp" \
         \
         "@objects" \
