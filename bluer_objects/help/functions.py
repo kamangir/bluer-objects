@@ -1,7 +1,6 @@
 from bluer_ai.help.generic import help_functions as generic_help_functions
 
 from bluer_objects import ALIAS
-from bluer_objects.help.assets import help_functions as help_assets
 from bluer_objects.help.clone import help_clone
 from bluer_objects.help.download import help_download
 from bluer_objects.help.gif import help_gif
@@ -15,7 +14,6 @@ help_functions = generic_help_functions(plugin_name=ALIAS)
 
 help_functions.update(
     {
-        "assets": help_assets,
         "clone": help_clone,
         "download": help_download,
         "gif": help_gif,

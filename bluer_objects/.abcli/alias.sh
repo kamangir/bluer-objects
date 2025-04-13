@@ -6,8 +6,6 @@ alias @download=bluer_objects_download
 
 alias @gif=bluer_objects_gif
 
-alias @assets=bluer_objects_assets
-
 alias @cache=bluer_objects_mlflow_cache
 alias @ref="bluer_objects_mlflow_cache read"
 alias @tags=bluer_objects_mlflow_tags
