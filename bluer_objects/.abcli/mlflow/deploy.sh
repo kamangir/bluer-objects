@@ -11,10 +11,14 @@ function bluer_objects_mlflow_deploy() {
         return 1
     fi
 
+    bluer_ai_badge "🤖"
+
     bluer_ai_eval dryrun=$do_dryrun \
         mlflow ui \
         --backend-store-uri $MLFLOW_TRACKING_URI \
         --default-artifact-root file://$MLFLOW_TRACKING_URI \
         --host 0.0.0.0 \
         --port $port
+
+    bluer_ai_badge "💻"
 }
