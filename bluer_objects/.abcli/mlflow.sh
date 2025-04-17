@@ -1,6 +1,6 @@
 #! /usr/bin/env bash
 
-export MLFLOW_TRACKING_URI=$HOME/mlruns
+export MLFLOW_TRACKING_URI=$HOME/mlflow
 
 function bluer_objects_mlflow() {
     local task=$1

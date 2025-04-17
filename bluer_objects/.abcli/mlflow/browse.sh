@@ -4,12 +4,10 @@ function bluer_objects_mlflow_browse() {
     local options=$1
     local browse_experiment=$(bluer_ai_option_int "$options" experiment 0)
 
-    local url=$DATABRICKS_HOST/$ABCLI_MLFLOW_URL_SUBDOMAIN
+    local url=http://localhost:5001/#
 
     if [ $(bluer_ai_option_int "$options" databricks 0) == 1 ]; then
         url="https://accounts.cloud.databricks.com/"
-    elif [ $(bluer_ai_option_int "$options" host 0) == 1 ]; then
-        : # do nothing
     elif [ $(bluer_ai_option_int "$options" models 0) == 1 ]; then
         url="$url/models"
     else

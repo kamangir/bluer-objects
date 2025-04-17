@@ -11,7 +11,7 @@ def help_browse(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = "databricks,experiment,host,models"
+    options = xtra("experiment,models", mono=mono)
 
     return show_usage(
         [
@@ -21,6 +21,23 @@ def help_browse(
             "[.|<object-name>]",
         ],
         "browse mlflow.",
+        mono=mono,
+    )
+
+
+def help_deploy(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = xtra("dryrun,~local,port=<5001>", mono=mono)
+
+    return show_usage(
+        [
+            "@mlflow",
+            "deploy",
+            f"[{options}]",
+        ],
+        "deploy mlflow.",
         mono=mono,
     )
 
@@ -181,6 +198,7 @@ def help_transition(
 help_functions = {
     "browse": help_browse,
     "cache": help_cache,
+    "deploy": help_deploy,
     "get_id": help_get_id,
     "get_run_id": help_get_run_id,
     "list_registered_models": help_list_registered_models,
