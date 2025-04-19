@@ -27,6 +27,10 @@ alias @mysql=abcli_mysql
 
 alias @objects=bluer_objects
 
+alias @random=bluer_ai_string_random
+
 alias @select=bluer_ai_select
+
+alias @storage=bluer_ai_storage
 
 alias @upload=bluer_objects_upload
