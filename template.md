@@ -19,8 +19,6 @@ pip install bluer-objects
 [@ls](./bluer_objects/docs/aliases/ls.md), 
 [@metadata](./bluer_objects/docs/aliases/metadata.md), 
 [@mlflow](./bluer_objects/docs/aliases/mlflow.md), 
-[@select](./bluer_objects/docs/aliases/select.md), 
-[@storage](./bluer_objects/docs/aliases/storage.md), 
 [@upload](./bluer_objects/docs/aliases/upload.md).
 
 ---
