@@ -16,14 +16,25 @@ def build_me() -> bool:
 
     return all(
         build(
-            path=os.path.join(file.path(__file__), readme["path"]),
+            path=os.path.join(file.path(__file__), path),
             ICON=ICON,
             NAME=NAME,
             VERSION=VERSION,
             REPO_NAME=REPO_NAME,
         )
-        for readme in [
-            {"path": "../.."},
-            {"path": "."},
+        for path in [
+            "../..",
+            ".",
+            # aliases
+            "../docs/aliases/clone.md",
+            "../docs/aliases/download.md",
+            "../docs/aliases/gif.md",
+            "../docs/aliases/host.md",
+            "../docs/aliases/ls.md",
+            "../docs/aliases/metadata.md",
+            "../docs/aliases/mlflow.md",
+            "../docs/aliases/select.md",
+            "../docs/aliases/storage.md",
+            "../docs/aliases/upload.md",
         ]
     )
