@@ -2,10 +2,12 @@ import os
 
 from blueness import module
 
+from bluer_options.help.functions import get_help
 from bluer_objects import NAME as MY_NAME
 from bluer_objects import file
 from bluer_objects.README.functions import build
 from bluer_objects.README.items import Items
+from bluer_objects.help.functions import help_functions
 from bluer_objects.logger import logger
 
 MY_NAME = module.name(__file__, MY_NAME)
@@ -21,6 +23,11 @@ def build_me() -> bool:
             NAME=NAME,
             VERSION=VERSION,
             REPO_NAME=REPO_NAME,
+            help_function=lambda tokens: get_help(
+                tokens,
+                help_functions,
+                mono=True,
+            ),
         )
         for path in [
             "../..",
@@ -33,8 +40,6 @@ def build_me() -> bool:
             "../docs/aliases/ls.md",
             "../docs/aliases/metadata.md",
             "../docs/aliases/mlflow.md",
-            "../docs/aliases/select.md",
-            "../docs/aliases/storage.md",
             "../docs/aliases/upload.md",
         ]
     )

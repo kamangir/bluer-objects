@@ -1,3 +1,8 @@
 # upload
 
-help::: bluer_objects upload
+```bash
+@upload \
+	[filename=<filename>] \
+	[.|<object-name>]
+ . upload <object-name>.
+```
