@@ -12,16 +12,16 @@ pip install bluer-objects
 
 # aliases
 
-[@clone](./bluer_objects/docs/clone.md), 
-[@download](./bluer_objects/docs/download.md), 
-[@gif](./bluer_objects/docs/gif.md), 
-[@host](./bluer_objects/docs/host.md), 
-[@ls](./bluer_objects/docs/ls.md), 
-[@metadata](./bluer_objects/docs/metadata.md), 
-[@mlflow](./bluer_objects/docs/mlflow.md), 
-[@select](./bluer_objects/docs/select.md), 
-[@storage](./bluer_objects/docs/storage.md), 
-[@upload](./bluer_objects/docs/upload.md).
+[@clone](./bluer_objects/docs/aliases/clone.md), 
+[@download](./bluer_objects/docs/aliases/download.md), 
+[@gif](./bluer_objects/docs/aliases/gif.md), 
+[@host](./bluer_objects/docs/aliases/host.md), 
+[@ls](./bluer_objects/docs/aliases/ls.md), 
+[@metadata](./bluer_objects/docs/aliases/metadata.md), 
+[@mlflow](./bluer_objects/docs/aliases/mlflow.md), 
+[@select](./bluer_objects/docs/aliases/select.md), 
+[@storage](./bluer_objects/docs/aliases/storage.md), 
+[@upload](./bluer_objects/docs/aliases/upload.md).
 
 ---
 

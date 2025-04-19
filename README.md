@@ -12,16 +12,16 @@ pip install bluer-objects
 
 # aliases
 
-[@clone](./bluer_objects/docs/clone.md), 
-[@download](./bluer_objects/docs/download.md), 
-[@gif](./bluer_objects/docs/gif.md), 
-[@host](./bluer_objects/docs/host.md), 
-[@ls](./bluer_objects/docs/ls.md), 
-[@metadata](./bluer_objects/docs/metadata.md), 
-[@mlflow](./bluer_objects/docs/mlflow.md), 
-[@select](./bluer_objects/docs/select.md), 
-[@storage](./bluer_objects/docs/storage.md), 
-[@upload](./bluer_objects/docs/upload.md).
+[@clone](./bluer_objects/docs/aliases/clone.md), 
+[@download](./bluer_objects/docs/aliases/download.md), 
+[@gif](./bluer_objects/docs/aliases/gif.md), 
+[@host](./bluer_objects/docs/aliases/host.md), 
+[@ls](./bluer_objects/docs/aliases/ls.md), 
+[@metadata](./bluer_objects/docs/aliases/metadata.md), 
+[@mlflow](./bluer_objects/docs/aliases/mlflow.md), 
+[@select](./bluer_objects/docs/aliases/select.md), 
+[@storage](./bluer_objects/docs/aliases/storage.md), 
+[@upload](./bluer_objects/docs/aliases/upload.md).
 
 ---
 
@@ -32,4 +32,4 @@ pip install bluer-objects
 
 [![pylint](https://github.com/kamangir/bluer-objects/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/bluer-objects/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/bluer-objects/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/bluer-objects.svg)](https://pypi.org/project/bluer-objects/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/bluer-objects)](https://pypistats.org/packages/bluer-objects)
 
-built by 🌀 [`bluer README`](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README), based on 🌀 [`bluer_objects-6.91.1`](https://github.com/kamangir/bluer-objects).
+built by 🌀 [`bluer README`](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README), based on 🌀 [`bluer_objects-6.92.1`](https://github.com/kamangir/bluer-objects).
