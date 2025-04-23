@@ -4,7 +4,7 @@ ICON = "🌀"
 
 DESCRIPTION = f"{ICON} Object management in Bash."
 
-VERSION = "6.95.1"
+VERSION = "6.96.1"
 
 REPO_NAME = "bluer-objects"
 
