@@ -13,9 +13,6 @@ from bluer_objects.logger import logger
 MY_NAME = module.name(__file__, MY_NAME)
 
 
-ABCLI_PUBLIC_PREFIX = "to-be-removed"
-
-
 def build(
     NAME: str,
     VERSION: str,
@@ -153,7 +150,7 @@ def build(
                         (
                             "[{}]({}/{}.tar.gz)".format(
                                 token.split(":::")[1].strip(),
-                                ABCLI_PUBLIC_PREFIX,
+                                "TBA",
                                 token.split(":::")[1].strip(),
                             )
                             if token.startswith("object:::")
