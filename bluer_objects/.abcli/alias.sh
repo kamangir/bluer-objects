@@ -1,7 +1,5 @@
 #! /usr/bin/env bash
 
-alias @ai=bluer_ai
-
 alias @download=bluer_objects_download
 
 alias @gif=bluer_objects_gif
