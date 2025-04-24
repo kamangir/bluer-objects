@@ -2,6 +2,7 @@ import glob
 import os
 from typing import Tuple, List
 from webdav3.client import Client
+from tqdm import tqdm
 
 from bluer_objects.storage.base import StorageInterface
 from bluer_objects import env, file, path
@@ -24,6 +25,40 @@ class WebDAVzipInterface(StorageInterface):
         }
 
         self.client = Client(config)
+
+    def clear(
+        self,
+        do_dryrun: bool = True,
+    ) -> bool:
+        logger.info(
+            "{}.clear({})".format(
+                self.__class__.__name__,
+                "dryrun" if do_dryrun else "",
+            )
+        )
+
+        count: int = 0
+        for thing in tqdm(self.client.list()):
+            if not thing.endswith(".zip"):
+                continue
+            if not thing.startswith("test"):
+                continue
+
+            logger.info(thing)
+            if do_dryrun:
+                continue
+
+            try:
+                self.client.clean(remote_path=thing)
+            except Exception as e:
+                logger.error(e)
+                return False
+
+            count += 1
+
+        logger.info(f"deleted {count} object(s).")
+
+        return True
 
     def download(
         self,

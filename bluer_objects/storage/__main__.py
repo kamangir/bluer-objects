@@ -13,7 +13,7 @@ parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,
-    help="download | ls | upload",
+    help="clear | download | ls | upload",
 )
 parser.add_argument(
     "--object_name",
@@ -41,12 +41,22 @@ parser.add_argument(
     type=str,
     default=",",
 )
+parser.add_argument(
+    "--do_dryrun",
+    type=int,
+    default=1,
+    help="0 | 1",
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
 
 success = False
-if args.task == "download":
+if args.task == "clear":
+    success = storage.clear(
+        do_dryrun=args.do_dryrun == 1,
+    )
+elif args.task == "download":
     success = storage.download(
         object_name=args.object_name,
         filename=args.filename,
