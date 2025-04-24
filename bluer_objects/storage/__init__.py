@@ -17,6 +17,14 @@ else:
     assert False
 
 
+def clear(
+    do_dryrun: bool = True,
+) -> bool:
+    return interface.clear(
+        do_dryrun=do_dryrun,
+    )
+
+
 def download(
     object_name: str,
     filename: str = "",

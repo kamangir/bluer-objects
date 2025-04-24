@@ -4,6 +4,12 @@ from bluer_objects.logger import logger
 
 
 class StorageInterface:
+    def clear(
+        self,
+        do_dryrun: bool = True,
+    ) -> bool:
+        return False
+
     def download(
         self,
         object_name: str,

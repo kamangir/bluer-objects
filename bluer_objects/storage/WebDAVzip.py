@@ -25,6 +25,21 @@ class WebDAVzipInterface(StorageInterface):
 
         self.client = Client(config)
 
+    def clear(
+        self,
+        do_dryrun: bool = True,
+    ) -> bool:
+        logger.info(
+            "{}.clear({})".format(
+                self.__class__.__name__,
+                "dryrun" if do_dryrun else "",
+            )
+        )
+
+        logger.info("🪄")
+
+        return True
+
     def download(
         self,
         object_name: str,
