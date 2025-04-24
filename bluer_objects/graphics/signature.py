@@ -24,6 +24,7 @@ def justify_text(
             textwrap.wrap(line, width=line_width)
             for line in (text if isinstance(text, list) else [text])
         ],
+        [],
     )
 
     return "\n".join(output) if return_str else output
