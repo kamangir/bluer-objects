@@ -31,7 +31,10 @@ class WebDAVzipInterface(StorageInterface):
         filename: str = "",
         log: bool = True,
     ) -> bool:
-        object_path = objects.object_path(object_name=object_name)
+        object_path = objects.object_path(
+            object_name=object_name,
+            create=True,
+        )
         zip_filename = f"{object_path}.zip"
 
         try:
