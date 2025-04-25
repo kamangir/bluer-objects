@@ -149,21 +149,14 @@ def load_matrix(
 def load_text(
     filename,
     ignore_error=False,
-    count=-1,
     log=False,
 ) -> Tuple[bool, List[str]]:
     success = True
     text = []
 
     try:
-        if count == -1:
-            with open(filename, "r") as fp:
-                text = fp.read()
-            text = text.split("\n")
-        else:
-            # https://stackoverflow.com/a/1767589/10917551
-            with open(filename) as fp:
-                text = [next(fp) for _ in range(count)]
+        with open(filename, "r") as fp:
+            text = fp.read().splitlines()
     except:
         success = False
         if not ignore_error:

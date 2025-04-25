@@ -13,7 +13,6 @@ from bluer_options.host import is_jupyter
 from bluer_objects import NAME
 from bluer_objects.file.classes import JsonEncoder
 from bluer_objects.file.functions import path as file_path
-from bluer_objects.file.load import load_text
 from bluer_objects.path import create as path_create
 from bluer_objects.logger import logger
 
@@ -214,32 +213,15 @@ def save_matrix(
 def save_text(
     filename: str,
     text: List[str],
-    if_different: bool = False,
     log: bool = False,
-    remove_empty_lines: bool = False,
 ) -> bool:
-    if remove_empty_lines:
-        text = [
-            line
-            for line, next_line in zip(text, text[1:] + ["x"])
-            if line.strip() or next_line.strip()
-        ]
-
-    if if_different:
-        _, content = load_text(filename, ignore_error=True)
-
-        if "|".join([line for line in content if line]) == "|".join(
-            [line for line in text if line]
-        ):
-            return True
-
     if not prepare_for_saving(filename):
         return False
 
     success = True
     try:
         with open(filename, "w") as fp:
-            fp.writelines([string + "\n" for string in text])
+            fp.writelines(string + "\n" for string in text)
     except:
         success = False
 
