@@ -11,9 +11,6 @@ from bluer_objects.logger import logger
 class WebDAVRequestInterface(StorageInterface):
     name = "webdav-request"
 
-    def __init__(self):
-        super().__init__()
-
     def mkdir(
         self,
         path: str,
@@ -104,6 +101,7 @@ class WebDAVRequestInterface(StorageInterface):
             return False
 
         logger.error("not implemented")
+        return False
 
     def upload(
         self,
