@@ -2,6 +2,7 @@ from typing import Tuple, List
 
 from bluer_objects.storage.base import StorageInterface
 from bluer_objects.storage.WebDAV import WebDAVInterface
+from bluer_objects.storage.WebDAVrequest import WebDAVRequestInterface
 from bluer_objects.storage.WebDAVzip import WebDAVzipInterface
 from bluer_objects import env
 from bluer_objects.logger import logger
