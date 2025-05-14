@@ -11,6 +11,8 @@ interface = StorageInterface()
 
 if env.BLUER_OBJECTS_STORAGE_INTERFACE == WebDAVInterface.name:
     interface = WebDAVInterface()
+elif env.BLUER_OBJECTS_STORAGE_INTERFACE == WebDAVRequestInterface.name:
+    interface = WebDAVRequestInterface()
 elif env.BLUER_OBJECTS_STORAGE_INTERFACE == WebDAVzipInterface.name:
     interface = WebDAVzipInterface()
 else:
