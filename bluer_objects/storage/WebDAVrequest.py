@@ -152,19 +152,19 @@ class WebDAVRequestInterface(StorageInterface):
             return False
 
         object_path = "{}/".format(objects.object_path(object_name=object_name))
-        for filename in glob.glob(
+        for filename_ in glob.glob(
             objects.path_of(
                 object_name=object_name,
                 filename="**",
             ),
             recursive=True,
         ):
-            if not file.exists(filename):
+            if not file.exists(filename_):
                 continue
 
             if not self.upload(
                 object_name=object_name,
-                filename=filename.split(object_path, 1)[1],
+                filename=filename_.split(object_path, 1)[1],
                 log=log,
             ):
                 return False
