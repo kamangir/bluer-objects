@@ -1,5 +1,6 @@
 import requests
 from requests.auth import HTTPBasicAuth
+import glob
 
 from bluer_objects.storage.base import StorageInterface
 from bluer_objects import env, file, path
@@ -150,5 +151,22 @@ class WebDAVRequestInterface(StorageInterface):
             logger.error(f"failed to upload: {response.status_code} - {response.text}")
             return False
 
-        logger.error("not implemented")
-        return False
+        object_path = "{}/".format(objects.object_path(object_name=object_name))
+        for filename in glob.glob(
+            objects.path_of(
+                object_name=object_name,
+                filename="**",
+            ),
+            recursive=True,
+        ):
+            if not file.exists(filename):
+                continue
+
+            if not self.upload(
+                object_name=object_name,
+                filename=filename.split(object_path, 1)[1],
+                log=log,
+            ):
+                return False
+
+        return True

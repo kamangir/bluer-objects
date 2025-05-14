@@ -23,8 +23,7 @@ def test_storage_webdav_request():
             filename=filename,
         )
 
-    # TODO: enable
-    # assert storage.upload(object_name=object_name)
+    assert storage.upload(object_name=object_name)
 
     for filename in [
         "this.yaml",
