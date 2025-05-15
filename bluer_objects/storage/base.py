@@ -40,18 +40,20 @@ class StorageInterface:
                 object_name=object_name,
             )
 
-            return True, [
-                os.path.relpath(filename, start=object_path)
-                for filename in glob.glob(
-                    os.path.join(
-                        object_path,
-                        "**",
-                        "*",
-                    ),
-                    recursive=True,
-                )
-                if os.path.isfile(filename)
-            ]
+            return True, sorted(
+                [
+                    os.path.relpath(filename, start=object_path)
+                    for filename in glob.glob(
+                        os.path.join(
+                            object_path,
+                            "**",
+                            "*",
+                        ),
+                        recursive=True,
+                    )
+                    if os.path.isfile(filename)
+                ]
+            )
 
         if where == "cloud":
             logger.error("not implemented")

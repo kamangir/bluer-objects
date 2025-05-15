@@ -13,6 +13,20 @@ def test_storage_webdav_request():
 
     storage = WebDAVRequestInterface()
 
+    success, list_of_files_local = storage.ls(
+        object_name=object_name,
+        where="local",
+    )
+    assert success
+    assert list_of_files_local
+
+    success, list_of_files_cloud = storage.ls(
+        object_name=object_name,
+        where="cloud",
+    )
+    assert success
+    assert not list_of_files_cloud
+
     for filename in [
         "this.yaml",
         "subfolder/this.yaml",
@@ -23,7 +37,22 @@ def test_storage_webdav_request():
             filename=filename,
         )
 
+    success, list_of_files_cloud = storage.ls(
+        object_name=object_name,
+        where="cloud",
+    )
+    assert success
+    assert list_of_files_cloud
+
     assert storage.upload(object_name=object_name)
+
+    success, list_of_files_cloud = storage.ls(
+        object_name=object_name,
+        where="cloud",
+    )
+    assert success
+    assert list_of_files_cloud
+    assert list_of_files_cloud == list_of_files_local
 
     for filename in [
         "this.yaml",
@@ -35,5 +64,4 @@ def test_storage_webdav_request():
             filename=filename,
         )
 
-    # TODO: enable
-    # assert storage.download(object_name=object_name)
+    assert storage.download(object_name=object_name)
