@@ -1,6 +1,7 @@
 import requests
 from requests.auth import HTTPBasicAuth
 import glob
+from typing import Tuple, List
 
 from bluer_objects.storage.base import StorageInterface
 from bluer_objects import env, file, path
@@ -103,6 +104,20 @@ class WebDAVRequestInterface(StorageInterface):
 
         logger.error("not implemented")
         return False
+
+    def ls(
+        self,
+        object_name: str,
+        where: str = "local",
+    ) -> Tuple[bool, List[str]]:
+        if where == "cloud":
+            logger.error("not implemented")
+            return False, []
+
+        return super().ls(
+            object_name=object_name,
+            where=where,
+        )
 
     def upload(
         self,

@@ -82,13 +82,6 @@ class WebDAVInterface(StorageInterface):
             log=log,
         )
 
-    def ls(
-        self,
-        object_name: str,
-        where: str = "local",
-    ) -> Tuple[bool, List[str]]:
-        assert False, "not implemented"
-
     def upload(
         self,
         object_name: str,

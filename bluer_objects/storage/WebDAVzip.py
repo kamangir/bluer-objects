@@ -106,24 +106,6 @@ class WebDAVzipInterface(StorageInterface):
         object_name: str,
         where: str = "local",
     ) -> Tuple[bool, List[str]]:
-        if where == "local":
-            object_path = objects.object_path(
-                object_name=object_name,
-            )
-
-            return True, [
-                os.path.relpath(filename, start=object_path)
-                for filename in glob.glob(
-                    os.path.join(
-                        object_path,
-                        "**",
-                        "*",
-                    ),
-                    recursive=True,
-                )
-                if os.path.isfile(filename)
-            ]
-
         if where == "cloud":
             try:
                 if self.client.check(remote_path=f"{object_name}.zip"):
@@ -134,8 +116,10 @@ class WebDAVzipInterface(StorageInterface):
 
             return True, []
 
-        logger.error(f"Unknown 'where': {where}")
-        return False, []
+        return super().ls(
+            object_name=object_name,
+            where=where,
+        )
 
     def upload(
         self,
