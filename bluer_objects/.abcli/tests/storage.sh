@@ -11,10 +11,13 @@ function test_bluer_objects_storage() {
         create_test_asset \
         --object_name $object_name
     [[ $? -ne 0 ]] && return 1
-
-    # testing upload
     bluer_ai_hr
 
+    bluer_objects_ls local $object_name
+    [[ $? -ne 0 ]] && return 1
+    bluer_ai_hr
+
+    # upload
     bluer_objects_upload \
         filename=this.yaml \
         $object_name
@@ -33,12 +36,15 @@ function test_bluer_objects_storage() {
     [[ $? -ne 0 ]] && return 1
     bluer_ai_hr
 
+    bluer_objects_ls cloud $object_name
+    [[ $? -ne 0 ]] && return 1
+    bluer_ai_hr
+
     # clean-up
     rm -rfv $object_path
     bluer_ai_hr
 
-    # testing download
-
+    # download
     bluer_objects_download \
         filename=this.yaml \
         $object_name
