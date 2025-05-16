@@ -121,64 +121,74 @@ class WebDAVRequestInterface(StorageInterface):
 
         return True
 
+    def list_raw(
+        self,
+        suffix: str,
+    ) -> Tuple[bool, List[str]]:
+        # https://chatgpt.com/c/6824f8d3-d9c0-8005-a7fa-d646f812f4b7
+        headers = {
+            "Depth": "infinity",
+            "Content-Type": "application/xml",
+        }
+
+        # Minimal PROPFIND XML body
+        data = """<?xml version="1.0"?>
+        <d:propfind xmlns:d="DAV:">
+        <d:prop><d:displayname/></d:prop>
+        </d:propfind>"""
+
+        try:
+            response = requests.request(
+                method="PROPFIND",
+                url=f"{env.WEBDAV_HOSTNAME}/{suffix}",
+                data=data,
+                headers=headers,
+                auth=HTTPBasicAuth(
+                    env.WEBDAV_LOGIN,
+                    env.WEBDAV_PASSWORD,
+                ),
+            )
+        except Exception as e:
+            logger.error(e)
+            return False, []
+
+        if response.status_code == 404:  # object not found
+            return True, []
+
+        if response.status_code in (207, 207):
+            tree = ET.fromstring(response.content)
+            ns = {"d": "DAV:"}
+            list_of_files = []
+            for resp in tree.findall("d:response", ns):
+                href = resp.find("d:href", ns).text
+                list_of_files.append(href)
+
+            return True, list_of_files
+
+        logger.error(f"failed to list: {response.status_code} - {response.text}")
+        return False, []
+
     def ls(
         self,
         object_name: str,
         where: str = "local",
     ) -> Tuple[bool, List[str]]:
         if where == "cloud":
-            # https://chatgpt.com/c/6824f8d3-d9c0-8005-a7fa-d646f812f4b7
-            headers = {
-                "Depth": "infinity",
-                "Content-Type": "application/xml",
-            }
+            success, list_of_files = self.list_raw(
+                suffix=f"{object_name}/",
+            )
 
-            # Minimal PROPFIND XML body
-            data = """<?xml version="1.0"?>
-            <d:propfind xmlns:d="DAV:">
-            <d:prop><d:displayname/></d:prop>
-            </d:propfind>"""
-
-            try:
-                response = requests.request(
-                    method="PROPFIND",
-                    url=f"{env.WEBDAV_HOSTNAME}/{object_name}/",
-                    data=data,
-                    headers=headers,
-                    auth=HTTPBasicAuth(
-                        env.WEBDAV_LOGIN,
-                        env.WEBDAV_PASSWORD,
-                    ),
-                )
-            except Exception as e:
-                logger.error(e)
-                return False, []
-
-            if response.status_code == 404:  # object not found
-                return True, []
-
-            if response.status_code in (207, 207):
-                tree = ET.fromstring(response.content)
-                ns = {"d": "DAV:"}
-                files = []
-                for resp in tree.findall("d:response", ns):
-                    href = resp.find("d:href", ns).text
-                    files.append(href)
-
-                return True, sorted(
-                    [
-                        filename
-                        for filename in [
-                            filename.split(f"{env.WEBDAV_LOGIN}/{object_name}/", 1)[1]
-                            for filename in files
-                            if not filename.endswith("/")
-                        ]
-                        if filename
+            return success, sorted(
+                [
+                    filename
+                    for filename in [
+                        filename.split(f"{env.WEBDAV_LOGIN}/{object_name}/", 1)[1]
+                        for filename in list_of_files
+                        if not filename.endswith("/")
                     ]
-                )
-
-            logger.error(f"failed to list: {response.status_code} - {response.text}")
-            return False, []
+                    if filename
+                ]
+            )
 
         return super().ls(
             object_name=object_name,
