@@ -137,7 +137,8 @@ class WebDAVRequestInterface(StorageInterface):
 
             if response.status_code == 404:  # object not found
                 return True, []
-            elif response.status_code in (207, 207):
+
+            if response.status_code in (207, 207):
                 tree = ET.fromstring(response.content)
                 ns = {"d": "DAV:"}
                 files = []
@@ -156,11 +157,9 @@ class WebDAVRequestInterface(StorageInterface):
                         if filename
                     ]
                 )
-            else:
-                logger.error(
-                    f"failed to list: {response.status_code} - {response.text}"
-                )
-                return False, []
+
+            logger.error(f"failed to list: {response.status_code} - {response.text}")
+            return False, []
 
         return super().ls(
             object_name=object_name,
