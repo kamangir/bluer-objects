@@ -3,6 +3,7 @@ from requests.auth import HTTPBasicAuth
 import glob
 from typing import Tuple, List
 from xml.etree import ElementTree as ET
+from tqdm import tqdm
 
 from bluer_objects.storage.base import StorageInterface
 from bluer_objects import env, file, path
@@ -103,8 +104,22 @@ class WebDAVRequestInterface(StorageInterface):
             logger.error(f"failed to download: {response.status_code}")
             return False
 
-        logger.error("not implemented")
-        return False
+        success, list_of_files = self.ls(
+            object_name=object_name,
+            where="cloud",
+        )
+        if not success:
+            return False
+
+        for filename_ in tqdm(list_of_files):
+            if not self.download(
+                object_name=object_name,
+                filename=filename_,
+                log=log,
+            ):
+                return False
+
+        return True
 
     def ls(
         self,
