@@ -161,6 +161,9 @@ class WebDAVRequestInterface(StorageInterface):
                 logger.error(e)
                 return False
 
+            if response.status_code == 404:  # object not found
+                return True
+
             if response.status_code == 200:
                 try:
                     with open(local_path, "wb") as file_:
