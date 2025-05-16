@@ -124,16 +124,20 @@ class WebDAVRequestInterface(StorageInterface):
             <d:prop><d:displayname/></d:prop>
             </d:propfind>"""
 
-            response = requests.request(
-                method="PROPFIND",
-                url=f"{env.WEBDAV_HOSTNAME}/{object_name}/",
-                data=data,
-                headers=headers,
-                auth=HTTPBasicAuth(
-                    env.WEBDAV_LOGIN,
-                    env.WEBDAV_PASSWORD,
-                ),
-            )
+            try:
+                response = requests.request(
+                    method="PROPFIND",
+                    url=f"{env.WEBDAV_HOSTNAME}/{object_name}/",
+                    data=data,
+                    headers=headers,
+                    auth=HTTPBasicAuth(
+                        env.WEBDAV_LOGIN,
+                        env.WEBDAV_PASSWORD,
+                    ),
+                )
+            except Exception as e:
+                logger.error(e)
+                return False, []
 
             if response.status_code == 404:  # object not found
                 return True, []
