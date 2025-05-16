@@ -11,7 +11,7 @@ class StorageInterface:
         self,
         do_dryrun: bool = True,
     ) -> bool:
-        return False
+        return True
 
     def download(
         self,
