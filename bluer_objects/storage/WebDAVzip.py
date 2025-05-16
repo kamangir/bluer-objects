@@ -13,7 +13,7 @@ from bluer_objects.logger import logger
 
 # tars the objects to avoid 'content-length' - see WebDAVInterface.
 class WebDAVzipInterface(StorageInterface):
-    name = "webdavzip"
+    name = "webdav-zip"
 
     def __init__(self):
         super().__init__()
