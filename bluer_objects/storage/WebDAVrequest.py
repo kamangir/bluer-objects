@@ -15,6 +15,82 @@ from bluer_objects.logger import logger
 class WebDAVRequestInterface(StorageInterface):
     name = "webdav-request"
 
+    def clear(
+        self,
+        do_dryrun: bool = True,
+        log: bool = True,
+    ) -> bool:
+        logger.info(
+            "{}.clear({})".format(
+                self.__class__.__name__,
+                "dryrun" if do_dryrun else "",
+            )
+        )
+
+        success, list_of_objects = self.list_raw(
+            suffix="",
+            recursive=False,
+        )
+        if not success:
+            return False
+
+        count: int = 0
+        for thing in tqdm(list_of_objects):
+            thing_name = thing.split(f"{env.WEBDAV_LOGIN}/", 1)[1]
+            if not thing_name.startswith("test"):
+                continue
+
+            if not thing_name.endswith("/"):
+                continue
+
+            if not self.delete(
+                object_name=thing_name.split("/", 1)[0],
+                do_dryrun=do_dryrun,
+                log=log,
+            ):
+                return False
+
+            count += 1
+
+        logger.info(f"deleted {count} object(s).")
+        return True
+
+    def delete(
+        self,
+        object_name: str,
+        do_dryrun: bool = True,
+        log: bool = True,
+    ) -> bool:
+        if log:
+            logger.info(
+                "{}.delete({}){}".format(
+                    self.__class__.__name__,
+                    object_name,
+                    " dryrun" if do_dryrun else "",
+                )
+            )
+        if do_dryrun:
+            return True
+
+        try:
+            response = requests.request(
+                method="DELETE",
+                url=f"{env.WEBDAV_HOSTNAME}/{object_name}/",
+                auth=HTTPBasicAuth(
+                    env.WEBDAV_LOGIN,
+                    env.WEBDAV_PASSWORD,
+                ),
+            )
+        except Exception as e:
+            logger.error(e)
+            return False
+
+        if response.status_code in [200, 204]:
+            return True
+
+        logger.error(f"failed to delete: {response.status_code} - {response.text}")
+        return False
+
     def mkdir(
         self,
         path: str,
@@ -50,9 +126,7 @@ class WebDAVRequestInterface(StorageInterface):
                     )
                 continue
 
-            logger.error(
-                f"failed to create directory: {response.status_code} - {response.text}"
-            )
+            logger.error(f"failed to create: {response.status_code} - {response.text}")
             return False
 
         return True
@@ -124,10 +198,11 @@ class WebDAVRequestInterface(StorageInterface):
     def list_raw(
         self,
         suffix: str,
+        recursive: bool,
     ) -> Tuple[bool, List[str]]:
         # https://chatgpt.com/c/6824f8d3-d9c0-8005-a7fa-d646f812f4b7
         headers = {
-            "Depth": "infinity",
+            "Depth": "infinity" if recursive else "1",
             "Content-Type": "application/xml",
         }
 
@@ -176,6 +251,7 @@ class WebDAVRequestInterface(StorageInterface):
         if where == "cloud":
             success, list_of_files = self.list_raw(
                 suffix=f"{object_name}/",
+                recursive=True,
             )
 
             return success, sorted(
