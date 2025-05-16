@@ -2,6 +2,7 @@ import requests
 from requests.auth import HTTPBasicAuth
 import glob
 from typing import Tuple, List
+from xml.etree import ElementTree as ET
 
 from bluer_objects.storage.base import StorageInterface
 from bluer_objects import env, file, path
@@ -111,8 +112,55 @@ class WebDAVRequestInterface(StorageInterface):
         where: str = "local",
     ) -> Tuple[bool, List[str]]:
         if where == "cloud":
-            logger.error("not implemented")
-            return False, []
+            # https://chatgpt.com/c/6824f8d3-d9c0-8005-a7fa-d646f812f4b7
+            headers = {
+                "Depth": "infinity",
+                "Content-Type": "application/xml",
+            }
+
+            # Minimal PROPFIND XML body
+            data = """<?xml version="1.0"?>
+            <d:propfind xmlns:d="DAV:">
+            <d:prop><d:displayname/></d:prop>
+            </d:propfind>"""
+
+            response = requests.request(
+                method="PROPFIND",
+                url=f"{env.WEBDAV_HOSTNAME}/{object_name}/",
+                data=data,
+                headers=headers,
+                auth=HTTPBasicAuth(
+                    env.WEBDAV_LOGIN,
+                    env.WEBDAV_PASSWORD,
+                ),
+            )
+
+            if response.status_code == 404:  # object not found
+                return True, []
+            elif response.status_code in (207, 207):
+                tree = ET.fromstring(response.content)
+                ns = {"d": "DAV:"}
+                files = []
+                for resp in tree.findall("d:response", ns):
+                    href = resp.find("d:href", ns).text
+                    files.append(href)
+
+                return True, sorted(
+                    [
+                        filename
+                        for filename in [
+                            filename.split(f"{env.WEBDAV_LOGIN}/{object_name}/", 1)[1]
+                            for filename in files
+                            if not filename.endswith("/")
+                        ]
+                        if filename
+                    ]
+                )
+            else:
+                logger.error(
+                    f"failed to list: {response.status_code} - {response.text}"
+                )
+                return False, []
 
         return super().ls(
             object_name=object_name,
