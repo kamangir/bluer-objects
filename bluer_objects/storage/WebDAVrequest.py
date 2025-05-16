@@ -319,12 +319,16 @@ class WebDAVRequestInterface(StorageInterface):
             return False
 
         object_path = "{}/".format(objects.object_path(object_name=object_name))
-        for filename_ in glob.glob(
-            objects.path_of(
-                object_name=object_name,
-                filename="**",
-            ),
-            recursive=True,
+        for filename_ in tqdm(
+            sorted(
+                glob.glob(
+                    objects.path_of(
+                        object_name=object_name,
+                        filename="**",
+                    ),
+                    recursive=True,
+                )
+            )
         ):
             if not file.exists(filename_):
                 continue
