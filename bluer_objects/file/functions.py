@@ -150,6 +150,8 @@ def download(
         return True
 
     try:
+        os.makedirs(path(filename), exist_ok=True)
+
         # https://stackoverflow.com/a/27406501
         with urllib3.PoolManager().request(
             "GET", url, preload_content=False
