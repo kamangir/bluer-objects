@@ -11,7 +11,7 @@ from bluer_objects.mlflow import testing
 
 
 def test_from_and_to_experiment_name():
-    object_name = unique_object()
+    object_name = unique_object("test_from_and_to_experiment_name")
 
     assert (
         objects.to_object_name(objects.to_experiment_name(object_name)) == object_name
@@ -27,7 +27,7 @@ def test_mlflow_testing():
     [["x=1,y=2,z=3"]],
 )
 def test_mlflow_tag_set_get(tags_str: str):
-    object_name = unique_object("test_mlflow_tag_set")
+    object_name = unique_object("test_mlflow_tag_set_get")
 
     assert tags.set_tags(
         object_name,

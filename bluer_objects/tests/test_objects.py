@@ -41,6 +41,7 @@ def test_objects_list_of_files(
 
 def test_object_object_path():
     object_name = objects.unique_object("test_object_object_path")
+
     object_path = objects.object_path(object_name, create=True)
     assert object_path
     assert path.exists(object_path)
@@ -61,5 +62,6 @@ def test_objects_path_of(test_object):
 )
 def test_objects_unique_object(prefix: str):
     object_name = objects.unique_object(prefix)
+
     assert object_name
     assert object_name.startswith(prefix)
