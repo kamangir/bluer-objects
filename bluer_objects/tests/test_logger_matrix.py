@@ -18,7 +18,7 @@ def test_log_matrix(
     test_image,
     verbose: bool,
 ):
-    object_name = objects.unique_object()
+    object_name = objects.unique_object("test_log_matrix")
 
     assert log_matrix(
         matrix=test_image,
@@ -58,7 +58,7 @@ def test_log_matrix_hist(
     test_image,
     verbose: bool,
 ):
-    object_name = objects.unique_object()
+    object_name = objects.unique_object("test_log_matrix_hist")
 
     assert log_matrix_hist(
         matrix=test_image,

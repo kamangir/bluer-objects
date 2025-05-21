@@ -94,7 +94,7 @@ def test_file_load_save_matrix(
     size: Tuple[int, ...],
     dtype: Union[np.dtype, type],
 ) -> None:
-    object_name = objects.unique_object(test_file_load_save_matrix)
+    object_name = objects.unique_object("test_file_load_save_matrix")
 
     test_matrix = (
         np.random.randint(0, 256, size=size, dtype=dtype)

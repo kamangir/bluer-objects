@@ -77,7 +77,8 @@ def test_metadata(
     get_source: Callable[[str], str],
     get_source_type: MetadataSourceType,
 ):
-    object_name = unique_object()
+    object_name = unique_object("test_metadata")
+
     key = random()
     value = random()
 
@@ -98,7 +99,8 @@ def test_metadata(
 
 
 def test_metadata_dict():
-    object_name = unique_object()
+    object_name = unique_object("test_metadata_dict")
+
     key = random()
     value = {random(): random() for _ in range(10)}
 
@@ -138,7 +140,8 @@ def test_metadata_dict():
 
 
 def test_metadata_file():
-    object_name = unique_object()
+    object_name = unique_object("test_metadata_file")
+
     key = random()
     value = random()
 
@@ -153,7 +156,8 @@ def test_metadata_file():
 
 
 def test_metadata_object():
-    object_name = unique_object()
+    object_name = unique_object("test_metadata_object")
+
     key = random()
     value = random()
 
@@ -163,7 +167,8 @@ def test_metadata_object():
 
 
 def test_metadata_path():
-    object_name = unique_object()
+    object_name = unique_object("test_metadata_path")
+
     key = random()
     value = random()
 
@@ -175,7 +180,8 @@ def test_metadata_path():
 
 
 def test_metadata_upload():
-    object_name = unique_object()
+    object_name = unique_object("test_metadata_upload")
+
     key = random()
     value = random()
 
