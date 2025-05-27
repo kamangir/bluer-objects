@@ -19,12 +19,18 @@ parser.add_argument(
     "--object_name",
     type=str,
 )
+parser.add_argument(
+    "--depth",
+    type=int,
+    default=10,
+)
 args = parser.parse_args()
 
 success = False
 if args.task == "create_test_asset":
     success = create_test_asset(
         object_name=args.object_name,
+        depth=args.depth,
     )
 else:
     success = None

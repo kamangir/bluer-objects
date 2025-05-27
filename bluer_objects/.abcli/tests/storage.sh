@@ -7,9 +7,8 @@ function test_bluer_objects_storage() {
     local object_path=$ABCLI_OBJECT_ROOT/$object_name
     mkdir -pv $object_path
 
-    python3 -m bluer_objects.testing \
-        create_test_asset \
-        --object_name $object_name
+    bluer_objects_create_test_asset \
+        $object_name
     [[ $? -ne 0 ]] && return 1
     bluer_ai_hr
 

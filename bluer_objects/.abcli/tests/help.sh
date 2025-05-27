@@ -10,6 +10,8 @@ function test_bluer_objects_help() {
     for module in \
         "@cp" \
         \
+        "@create_test_asset" \
+        \
         "@objects" \
         \
         "@objects pypi" \
