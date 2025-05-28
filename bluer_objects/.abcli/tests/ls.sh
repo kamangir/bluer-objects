@@ -3,9 +3,8 @@
 function test_bluer_objects_ls() {
     local object_name=test_bluer_objects_ls-$(bluer_ai_string_timestamp_short)
 
-    python3 -m bluer_objects.testing \
-        create_test_asset \
-        --object_name $object_name
+    bluer_objects_create_test_asset \
+        $object_name
     [[ $? -ne 0 ]] && return 1
     bluer_ai_hr
 

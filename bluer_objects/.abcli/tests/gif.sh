@@ -5,9 +5,8 @@ function test_bluer_objects_gif() {
 
     local source_object_name=test_bluer_objects_clone-$(bluer_ai_string_timestamp_short)
 
-    python3 -m bluer_objects.testing \
-        create_test_asset \
-        --object_name $source_object_name
+    bluer_objects_create_test_asset \
+        $source_object_name
     [[ $? -ne 0 ]] && return 1
 
     bluer_objects_gif \
