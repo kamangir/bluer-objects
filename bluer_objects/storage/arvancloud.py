@@ -51,6 +51,8 @@ class ArvancloudInterface(StorageInterface):
                     local_path,
                 )
             except ClientError as e:
+                if int(e.response["Error"]["Code"]) == 404:  # Not found
+                    return True
                 logger.error(e)
                 return False
 
