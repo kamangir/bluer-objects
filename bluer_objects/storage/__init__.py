@@ -1,5 +1,6 @@
 from typing import Tuple, List
 
+from bluer_objects.storage.arvancloud import ArvancloudInterface
 from bluer_objects.storage.base import StorageInterface
 from bluer_objects.storage.WebDAV import WebDAVInterface
 from bluer_objects.storage.WebDAVrequest import WebDAVRequestInterface
@@ -9,7 +10,9 @@ from bluer_objects.logger import logger
 
 interface = StorageInterface()
 
-if env.BLUER_OBJECTS_STORAGE_INTERFACE == WebDAVInterface.name:
+if env.BLUER_OBJECTS_STORAGE_INTERFACE == ArvancloudInterface.name:
+    interface = ArvancloudInterface()
+elif env.BLUER_OBJECTS_STORAGE_INTERFACE == WebDAVInterface.name:
     interface = WebDAVInterface()
 elif env.BLUER_OBJECTS_STORAGE_INTERFACE == WebDAVRequestInterface.name:
     interface = WebDAVRequestInterface()

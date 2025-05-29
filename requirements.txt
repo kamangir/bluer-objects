@@ -1,5 +1,6 @@
 bluer_ai
 
+boto3
 webdavclient3
 dill
 mlflow
