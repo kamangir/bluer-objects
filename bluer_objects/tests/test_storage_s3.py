@@ -1,17 +1,17 @@
 from bluer_objects import objects
 from bluer_objects.testing import create_test_asset
-from bluer_objects.storage import ArvancloudInterface
+from bluer_objects.storage import S3Interface
 
 
-def test_storage_arvancloud():
-    object_name = objects.unique_object("test_storage_arvancloud")
+def test_storage_s3():
+    object_name = objects.unique_object("test_storage_s3")
 
     assert create_test_asset(
         object_name=object_name,
         depth=10,
     )
 
-    storage = ArvancloudInterface()
+    storage = S3Interface()
 
     success, list_of_files_local = storage.ls(
         object_name=object_name,

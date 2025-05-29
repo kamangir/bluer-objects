@@ -13,8 +13,8 @@ from bluer_objects.logger import logger
 
 
 # https://docs.arvancloud.ir/fa/developer-tools/sdk/object-storage/
-class ArvancloudInterface(StorageInterface):
-    name = "arvancloud"
+class S3Interface(StorageInterface):
+    name = "s3"
 
     def download(
         self,
@@ -35,16 +35,16 @@ class ArvancloudInterface(StorageInterface):
             try:
                 s3_resource = boto3.resource(
                     "s3",
-                    endpoint_url=env.ARVANCLOUD_STORAGE_ENDPOINT_URL,
-                    aws_access_key_id=env.ARVANCLOUD_STORAGE_AWS_ACCESS_KEY_ID,
-                    aws_secret_access_key=env.ARVANCLOUD_STORAGE_AWS_SECRET_ACCESS_KEY,
+                    endpoint_url=env.S3_STORAGE_ENDPOINT_URL,
+                    aws_access_key_id=env.S3_STORAGE_AWS_ACCESS_KEY_ID,
+                    aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
                 )
             except Exception as e:
                 logger.error(e)
                 return False
 
             try:
-                bucket = s3_resource.Bucket(env.ARVANCLOUD_STORAGE_BUCKET)
+                bucket = s3_resource.Bucket(env.S3_STORAGE_BUCKET)
 
                 bucket.download_file(
                     f"{object_name}/{filename}",
@@ -87,16 +87,16 @@ class ArvancloudInterface(StorageInterface):
         if where == "cloud":
             s3 = boto3.client(
                 "s3",
-                endpoint_url=env.ARVANCLOUD_STORAGE_ENDPOINT_URL,
-                aws_access_key_id=env.ARVANCLOUD_STORAGE_AWS_ACCESS_KEY_ID,
-                aws_secret_access_key=env.ARVANCLOUD_STORAGE_AWS_SECRET_ACCESS_KEY,
+                endpoint_url=env.S3_STORAGE_ENDPOINT_URL,
+                aws_access_key_id=env.S3_STORAGE_AWS_ACCESS_KEY_ID,
+                aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
             )
 
             prefix = f"{object_name}/"
 
             paginator = s3.get_paginator("list_objects_v2")
             pages = paginator.paginate(
-                Bucket=env.ARVANCLOUD_STORAGE_BUCKET,
+                Bucket=env.S3_STORAGE_BUCKET,
                 Prefix=prefix,
             )
 
@@ -134,9 +134,9 @@ class ArvancloudInterface(StorageInterface):
             try:
                 s3_resource = boto3.resource(
                     "s3",
-                    endpoint_url=env.ARVANCLOUD_STORAGE_ENDPOINT_URL,
-                    aws_access_key_id=env.ARVANCLOUD_STORAGE_AWS_ACCESS_KEY_ID,
-                    aws_secret_access_key=env.ARVANCLOUD_STORAGE_AWS_SECRET_ACCESS_KEY,
+                    endpoint_url=env.S3_STORAGE_ENDPOINT_URL,
+                    aws_access_key_id=env.S3_STORAGE_AWS_ACCESS_KEY_ID,
+                    aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
                 )
 
             except Exception as e:
@@ -144,7 +144,7 @@ class ArvancloudInterface(StorageInterface):
                 return False
 
             try:
-                bucket = s3_resource.Bucket(env.ARVANCLOUD_STORAGE_BUCKET)
+                bucket = s3_resource.Bucket(env.S3_STORAGE_BUCKET)
 
                 with open(local_path, "rb") as fp:
                     bucket.put_object(
