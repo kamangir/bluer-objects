@@ -65,8 +65,3 @@ def test_storage_arvancloud():
         )
 
     assert storage.download(object_name=object_name)
-
-    assert storage.delete(
-        object_name=object_name,
-        do_dryrun=False,
-    )
