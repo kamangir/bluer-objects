@@ -15,6 +15,67 @@ from bluer_objects.logger import logger
 class ArvancloudInterface(StorageInterface):
     name = "arvancloud"
 
+    def download(
+        self,
+        object_name: str,
+        filename: str = "",
+        log: bool = True,
+    ) -> bool:
+        if filename:
+            local_path = objects.path_of(
+                object_name=object_name,
+                filename=filename,
+                create=True,
+            )
+
+            if not path.create(file.path(local_path)):
+                return False
+
+            try:
+                s3_resource = boto3.resource(
+                    "s3",
+                    endpoint_url=env.ARVANCLOUD_STORAGE_ENDPOINT_URL,
+                    aws_access_key_id=env.ARVANCLOUD_STORAGE_AWS_ACCESS_KEY_ID,
+                    aws_secret_access_key=env.ARVANCLOUD_STORAGE_AWS_SECRET_ACCESS_KEY,
+                )
+            except Exception as e:
+                logger.error(e)
+                return False
+
+            try:
+                bucket = s3_resource.Bucket(env.ARVANCLOUD_STORAGE_BUCKET)
+
+                bucket.download_file(
+                    f"{object_name}/{filename}",
+                    local_path,
+                )
+            except ClientError as e:
+                logger.error(e)
+                return False
+
+            return super().download(
+                object_name=object_name,
+                filename=filename,
+                log=log,
+            )
+
+        success, list_of_files = self.ls(
+            object_name=object_name,
+            where="cloud",
+        )
+        if not success:
+            return False
+
+        for filename_ in tqdm(list_of_files):
+            if not self.download(
+                object_name=object_name,
+                filename=filename_,
+                log=log,
+            ):
+                return False
+
+        return True
+
     def upload(
         self,
         object_name: str,
