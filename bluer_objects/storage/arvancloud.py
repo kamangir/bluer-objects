@@ -4,6 +4,7 @@ import glob
 from typing import Tuple, List
 from xml.etree import ElementTree as ET
 from tqdm import tqdm
+from functools import reduce
 
 from bluer_objects.storage.base import StorageInterface
 from bluer_objects import env, file, path
@@ -75,6 +76,46 @@ class ArvancloudInterface(StorageInterface):
                 return False
 
         return True
+
+    def ls(
+        self,
+        object_name: str,
+        where: str = "local",
+    ) -> Tuple[bool, List[str]]:
+        if where == "cloud":
+            s3 = boto3.client(
+                "s3",
+                endpoint_url=env.ARVANCLOUD_STORAGE_ENDPOINT_URL,
+                aws_access_key_id=env.ARVANCLOUD_STORAGE_AWS_ACCESS_KEY_ID,
+                aws_secret_access_key=env.ARVANCLOUD_STORAGE_AWS_SECRET_ACCESS_KEY,
+            )
+
+            prefix = f"{object_name}/"
+
+            paginator = s3.get_paginator("list_objects_v2")
+            pages = paginator.paginate(
+                Bucket=env.ARVANCLOUD_STORAGE_BUCKET,
+                Prefix=prefix,
+            )
+
+            return True, sorted(
+                reduce(
+                    lambda x, y: x + y,
+                    [
+                        [
+                            obj["Key"].split(prefix, 1)[1]
+                            for obj in page.get("Contents", [])
+                        ]
+                        for page in pages
+                    ],
+                    [],
+                )
+            )
+
+        return super().ls(
+            object_name=object_name,
+            where=where,
+        )
 
     def upload(
         self,
