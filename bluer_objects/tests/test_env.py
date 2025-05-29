@@ -19,6 +19,8 @@ def test_bluer_objects_env():
         WebDAVzipInterface.name,
     ]
 
+    assert env.MLFLOW_DEPLOYMENT
+
     assert env.WEBDAV_HOSTNAME
     assert env.WEBDAV_LOGIN
     assert env.WEBDAV_PASSWORD

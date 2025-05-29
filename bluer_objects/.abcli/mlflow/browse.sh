@@ -5,6 +5,8 @@ function bluer_objects_mlflow_browse() {
     local browse_experiment=$(bluer_ai_option_int "$options" experiment 0)
 
     local url=http://localhost:5001/#
+    [[ "$MLFLOW_DEPLOYMENT" != "local" ]] &&
+        url=$MLFLOW_TRACKING_URI
 
     if [ $(bluer_ai_option_int "$options" databricks 0) == 1 ]; then
         url="https://accounts.cloud.databricks.com/"
