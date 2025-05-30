@@ -1,8 +1,11 @@
+import pytest
+
 from bluer_objects import objects
 from bluer_objects.testing import create_test_asset
 from bluer_objects.storage import WebDAVzipInterface
 
 
+@pytest.mark.skip(reason="nodisk is super slow")
 def test_storage_webdav_zip():
     object_name = objects.unique_object("test_storage_webdav_zip")
 

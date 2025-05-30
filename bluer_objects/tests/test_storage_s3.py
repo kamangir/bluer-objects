@@ -1,20 +1,17 @@
-import pytest
-
 from bluer_objects import objects
 from bluer_objects.testing import create_test_asset
-from bluer_objects.storage import WebDAVRequestInterface
+from bluer_objects.storage import S3Interface
 
 
-@pytest.mark.skip(reason="nodisk is super slow")
-def test_storage_webdav_request():
-    object_name = objects.unique_object("test_storage_webdav_request")
+def test_storage_s3():
+    object_name = objects.unique_object("test_storage_s3")
 
     assert create_test_asset(
         object_name=object_name,
         depth=10,
     )
 
-    storage = WebDAVRequestInterface()
+    storage = S3Interface()
 
     success, list_of_files_local = storage.ls(
         object_name=object_name,
@@ -68,8 +65,3 @@ def test_storage_webdav_request():
         )
 
     assert storage.download(object_name=object_name)
-
-    assert storage.delete(
-        object_name=object_name,
-        do_dryrun=False,
-    )

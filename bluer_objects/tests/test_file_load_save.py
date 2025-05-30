@@ -78,7 +78,6 @@ def test_file_load_save(
         )
 
 
-@pytest.mark.unit
 @pytest.mark.parametrize(
     ["size", "dtype"],
     [
