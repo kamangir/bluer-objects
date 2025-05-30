@@ -85,20 +85,24 @@ class S3Interface(StorageInterface):
         where: str = "local",
     ) -> Tuple[bool, List[str]]:
         if where == "cloud":
-            s3 = boto3.client(
-                "s3",
-                endpoint_url=env.S3_STORAGE_ENDPOINT_URL,
-                aws_access_key_id=env.S3_STORAGE_AWS_ACCESS_KEY_ID,
-                aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
-            )
+            try:
+                s3 = boto3.client(
+                    "s3",
+                    endpoint_url=env.S3_STORAGE_ENDPOINT_URL,
+                    aws_access_key_id=env.S3_STORAGE_AWS_ACCESS_KEY_ID,
+                    aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
+                )
 
-            prefix = f"{object_name}/"
+                prefix = f"{object_name}/"
 
-            paginator = s3.get_paginator("list_objects_v2")
-            pages = paginator.paginate(
-                Bucket=env.S3_STORAGE_BUCKET,
-                Prefix=prefix,
-            )
+                paginator = s3.get_paginator("list_objects_v2")
+                pages = paginator.paginate(
+                    Bucket=env.S3_STORAGE_BUCKET,
+                    Prefix=prefix,
+                )
+            except Exception as e:
+                logger.error(e)
+                return False, []
 
             return True, sorted(
                 reduce(
@@ -139,11 +143,6 @@ class S3Interface(StorageInterface):
                     aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
                 )
 
-            except Exception as e:
-                logger.error(e)
-                return False
-
-            try:
                 bucket = s3_resource.Bucket(env.S3_STORAGE_BUCKET)
 
                 with open(local_path, "rb") as fp:
