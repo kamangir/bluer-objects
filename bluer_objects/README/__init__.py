@@ -41,5 +41,7 @@ def build_me() -> bool:
             "../docs/aliases/metadata.md",
             "../docs/aliases/mlflow.md",
             "../docs/aliases/upload.md",
+            # modules
+            "../mlflow/lock",
         ]
     )

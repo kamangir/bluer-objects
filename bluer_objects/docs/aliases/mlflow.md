@@ -35,6 +35,17 @@
 @mlflow \
 	list_registered_models
  . list mlflow registered models.
+@lock \
+	lock \
+	[.|<object-name>] \
+	[--lock <lock-name>] \
+	[--timeout <10>]
+ . lock <object-name>.
+@lock \
+	unlock \
+	[.|<object-name>] \
+	[--lock <lock-name>]
+ . unlock <object-name>.
 @mlflow \
 	log_artifacts \
 	[.|<object-name>] \

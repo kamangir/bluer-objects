@@ -21,6 +21,8 @@ alias @host=bluer_objects_host
 
 alias @ls=bluer_objects_ls
 
+alias @lock=bluer_objects_mlflow_lock
+
 alias @metadata=bluer_objects_metadata
 
 alias @mlflow=bluer_objects_mlflow
