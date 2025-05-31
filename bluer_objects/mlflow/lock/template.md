@@ -19,6 +19,7 @@ objective: exclusive access to `object_name` is needed.
 🔥
 
 ```bash
-@lock lock - <object-name>
+@lock lock - <object-name> \
+    --timeout 10
 @lock unlock - <object-name>
 ```

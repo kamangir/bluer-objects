@@ -37,6 +37,10 @@ function test_bluer_objects_help() {
         "@host reboot" \
         "@host shutdown" \
         \
+        "@lock" \
+        "@lock lock" \
+        "@lock unlock" \
+        \
         "@metadata" \
         "@metadata get" \
         "@metadata post" \
