@@ -6,7 +6,7 @@ import mlflow
 from blueness import module
 from bluer_options.logger import crash_report
 
-from bluer_objects import file, objects, NAME
+from bluer_objects import file, objects, NAME, env
 from bluer_objects.mlflow.runs import start_run, end_run
 from bluer_objects.logger import logger
 
@@ -22,25 +22,28 @@ def log_artifacts(
 
     object_path = objects.object_path(object_name, create=True)
 
-    try:
-        mlflow.log_artifacts(object_path)
+    if env.MLFLOW_LOG_ARTIFACTS:
+        try:
+            mlflow.log_artifacts(object_path)
 
-        logger.info("⬆️  {}".format(object_name))
+            logger.info("⬆️  {}".format(object_name))
 
-        # https://mlflow.org/docs/latest/python_api/mlflow.html#mlflow.register_model
-        # https://stackoverflow.com/a/71447758/17619982
-        if model_name:
-            mv = mlflow.register_model(
-                "runs:/{}".format(mlflow.active_run().info.run_id),
-                model_name,
-                await_registration_for=0,
-            )
+            # https://mlflow.org/docs/latest/python_api/mlflow.html#mlflow.register_model
+            # https://stackoverflow.com/a/71447758/17619982
+            if model_name:
+                mv = mlflow.register_model(
+                    "runs:/{}".format(mlflow.active_run().info.run_id),
+                    model_name,
+                    await_registration_for=0,
+                )
 
-            logger.info("*️⃣  {} -> {}.{}".format(object_name, mv.name, mv.version))
+                logger.info("*️⃣  {} -> {}.{}".format(object_name, mv.name, mv.version))
 
-    except:
-        crash_report(f"{NAME}.log_artifacts({object_name})")
-        return False
+        except:
+            crash_report(f"{NAME}.log_artifacts({object_name})")
+            return False
+    else:
+        logger.info("skipped log artifacts.")
 
     return end_run(object_name)
 
