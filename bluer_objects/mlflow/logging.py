@@ -78,10 +78,10 @@ def log_run(object_name: str) -> bool:
 
                 mlflow.log_artifact(filename)
                 logger.info(f"⬆️  {filename}")
+
+        if skipped_count:
+            logger.info(f"skipped {skipped_count:,} file(s).")
     else:
         logger.info("skipped log artifacts.")
-
-    if skipped_count:
-        logger.info(f"skipped {skipped_count:,} file(s).")
 
     return end_run(object_name)
