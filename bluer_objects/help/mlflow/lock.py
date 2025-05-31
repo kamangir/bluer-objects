@@ -7,9 +7,10 @@ def help_lock(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = xtra("dryrun,lock=<lock-name>", mono=mono)
+    options = xtra("dryrun", mono=mono)
 
     args = [
+        "[--lock <lock-name>]",
         "[--timeout <10>]",
     ]
 
@@ -17,7 +18,6 @@ def help_lock(
         [
             "@lock",
             "lock",
-            f"[{options}]",
             "[.|<object-name>]",
         ]
         + args,
@@ -32,13 +32,17 @@ def help_unlock(
 ) -> str:
     options = xtra("dryrun,lock=<lock-name>", mono=mono)
 
+    args = [
+        "[--lock <lock-name>]",
+    ]
+
     return show_usage(
         [
             "@lock",
             "unlock",
-            f"[{options}]",
             "[.|<object-name>]",
-        ],
+        ]
+        + args,
         "unlock <object-name>.",
         mono=mono,
     )

@@ -4,7 +4,7 @@ Exclusive access control to shared objects through named locks.
 
 ## concept
 
-objective: exclusive access to `object_name` is needed.
+objective: exclusive access to `object_name`.
 
 1. read `object_name.lock`: if blank go to 3, else continue.
 2. wait for `wait_for_clearance` (example: 3s), then go to 1.
@@ -13,13 +13,3 @@ objective: exclusive access to `object_name` is needed.
 5. read `object_name.lock`, if the value is not equal to `key` go to 2, else continue.
 6. exclusive access is established, process `object_name`.
 7. write blank in `object_name.lock`.
-
-## validation
-
-🔥
-
-```bash
-@lock lock - <object-name> \
-    --timeout 10
-@lock unlock - <object-name>
-```
