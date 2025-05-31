@@ -54,29 +54,32 @@ def log_run(object_name: str) -> bool:
 
     object_path = objects.object_path(object_name, create=True)
 
-    counts: Dict[str, int] = {}
-    skipped_count = 0
-    for extension in "dot,gif,jpeg,jpg,json,png,sh,xml,yaml".split(","):
-        for filename in glob.glob(
-            os.path.join(object_path, f"*.{extension}"),
-        ):
-            filename_name = file.name(filename)
-
-            counts[len(filename_name)] = counts.get(len(filename_name), 0) + 1
-
-            if any(
-                [
-                    file.size(filename) > 10 * 1024 * 1024,
-                    filename_name.startswith("thumbnail"),
-                    counts[len(filename_name)] > 20,
-                ]
+    if env.MLFLOW_LOG_ARTIFACTS:
+        counts: Dict[str, int] = {}
+        skipped_count = 0
+        for extension in "dot,gif,jpeg,jpg,json,png,sh,xml,yaml".split(","):
+            for filename in glob.glob(
+                os.path.join(object_path, f"*.{extension}"),
             ):
-                logger.info(f"skipping {filename}")
-                skipped_count += 1
-                continue
+                filename_name = file.name(filename)
 
-            mlflow.log_artifact(filename)
-            logger.info(f"⬆️  {filename}")
+                counts[len(filename_name)] = counts.get(len(filename_name), 0) + 1
+
+                if any(
+                    [
+                        file.size(filename) > 10 * 1024 * 1024,
+                        filename_name.startswith("thumbnail"),
+                        counts[len(filename_name)] > 20,
+                    ]
+                ):
+                    logger.info(f"skipping {filename}")
+                    skipped_count += 1
+                    continue
+
+                mlflow.log_artifact(filename)
+                logger.info(f"⬆️  {filename}")
+    else:
+        logger.info("skipped log artifacts.")
 
     if skipped_count:
         logger.info(f"skipped {skipped_count:,} file(s).")
