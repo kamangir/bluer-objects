@@ -31,6 +31,12 @@ def test_bluer_objects_env():
 
     assert env.MLFLOW_DEPLOYMENT
 
+    assert isinstance(env.MLFLOW_LOCK_WAIT_FOR_CLEARANCE, int)
+    assert env.MLFLOW_LOCK_WAIT_FOR_CLEARANCE > 0
+
+    assert isinstance(env.MLFLOW_LOCK_WAIT_FOR_EXCLUSIVITY, int)
+    assert env.MLFLOW_LOCK_WAIT_FOR_EXCLUSIVITY > 0
+
     assert env.WEBDAV_HOSTNAME
     assert env.WEBDAV_LOGIN
     assert env.WEBDAV_PASSWORD

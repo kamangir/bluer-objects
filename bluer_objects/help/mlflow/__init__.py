@@ -3,6 +3,7 @@ from typing import List
 from bluer_options.terminal import show_usage, xtra
 
 from bluer_objects.help.mlflow.cache import help_functions as help_cache
+from bluer_objects.help.mlflow.lock import help_functions as help_lock
 from bluer_objects.help.mlflow.tags import help_functions as help_tags
 from bluer_ai import env
 
@@ -202,6 +203,7 @@ help_functions = {
     "get_id": help_get_id,
     "get_run_id": help_get_run_id,
     "list_registered_models": help_list_registered_models,
+    "lock": help_lock,
     "log_artifacts": help_log_artifacts,
     "log_run": help_log_run,
     "rm": help_rm,
