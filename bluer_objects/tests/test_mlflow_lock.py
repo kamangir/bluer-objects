@@ -6,7 +6,7 @@ from bluer_objects.mlflow.lock.functions import lock, unlock
 
 def test_mlflow_lock():
     object_name = objects.unique_object("test_mlflow_lock")
-    lock_name = string.random()
+    lock_name = "lock-{}".format(string.random())
 
     assert lock(
         object_name=object_name,

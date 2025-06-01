@@ -4,7 +4,7 @@ function test_bluer_objects_mlflow_lock() {
     local options=$1
 
     local object_name="test-object-$(bluer_ai_string_timestamp_short)"
-    local lock_name=$(bluer_ai_string_random)
+    local lock_name="lock-$(bluer_ai_string_random)"
 
     bluer_ai_eval ,$options \
         bluer_objects_mlflow_lock \

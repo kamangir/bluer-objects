@@ -12,6 +12,7 @@ def help_lock(
     args = [
         "[--lock <lock-name>]",
         "[--timeout <10>]",
+        "[--verbose 0]",
     ]
 
     return show_usage(
@@ -34,6 +35,7 @@ def help_unlock(
 
     args = [
         "[--lock <lock-name>]",
+        "[--verbose 0]",
     ]
 
     return show_usage(
