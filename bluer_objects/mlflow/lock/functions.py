@@ -4,7 +4,6 @@ from blueness import module
 from bluer_options import string
 
 from bluer_objects import NAME, env
-from bluer_objects.mlflow.lock.classes import Lock
 from bluer_objects.mlflow.tags import get_tags, set_tags
 from bluer_objects.logger import logger
 
