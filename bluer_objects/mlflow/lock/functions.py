@@ -18,11 +18,11 @@ def lock(
     verbose: bool = True,
 ) -> bool:
     logger.info(
-        "{}.lock: {}.{} @ {}".format(
+        "{}.lock: {}.{}{}".format(
             NAME,
             object_name,
             lock_name,
-            string.pretty_duration(timeout),
+            "" if timeout == -1 else " @ {}".format(string.pretty_duration(timeout)),
         )
     )
 
