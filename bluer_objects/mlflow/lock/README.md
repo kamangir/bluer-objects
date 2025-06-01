@@ -13,3 +13,17 @@ objective: exclusive access to `object_name`.
 5. read `object_name.lock`, if the value is not equal to `key` go to 2, else continue.
 6. exclusive access is established, process `object_name`.
 7. write blank in `object_name.lock`.
+
+## example use
+
+```bash
+@select
+@lock lock . \
+    --timeout 10
+
+@lock lock . \
+    --timeout 10
+# failure expected
+
+@lock unlock .
+```
