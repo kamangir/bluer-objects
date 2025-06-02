@@ -16,6 +16,104 @@ from bluer_objects.logger import logger
 class S3Interface(StorageInterface):
     name = "s3"
 
+    def clear(
+        self,
+        do_dryrun: bool = True,
+        log: bool = True,
+    ) -> bool:
+        logger.info(
+            "{}.clear({})".format(
+                self.__class__.__name__,
+                "dryrun" if do_dryrun else "",
+            )
+        )
+
+        try:
+            s3 = boto3.client(
+                "s3",
+                endpoint_url=env.S3_STORAGE_ENDPOINT_URL,
+                aws_access_key_id=env.S3_STORAGE_AWS_ACCESS_KEY_ID,
+                aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
+            )
+
+            paginator = s3.get_paginator("list_objects_v2")
+            pages = paginator.paginate(
+                Bucket=env.S3_STORAGE_BUCKET,
+                Prefix="test",
+            )
+        except Exception as e:
+            logger.error(e)
+            return False
+
+        list_of_objects = sorted(
+            list(
+                set(
+                    reduce(
+                        lambda x, y: x + y,
+                        [
+                            [
+                                obj["Key"].split("/", 1)[0]
+                                for obj in page.get("Contents", [])
+                            ]
+                            for page in pages
+                        ],
+                        [],
+                    )
+                )
+            )
+        )
+
+        logger.info(f"{len(list_of_objects)} object(s) to delete.")
+
+        for object_name in tqdm(list_of_objects):
+            if not self.delete(
+                object_name=object_name,
+                do_dryrun=do_dryrun,
+            ):
+                return False
+
+        return True
+
+    def delete(
+        self,
+        object_name: str,
+        do_dryrun: bool = True,
+        log: bool = True,
+    ) -> bool:
+        if log:
+            logger.info(
+                "{}.delete({}){}".format(
+                    self.__class__.__name__,
+                    object_name,
+                    " dryrun" if do_dryrun else "",
+                )
+            )
+        if do_dryrun:
+            return True
+
+        try:
+            s3 = boto3.resource(
+                "s3",
+                endpoint_url=env.S3_STORAGE_ENDPOINT_URL,
+                aws_access_key_id=env.S3_STORAGE_AWS_ACCESS_KEY_ID,
+                aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
+            )
+            bucket = s3.Bucket(env.S3_STORAGE_BUCKET)
+
+            objects_to_delete = bucket.objects.filter(Prefix=f"{object_name}/")
+            delete_requests = [{"Key": obj.key} for obj in objects_to_delete]
+
+            if not delete_requests:
+                logger.warning(f"no files found under {object_name}.")
+                return True
+
+            bucket.delete_objects(Delete={"Objects": delete_requests})
+        except Exception as e:
+            logger.error(e)
+            return False
+
+        return True
+
     def download(
         self,
         object_name: str,
