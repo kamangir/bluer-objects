@@ -17,6 +17,7 @@ setup(
         f"{NAME}.logger",
         f"{NAME}.metadata",
         f"{NAME}.mlflow",
+        f"{NAME}.mlflow.lock",
         f"{NAME}.README",
         f"{NAME}.storage",
         f"{NAME}.testing",
