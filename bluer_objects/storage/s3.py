@@ -39,7 +39,7 @@ class S3Interface(StorageInterface):
             paginator = s3.get_paginator("list_objects_v2")
             pages = paginator.paginate(
                 Bucket=env.S3_STORAGE_BUCKET,
-                Prefix=f"test",
+                Prefix="test",
             )
         except Exception as e:
             logger.error(e)
