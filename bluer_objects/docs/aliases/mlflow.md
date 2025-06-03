@@ -24,7 +24,7 @@
 @mlflow \
 	deploy \
 	set \
-	<url>
+	<url> | local
  . set mlflow deployment.
 @mlflow \
 	get_id \

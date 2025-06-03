@@ -52,7 +52,7 @@ def help_deploy_set(
             "@mlflow",
             "deploy",
             "set",
-            "<url>",
+            "<url> | local",
         ],
         "set mlflow deployment.",
         mono=mono,
