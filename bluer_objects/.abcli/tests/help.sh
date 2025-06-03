@@ -49,6 +49,7 @@ function test_bluer_objects_help() {
         "@mlflow browse" \
         "@mlflow cache" \
         "@mlflow deploy" \
+        "@mlflow deploy set" \
         "@mlflow get_id" \
         "@mlflow get_run_id" \
         "@mlflow list_registered_models" \

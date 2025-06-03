@@ -19,8 +19,13 @@
  . write mlflow.cache[<keyword>]=value.
 @mlflow \
 	deploy \
-	[dryrun,~local,port=<5001>]
+	[dryrun,port=<5001>]
  . deploy mlflow.
+@mlflow \
+	deploy \
+	set \
+	<url>
+ . set mlflow deployment.
 @mlflow \
 	get_id \
 	[.|<object-name>]
