@@ -30,7 +30,7 @@ def help_deploy(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = xtra("dryrun,~local,port=<5001>", mono=mono)
+    options = xtra("dryrun,port=<5001>", mono=mono)
 
     return show_usage(
         [
@@ -39,6 +39,22 @@ def help_deploy(
             f"[{options}]",
         ],
         "deploy mlflow.",
+        mono=mono,
+    )
+
+
+def help_deploy_set(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        [
+            "@mlflow",
+            "deploy",
+            "set",
+            "<url>",
+        ],
+        "set mlflow deployment.",
         mono=mono,
     )
 
@@ -199,7 +215,10 @@ def help_transition(
 help_functions = {
     "browse": help_browse,
     "cache": help_cache,
-    "deploy": help_deploy,
+    "deploy": {
+        "": help_deploy,
+        "set": help_deploy_set,
+    },
     "get_id": help_get_id,
     "get_run_id": help_get_run_id,
     "list_registered_models": help_list_registered_models,
