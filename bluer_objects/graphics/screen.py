@@ -24,14 +24,15 @@ def get_size() -> Tuple[int, int]:
     screen_height = 480
     screen_width = 640
 
-    if is_rpi() and not is_headless():
-        try:
-            # https://stackoverflow.com/a/14124257
-            screen = os.popen("xrandr -q -d :0").readlines()[0]
-            screen_width = int(screen.split()[7])
-            screen_height = int(screen.split()[9][:-1])
-        except Exception as e:
-            logger.error(f"{NAME}: Failed: {e}.")
+    if is_rpi():
+        if not is_headless():
+            try:
+                # https://stackoverflow.com/a/14124257
+                screen = os.popen("xrandr -q -d :0").readlines()[0]
+                screen_width = int(screen.split()[7])
+                screen_height = int(screen.split()[9][:-1])
+            except Exception as e:
+                logger.error(f"{NAME}: Failed: {e}.")
     elif is_mac():
         success, output = shell(
             "system_profiler SPDisplaysDataType | grep Resolution",
