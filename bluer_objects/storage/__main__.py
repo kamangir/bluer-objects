@@ -25,6 +25,12 @@ parser.add_argument(
     default="",
 )
 parser.add_argument(
+    "--public",
+    type=int,
+    default=0,
+    help="0 | 1",
+)
+parser.add_argument(
     "--where",
     type=str,
     default="local",
@@ -80,6 +86,7 @@ elif args.task == "upload":
     success = storage.upload(
         object_name=args.object_name,
         filename=args.filename,
+        public=args.public == 1,
     )
 else:
     success = None

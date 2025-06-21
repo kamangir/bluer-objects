@@ -225,12 +225,17 @@ class S3Interface(StorageInterface):
         self,
         object_name: str,
         filename: str = "",
+        public: bool = False,
         log: bool = True,
     ) -> bool:
         if filename:
             local_path = objects.path_of(
                 object_name=object_name,
                 filename=filename,
+            )
+
+            bucket_name = (
+                env.S3_PUBLIC_STORAGE_BUCKET if public else env.S3_STORAGE_BUCKET
             )
 
             try:
@@ -241,7 +246,7 @@ class S3Interface(StorageInterface):
                     aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
                 )
 
-                bucket = s3_resource.Bucket(env.S3_STORAGE_BUCKET)
+                bucket = s3_resource.Bucket(bucket_name)
 
                 with open(local_path, "rb") as fp:
                     bucket.put_object(
@@ -253,9 +258,12 @@ class S3Interface(StorageInterface):
                 logger.error(e)
                 return False
 
+            logger.info(f"bucket: {bucket_name}")
+
             return super().upload(
                 object_name=object_name,
                 filename=filename,
+                public=public,
                 log=log,
             )
 
@@ -277,6 +285,7 @@ class S3Interface(StorageInterface):
             if not self.upload(
                 object_name=object_name,
                 filename=filename_.split(object_path, 1)[1],
+                public=public,
                 log=log,
             ):
                 return False

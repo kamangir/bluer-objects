@@ -2,7 +2,7 @@
 
 ```bash
 @upload \
-	[filename=<filename>] \
+	[filename=<filename>,public] \
 	[.|<object-name>]
  . upload <object-name>.
 ```

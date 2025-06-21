@@ -66,14 +66,16 @@ class StorageInterface:
         self,
         object_name: str,
         filename: str = "",
+        public: bool = False,
         log: bool = True,
     ) -> bool:
         if log:
             logger.info(
-                "{}.upload {}{}".format(
+                "{}.upload {}{}{}".format(
                     self.__class__.__name__,
                     object_name,
                     f"/{filename}" if filename else "",
+                    " [public]" if public else "",
                 )
             )
 
