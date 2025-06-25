@@ -250,7 +250,7 @@ class S3Interface(StorageInterface):
 
                 with open(local_path, "rb") as fp:
                     bucket.put_object(
-                        ACL="private",
+                        ACL="public-read" if public else "private",
                         Body=fp,
                         Key=f"{object_name}/{filename}",
                     )
@@ -258,7 +258,16 @@ class S3Interface(StorageInterface):
                 logger.error(e)
                 return False
 
-            logger.info(f"bucket: {bucket_name}")
+            if public:
+
+                logger.info(
+                    "🔗 https://{}.{}/{}/{}".format(
+                        bucket_name,
+                        env.S3_STORAGE_ENDPOINT_URL.split("https://", 1)[1],
+                        object_name,
+                        filename,
+                    )
+                )
 
             return super().upload(
                 object_name=object_name,
