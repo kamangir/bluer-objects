@@ -86,8 +86,13 @@ class WebDAVInterface(StorageInterface):
         self,
         object_name: str,
         filename: str = "",
+        public: bool = False,
         log: bool = True,
     ) -> bool:
+        if public:
+            logger.error("public not supported.")
+            return False
+
         if filename:
             remote_dir = "/".join([object_name] + filename.split("/")[:-1])
             if not self.mkdir(
@@ -111,5 +116,6 @@ class WebDAVInterface(StorageInterface):
         return super().upload(
             object_name=object_name,
             filename=filename,
+            public=public,
             log=log,
         )

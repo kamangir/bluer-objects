@@ -7,7 +7,12 @@ def help_upload(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = "filename=<filename>"
+    options = "".join(
+        [
+            "filename=<filename>",
+            xtra(",public", mono=mono),
+        ]
+    )
 
     return show_usage(
         [

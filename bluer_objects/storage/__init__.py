@@ -56,10 +56,12 @@ def ls(
 def upload(
     object_name: str,
     filename: str = "",
+    public: bool = False,
     log: bool = True,
 ) -> bool:
     return interface.upload(
         object_name=object_name,
         filename=filename,
+        public=public,
         log=log,
     )

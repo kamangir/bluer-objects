@@ -1,9 +1,9 @@
 #! /usr/bin/env bash
 
-function test_bluer_objects_storage() {
+function test_bluer_objects_storage_upload_download() {
     local options=$1
 
-    local object_name=test_bluer_objects_storage-$(bluer_ai_string_timestamp_short)
+    local object_name=test_bluer_objects_storage_upload_download-$(bluer_ai_string_timestamp_short)
     local object_path=$ABCLI_OBJECT_ROOT/$object_name
     mkdir -pv $object_path
 

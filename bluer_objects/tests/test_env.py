@@ -17,6 +17,7 @@ def test_bluer_objects_env():
     assert env.ABCLI_MLFLOW_EXPERIMENT_PREFIX
 
     assert env.S3_STORAGE_BUCKET
+    assert env.S3_PUBLIC_STORAGE_BUCKET
 
     assert env.S3_STORAGE_ENDPOINT_URL
     assert env.S3_STORAGE_AWS_ACCESS_KEY_ID
