@@ -38,3 +38,5 @@ alias @select=bluer_ai_select
 alias @storage=bluer_ai_storage
 
 alias @upload=bluer_objects_upload
+
+alias @url=bluer_objects_url

@@ -77,6 +77,9 @@ function test_bluer_objects_help() {
         \
         "@upload" \
         \
+        "@url" \
+        "@url is_accessible" \
+        \
         "@wait" \
         \
         "bluer_objects"; do
