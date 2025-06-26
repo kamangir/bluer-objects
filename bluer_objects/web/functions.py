@@ -1,7 +1,5 @@
 import requests
 
-from bluer_objects.logger import logger
-
 
 def is_accessible(url) -> bool:
     try:

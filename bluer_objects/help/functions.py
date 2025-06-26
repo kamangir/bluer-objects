@@ -10,7 +10,7 @@ from bluer_objects.help.ls import help_ls
 from bluer_objects.help.metadata import help_functions as help_metadata
 from bluer_objects.help.mlflow import help_functions as help_mlflow
 from bluer_objects.help.upload import help_upload
-from bluer_objects.help.url import help_functions as help_url
+from bluer_objects.help.web import help_functions as help_web
 
 help_functions = generic_help_functions(plugin_name=ALIAS)
 
@@ -25,6 +25,6 @@ help_functions.update(
         "metadata": help_metadata,
         "mlflow": help_mlflow,
         "upload": help_upload,
-        "url": help_url,
+        "web": help_web,
     }
 )

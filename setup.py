@@ -22,7 +22,7 @@ setup(
         f"{NAME}.storage",
         f"{NAME}.testing",
         f"{NAME}.tests",
-        f"{NAME}.url",
+        f"{NAME}.web",
     ],
     include_package_data=True,
     package_data={

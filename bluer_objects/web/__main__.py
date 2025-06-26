@@ -4,7 +4,7 @@ from blueness import module
 from blueness.argparse.generic import sys_exit
 
 from bluer_objects import NAME
-from bluer_objects.url.functions import is_accessible
+from bluer_objects.web.functions import is_accessible
 from bluer_objects.logger import logger
 
 NAME = module.name(__file__, NAME)
