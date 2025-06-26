@@ -22,6 +22,7 @@ setup(
         f"{NAME}.storage",
         f"{NAME}.testing",
         f"{NAME}.tests",
+        f"{NAME}.url",
     ],
     include_package_data=True,
     package_data={
