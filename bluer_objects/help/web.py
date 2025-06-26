@@ -18,14 +18,14 @@ def help_is_accessible(
     )
 
 
-def help_where_am_ai(
+def help_where_am_i(
     tokens: List[str],
     mono: bool,
 ) -> str:
     return show_usage(
         [
             "@web",
-            "where_am_ai",
+            "where_am_i",
         ],
         "where am I?",
         mono=mono,
@@ -34,5 +34,5 @@ def help_where_am_ai(
 
 help_functions = {
     "is_accessible": help_is_accessible,
-    "where_am_ai": help_where_am_ai,
+    "where_am_i": help_where_am_i,
 }
