@@ -39,4 +39,4 @@ alias @storage=bluer_ai_storage
 
 alias @upload=bluer_objects_upload
 
-alias @url=bluer_objects_url
+alias @web=bluer_objects_web
