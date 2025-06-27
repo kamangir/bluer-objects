@@ -6,7 +6,7 @@ from blueness import module
 
 from bluer_objects import NAME as MY_NAME, ICON as MY_ICON
 from bluer_objects.metadata import get_from_object
-from bluer_objects import file
+from bluer_objects import file, env
 from bluer_objects import markdown
 from bluer_objects.logger import logger
 
@@ -148,9 +148,10 @@ def build(
                 template_line = " ".join(
                     [
                         (
-                            "[{}]({}/{}.tar.gz)".format(
+                            "[{}](https://{}.{}/{}.tar.gz)".format(
                                 token.split(":::")[1].strip(),
-                                "TBA",
+                                env.S3_PUBLIC_STORAGE_BUCKET,
+                                env.S3_STORAGE_ENDPOINT_URL.split("https://", 1)[1],
                                 token.split(":::")[1].strip(),
                             )
                             if token.startswith("object:::")
