@@ -11,8 +11,15 @@ function test_bluer_objects_storage_public_upload() {
         $object_name \
         --depth 1
     [[ $? -ne 0 ]] && return 1
+    bluer_ai_hr
 
     bluer_objects_upload \
         public \
+        $object_name
+    [[ $? -ne 0 ]] && return 1
+    bluer_ai_hr
+
+    bluer_objects_upload \
+        public,zip \
         $object_name
 }

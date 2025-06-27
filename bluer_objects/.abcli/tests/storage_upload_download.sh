@@ -8,7 +8,8 @@ function test_bluer_objects_storage_upload_download() {
     mkdir -pv $object_path
 
     bluer_objects_create_test_asset \
-        $object_name
+        $object_name \
+        --depth 1
     [[ $? -ne 0 ]] && return 1
     bluer_ai_hr
 
@@ -58,5 +59,11 @@ function test_bluer_objects_storage_upload_download() {
 
     bluer_objects_download \
         - \
+        $object_name
+    [[ $? -ne 0 ]] && return 1
+    bluer_ai_hr
+
+    bluer_objects_upload \
+        zip \
         $object_name
 }

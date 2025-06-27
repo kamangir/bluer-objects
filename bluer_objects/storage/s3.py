@@ -1,4 +1,5 @@
 import boto3
+import os
 from botocore.exceptions import ClientError
 import glob
 from typing import Tuple, List
@@ -7,6 +8,7 @@ from tqdm import tqdm
 from functools import reduce
 
 from bluer_objects.storage.base import StorageInterface
+from bluer_objects.env import ABCLI_OBJECT_ROOT
 from bluer_objects import env, file, path
 from bluer_objects import objects
 from bluer_objects.logger import logger
@@ -226,12 +228,20 @@ class S3Interface(StorageInterface):
         object_name: str,
         filename: str = "",
         public: bool = False,
+        zip: bool = False,
         log: bool = True,
     ) -> bool:
-        if filename:
-            local_path = objects.path_of(
-                object_name=object_name,
-                filename=filename,
+        if filename or zip:
+            local_path = (
+                os.path.join(
+                    ABCLI_OBJECT_ROOT,
+                    f"{object_name}.tar.gz",
+                )
+                if zip
+                else objects.path_of(
+                    object_name=object_name,
+                    filename=filename,
+                )
             )
 
             bucket_name = (
@@ -252,20 +262,22 @@ class S3Interface(StorageInterface):
                     bucket.put_object(
                         ACL="public-read" if public else "private",
                         Body=fp,
-                        Key=f"{object_name}/{filename}",
+                        Key=(
+                            f"{object_name}.tar.gz"
+                            if zip
+                            else f"{object_name}/{filename}"
+                        ),
                     )
             except ClientError as e:
                 logger.error(e)
                 return False
 
             if public:
-
                 logger.info(
-                    "🔗 https://{}.{}/{}/{}".format(
+                    "🔗 https://{}.{}/{}".format(
                         bucket_name,
                         env.S3_STORAGE_ENDPOINT_URL.split("https://", 1)[1],
-                        object_name,
-                        filename,
+                        f"{object_name}.tar.gz" if zip else f"{object_name}/{filename}",
                     )
                 )
 
@@ -273,6 +285,7 @@ class S3Interface(StorageInterface):
                 object_name=object_name,
                 filename=filename,
                 public=public,
+                zip=zip,
                 log=log,
             )
 

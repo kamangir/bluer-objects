@@ -57,11 +57,13 @@ def upload(
     object_name: str,
     filename: str = "",
     public: bool = False,
+    zip: bool = False,
     log: bool = True,
 ) -> bool:
     return interface.upload(
         object_name=object_name,
         filename=filename,
         public=public,
+        zip=zip,
         log=log,
     )

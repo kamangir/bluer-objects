@@ -10,7 +10,7 @@ def help_upload(
     options = "".join(
         [
             "filename=<filename>",
-            xtra(",public", mono=mono),
+            xtra(",public,zip", mono=mono),
         ]
     )
 

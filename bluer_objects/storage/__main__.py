@@ -31,6 +31,12 @@ parser.add_argument(
     help="0 | 1",
 )
 parser.add_argument(
+    "--zip",
+    type=int,
+    default=0,
+    help="0 | 1",
+)
+parser.add_argument(
     "--where",
     type=str,
     default="local",
@@ -86,6 +92,7 @@ elif args.task == "upload":
     success = storage.upload(
         object_name=args.object_name,
         filename=args.filename,
+        zip=args.zip == 1,
         public=args.public == 1,
     )
 else:
