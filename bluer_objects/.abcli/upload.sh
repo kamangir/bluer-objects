@@ -4,7 +4,7 @@ function bluer_objects_upload() {
     local options=$1
     local filename=$(bluer_ai_option "$options" filename)
     local public=$(bluer_ai_option_int "$options" public 0)
-    local do_zip=$(bluer_ai_option_int "$options" do_zip 1)
+    local do_zip=$(bluer_ai_option_int "$options" zip 0)
 
     local object_name=$(bluer_ai_clarify_object $2 .)
     local object_path=$ABCLI_OBJECT_ROOT/$object_name
