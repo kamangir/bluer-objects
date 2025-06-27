@@ -1,9 +1,11 @@
 import matplotlib.pyplot as plt
-from typing import Dict, Any, Union
+from typing import Dict, Any, Union, List
 import pandas as pd
 import random
+import os
 
-from bluer_objects import file
+from bluer_objects import file, objects
+from bluer_objects.graphics.signature import sign_filename
 
 
 def log_image_grid(
@@ -17,6 +19,8 @@ def log_image_grid(
     log: bool = True,
     scale: int = 2,
     shuffle: bool = False,
+    footer: List[str] = [],
+    relative_path: bool = False,
 ) -> bool:
     if isinstance(items, pd.DataFrame):
         items = items.to_dict("records")
@@ -26,6 +30,15 @@ def log_image_grid(
     if shuffle:
         random.shuffle(items)
     items = items[: rows * cols]
+
+    if relative_path:
+        root_path = file.path(filename)
+        for item in items:
+            if item.get("filename", ""):
+                item["filename"] = os.path.join(
+                    root_path,
+                    item["filename"],
+                )
 
     _, axes = plt.subplots(
         rows,
@@ -64,7 +77,14 @@ def log_image_grid(
 
     plt.tight_layout()
 
-    return file.save_fig(
+    if not file.save_fig(
         filename,
         log=log,
+    ):
+        return False
+
+    return sign_filename(
+        filename,
+        [" | ".join(objects.signature("grid.png"))],
+        [" | ".join(footer)],
     )
