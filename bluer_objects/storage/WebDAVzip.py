@@ -126,10 +126,11 @@ class WebDAVzipInterface(StorageInterface):
         object_name: str,
         filename: str = "",
         public: bool = False,
+        zip: bool = False,
         log: bool = True,
     ) -> bool:
-        if public:
-            logger.error("public not supported.")
+        if public or zip:
+            logger.error("public/zip upload not supported.")
             return False
 
         object_path = objects.object_path(object_name=object_name)
@@ -155,5 +156,6 @@ class WebDAVzipInterface(StorageInterface):
         return super().upload(
             object_name=object_name,
             public=public,
+            zip=zip,
             log=log,
         )

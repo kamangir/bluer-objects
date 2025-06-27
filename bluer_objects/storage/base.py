@@ -67,6 +67,7 @@ class StorageInterface:
         object_name: str,
         filename: str = "",
         public: bool = False,
+        zip: bool = False,
         log: bool = True,
     ) -> bool:
         if log:
@@ -74,7 +75,7 @@ class StorageInterface:
                 "{}.upload {}{}{}".format(
                     self.__class__.__name__,
                     object_name,
-                    f"/{filename}" if filename else "",
+                    ".tar.gz" if zip else f"/{filename}" if filename else "",
                     " [public]" if public else "",
                 )
             )
