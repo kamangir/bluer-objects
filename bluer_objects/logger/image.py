@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
-import numpy as np
 from typing import Dict, Any, Union
 import pandas as pd
+import random
 
 from bluer_objects import file
 
@@ -12,23 +12,27 @@ def log_image_grid(
         pd.DataFrame,
     ],
     filename: str,
-    rows: int = 5,
-    cols: int = 4,
+    rows: int = 3,
+    cols: int = 5,
     log: bool = True,
+    scale: int = 2,
+    shuffle: bool = False,
 ) -> bool:
     if isinstance(items, pd.DataFrame):
         items = items.to_dict("records")
 
     while len(items) < rows * cols:
         items += [{"pass": True}]
+    if shuffle:
+        random.shuffle(items)
     items = items[: rows * cols]
 
     _, axes = plt.subplots(
         rows,
         cols,
         figsize=(
-            4 * cols,
-            4 * rows,
+            scale * cols,
+            scale * rows,
         ),
     )
     axes = axes.flatten()
@@ -38,10 +42,9 @@ def log_image_grid(
             axes[i].axis("off")
             continue
 
-        filename = item.get("filename", "")
-        if filename:
+        if item.get("filename", ""):
             success, item["image"] = file.load_image(
-                filename,
+                item.get("filename", ""),
                 log=log,
             )
             if not success:
