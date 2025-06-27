@@ -69,7 +69,7 @@ def log_image_grid(
 
         ax = axes[i]
         image = item["image"]
-        image_shape = string.pretty_shape(image)
+        image_shape = string.pretty_shape_of_matrix(image)
         ax.imshow(
             image,
             cmap="gray" if image.ndim == 2 else None,
