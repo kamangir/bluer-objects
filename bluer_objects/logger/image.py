@@ -1,20 +1,27 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from typing import Dict, List, Any
-import os
+from typing import Dict, Any, Union
+import pandas as pd
 
 from bluer_objects import file
 
 
 def log_image_grid(
-    items: Dict[str, Dict[str, Any]],
+    items: Union[
+        Dict[str, Dict[str, Any]],
+        pd.DataFrame,
+    ],
     filename: str,
     rows: int = 5,
     cols: int = 4,
     log: bool = True,
 ) -> bool:
+    if isinstance(items, pd.DataFrame):
+        items = items.to_dict("records")
+
     while len(items) < rows * cols:
         items += [{"pass": True}]
+    items = items[: rows * cols]
 
     _, axes = plt.subplots(
         rows,
