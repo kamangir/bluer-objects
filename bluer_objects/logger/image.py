@@ -19,6 +19,7 @@ def log_image_grid(
     log: bool = True,
     scale: int = 2,
     shuffle: bool = False,
+    header: List[str] = [],
     footer: List[str] = [],
     relative_path: bool = False,
 ) -> bool:
@@ -85,6 +86,6 @@ def log_image_grid(
 
     return sign_filename(
         filename,
-        [" | ".join(objects.signature("grid.png"))],
+        [" | ".join(objects.signature("grid.png") + header)],
         [" | ".join(footer)],
     )
