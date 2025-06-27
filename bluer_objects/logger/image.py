@@ -4,6 +4,8 @@ import pandas as pd
 import random
 import os
 
+from bluer_options import string
+
 from bluer_objects import file, objects
 from bluer_objects.graphics.signature import sign_filename
 
@@ -51,6 +53,7 @@ def log_image_grid(
     )
     axes = axes.flatten()
 
+    image_shape = ""
     for i, item in enumerate(items):
         if item.get("pass", False):
             axes[i].axis("off")
@@ -66,6 +69,7 @@ def log_image_grid(
 
         ax = axes[i]
         image = item["image"]
+        image_shape = string.pretty_shape(image)
         ax.imshow(
             image,
             cmap="gray" if image.ndim == 2 else None,
@@ -86,6 +90,6 @@ def log_image_grid(
 
     return sign_filename(
         filename,
-        [" | ".join(objects.signature("grid.png") + header)],
+        [" | ".join(objects.signature("grid.png") + [image_shape] + header)],
         [" | ".join(footer)],
     )
