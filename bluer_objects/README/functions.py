@@ -3,6 +3,7 @@ import os
 import yaml
 
 from blueness import module
+from bluer_options.env import get_env
 
 from bluer_objects import NAME as MY_NAME, ICON as MY_ICON
 from bluer_objects.metadata import get_from_object
@@ -104,10 +105,23 @@ def build(
         if template_line.startswith("ignore:::"):
             content_section = [template_line.split(":::", 1)[1].strip()]
         else:
+            while "env:::" in template_line:
+                env_name = template_line.split("env:::", 1)[1]
+                if " " in env_name:
+                    env_name = env_name.split(" ", 1)[0]
+
+                env_value = get_env(env_name)
+
+                template_line = template_line.replace(
+                    f"env:::{env_name}",
+                    env_value,
+                )
+                logger.info(f"{env_name} -> {env_value}")
+
             if template_line.startswith("set:::"):
                 key, value = template_line.split("set:::", 1)[1].split(" ", 1)
                 variables[key] = value
-                logger.info(f":::{key} = {value}")
+                logger.info(f"c{key} = {value}")
                 continue
 
             for key, value in variables.items():
