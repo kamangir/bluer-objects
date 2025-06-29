@@ -6,6 +6,8 @@ assets:::<object-name>/<filename>
 details:::<summary>
 details:::
 
+env:::ENV_NAME
+
 help::: <command>
 
 include::: <filename>

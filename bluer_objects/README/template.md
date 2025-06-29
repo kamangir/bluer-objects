@@ -6,6 +6,8 @@ ignore::: assets:::<object-name>/<filename>
 ignore::: details:::<summary>
 ignore::: details:::
 
+ignore::: env:::ENV_NAME
+
 ignore::: help::: <command>
 
 ignore::: include::: <filename>
