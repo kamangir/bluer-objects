@@ -19,6 +19,7 @@ def log_image_grid(
     rows: int = 3,
     cols: int = 5,
     log: bool = True,
+    verbose: bool = False,
     scale: int = 2,
     shuffle: bool = False,
     header: List[str] = [],
@@ -62,7 +63,7 @@ def log_image_grid(
         if item.get("filename", ""):
             success, item["image"] = file.load_image(
                 item.get("filename", ""),
-                log=log,
+                log=verbose,
             )
             if not success:
                 return False
