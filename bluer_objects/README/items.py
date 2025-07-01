@@ -7,11 +7,17 @@ def Items(
 ) -> List[str]:
     return [
         (
-            "[`{}`]({}) [![image]({})]({}) {}".format(
-                item["name"],
-                item.get(
-                    "url",
-                    "#",
+            "{}[![image]({})]({}) {}".format(
+                (
+                    "[`{}`]({}) ".format(
+                        item["name"],
+                        item.get(
+                            "url",
+                            "#",
+                        ),
+                    )
+                    if item["name"]
+                    else ""
                 ),
                 item.get(
                     "marquee",
