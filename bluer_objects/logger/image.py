@@ -95,6 +95,12 @@ def log_image_grid(
 
     return sign_filename(
         filename,
-        [" | ".join(objects.signature("grid.png") + [image_shape] + header)],
+        [
+            " | ".join(
+                objects.signature(file.name_and_extension(filename))
+                + [image_shape]
+                + header
+            )
+        ],
         [" | ".join(footer)],
     )
