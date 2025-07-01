@@ -9,6 +9,9 @@ from bluer_options import string
 from bluer_objects import file, objects
 from bluer_objects.graphics.signature import sign_filename
 
+LOG_IMAGE_GRID_COLS = 5
+LOG_IMAGE_GRID_ROWS = 3
+
 
 def log_image_grid(
     items: Union[
@@ -16,8 +19,8 @@ def log_image_grid(
         pd.DataFrame,
     ],
     filename: str,
-    rows: int = 3,
-    cols: int = 5,
+    rows: int = LOG_IMAGE_GRID_ROWS,
+    cols: int = LOG_IMAGE_GRID_COLS,
     log: bool = True,
     verbose: bool = False,
     scale: int = 2,
@@ -77,6 +80,7 @@ def log_image_grid(
         )
         ax.set_title(
             item.get("title", f"#{i}"),
+            color=item.get("color", "black"),
             fontsize=10,
         )
         ax.axis("off")
@@ -85,7 +89,7 @@ def log_image_grid(
 
     if not file.save_fig(
         filename,
-        log=log,
+        log=verbose,
     ):
         return False
 
