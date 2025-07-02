@@ -104,9 +104,9 @@ def save_fig(
     try:
         import matplotlib.pyplot as plt
 
+        plt.savefig(filename, bbox_inches="tight")
         if is_jupyter():
             plt.show()
-        plt.savefig(filename, bbox_inches="tight")
         plt.close()
     except:
         success = False
