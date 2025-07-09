@@ -136,7 +136,9 @@ def save_image(
             data = np.flip(data, axis=2)
 
         cv2.imwrite(filename, data)
-    except:
+    except Exception as e:
+        if log:
+            logger.error(e)
         success = False
 
     return finish_saving(
