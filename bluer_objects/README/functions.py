@@ -3,12 +3,24 @@ import os
 import yaml
 
 from blueness import module
-from bluer_options.env import get_env
 
-from bluer_objects import NAME as MY_NAME, ICON as MY_ICON
+from bluer_objects import NAME as MY_NAME
 from bluer_objects.metadata import get_from_object
 from bluer_objects import file, env
 from bluer_objects import markdown
+from bluer_objects.README.utils import (
+    apply_legacy,
+    process_assets,
+    process_details,
+    process_envs,
+    process_help,
+    process_include,
+    process_mermaid,
+    process_objects,
+    process_variable,
+    signature,
+    variables,
+)
 from bluer_objects.logger import logger
 
 MY_NAME = module.name(__file__, MY_NAME)
@@ -56,156 +68,45 @@ def build(
 
     table_of_items = markdown.generate_table(items, cols=cols) if cols > 0 else items
 
-    signature = [
-        "",
-        " ".join(
-            [
-                f"[![pylint](https://github.com/kamangir/{REPO_NAME}/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/pylint.yml)",
-                f"[![pytest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/pytest.yml)",
-                f"[![bashtest](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/{REPO_NAME}/actions/workflows/bashtest.yml)",
-                f"[![PyPI version](https://img.shields.io/pypi/v/{MODULE_NAME}.svg)](https://pypi.org/project/{MODULE_NAME}/)",
-                f"[![PyPI - Downloads](https://img.shields.io/pypi/dd/{MODULE_NAME})](https://pypistats.org/packages/{MODULE_NAME})",
-            ]
-        ),
-        "",
-        "built by {} [`{}`]({}), based on {}[`{}-{}`]({}).".format(
-            MY_ICON,
-            "bluer README",
-            "https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README",
-            f"{ICON} " if ICON else "",
-            NAME,
-            VERSION,
-            f"https://github.com/kamangir/{REPO_NAME}",
-        ),
-    ]
-
     success, template = file.load_text(template_filename)
     if not success:
         return success
 
-    def apply_legacy(line: str) -> str:
-        for before, after in {
-            "yaml:::": "metadata:::",
-            "--help--": "help:::",
-            "--include": "include:::",
-            "--table--": "items:::",
-            "--signature--": "signature:::",
-        }.items():
-            line = line.replace(before, after)
-        return line
-
     if legacy_mode:
-        logger.info("applying legacy conversions...")
-        template = [apply_legacy(line) for line in template]
+        template = apply_legacy(template)
 
     content: List[str] = []
     mermaid_started: bool = False
-    variables: Dict[str, str] = {}
     for template_line in template:
         if template_line.startswith("ignore:::"):
-            content_section = [template_line.split(":::", 1)[1].strip()]
-        else:
-            while "env:::" in template_line:
-                env_name = template_line.split("env:::", 1)[1]
-                if " " in env_name:
-                    env_name = env_name.split(" ", 1)[0]
+            content += [template_line.split(":::", 1)[1].strip()]
+            continue
 
-                env_value = get_env(env_name)
+        for key, value in variables.items():
+            template_line = template_line.replace(
+                f"get:::{key}",
+                value,
+            )
 
-                template_line = template_line.replace(
-                    f"env:::{env_name}",
-                    env_value,
-                )
-                logger.info(f"{env_name} -> {env_value}")
+        if "metadata:::" in template_line:
+            object_name_and_key = template_line.split("metadata:::", 1)[1]
+            if " " in object_name_and_key:
+                object_name_and_key = object_name_and_key.split(" ", 1)[0]
+            if ":::" not in object_name_and_key:
+                object_name_and_key += ":::"
+            object_name, key = object_name_and_key.split(":::", 1)
 
-            if template_line.startswith("set:::"):
-                key, value = template_line.split("set:::", 1)[1].split(" ", 1)
-                variables[key] = value
-                logger.info(f"{key} = {value}")
-                continue
+            value = get_from_object(
+                object_name,
+                key,
+                {},
+                download=True,
+            )
 
-            for key, value in variables.items():
-                template_line = template_line.replace(
-                    f"get:::{key}",
-                    value,
-                )
+            logger.info(f"metadata[{object_name_and_key}] = {value}")
 
-            if "assets:::" in template_line:
-                template_line = " ".join(
-                    [
-                        (
-                            (
-                                "![image](https://github.com/{}/blob/main/{}?raw=true)".format(
-                                    assets_repo,
-                                    token.split(":::")[1].strip(),
-                                )
-                                if any(
-                                    token.endswith(extension)
-                                    for extension in ["png", "jpg", "jpeg", "gif"]
-                                )
-                                else "[{}](https://github.com/{}/blob/main/{})".format(
-                                    file.name_and_extension(
-                                        token.split(":::")[1].strip()
-                                    ),
-                                    assets_repo,
-                                    token.split(":::")[1].strip(),
-                                )
-                            )
-                            if token.startswith("assets:::")
-                            else token
-                        )
-                        for token in template_line.split(" ")
-                    ]
-                )
-
-            if "object:::" in template_line:
-                template_line = " ".join(
-                    [
-                        (
-                            "[{}](https://{}.{}/{}.tar.gz)".format(
-                                token.split(":::")[1].strip(),
-                                env.S3_PUBLIC_STORAGE_BUCKET,
-                                env.S3_STORAGE_ENDPOINT_URL.split("https://", 1)[1],
-                                token.split(":::")[1].strip(),
-                            )
-                            if token.startswith("object:::")
-                            else token
-                        )
-                        for token in template_line.split(" ")
-                    ]
-                )
-
-            content_section: List[str] = [template_line]
-
-            if template_line.startswith("details:::"):
-                suffix = template_line.split(":::", 1)[1]
-                if suffix:
-                    content_section = [
-                        "",
-                        "<details>",
-                        f"<summary>{suffix}</summary>",
-                        "",
-                    ]
-                else:
-                    content_section = [
-                        "",
-                        "</details>",
-                        "",
-                    ]
-            elif template_line.startswith("metadata:::"):
-                object_name_and_key = template_line.split(":::", 1)[1]
-                if ":::" not in object_name_and_key:
-                    object_name_and_key += ":::"
-                object_name, key = object_name_and_key.split(":::", 1)
-
-                value = get_from_object(
-                    object_name,
-                    key,
-                    {},
-                    download=True,
-                )
-
-                content_section = (
+            if template_line.startswith("metadata:::"):
+                content += (
                     ["```yaml"]
                     + yaml.dump(
                         value,
@@ -213,84 +114,72 @@ def build(
                     ).split("\n")
                     + ["```"]
                 )
-            elif template_line.startswith("```mermaid"):
-                mermaid_started = True
-                logger.info("🧜🏽‍♀️  detected ...")
-            elif mermaid_started and template_line.startswith("```"):
-                mermaid_started = False
-            elif mermaid_started:
-                if '"' in template_line and ":::folder" not in template_line:
-                    template_line_pieces = template_line.split('"')
-                    if len(template_line_pieces) != 3:
-                        logger.error(
-                            f"🧜🏽‍♀️  mermaid line not in expected format: {template_line}."
-                        )
-                        return False
+                continue
 
-                    template_line_pieces[1] = (
-                        template_line_pieces[1]
-                        .replace("<", "&lt;")
-                        .replace(">", "&gt;")
-                        .replace(" ", "<br>")
-                        .replace("~~", " ")
-                    )
+            template_line = template_line.replace(
+                f"metadata:::{object_name}::{key}",
+                value,
+            )
 
-                    content_section = ['"'.join(template_line_pieces)]
-            elif "items:::" in template_line:
-                content_section = table_of_items
-            elif "signature:::" in template_line:
-                content_section = signature
-            elif "include:::" in template_line:
-                include_filename_relative = template_line.split(" ")[1].strip()
-                include_filename = file.absolute(
-                    include_filename_relative,
-                    file.path(template_filename),
-                )
+        template_line = process_envs(template_line)
 
-                success, content_section = file.load_text(include_filename)
-                if not success:
-                    return success
+        if template_line.startswith("set:::"):
+            process_variable(template_line)
+            continue
 
-                content_section = [
-                    line for line in content_section if not line.startswith("used by:")
-                ]
+        template_line = process_assets(template_line, assets_repo)
 
-                include_title = (template_line.split(" ", 2) + ["", "", ""])[2]
-                if include_title:
-                    content_section = [f"## {include_title}"] + content_section[1:]
+        template_line = process_objects(template_line)
 
-                if "include:::noref" not in template_line:
-                    content_section += [
-                        "using [{}]({}).".format(
-                            file.name(include_filename),
-                            include_filename_relative,
-                        )
-                    ]
+        if template_line.startswith("details:::"):
+            content += process_details(template_line)
+            continue
 
-                logger.info(f"{MY_NAME}.build: including {include_filename} ...")
-            elif "help:::" in template_line:
-                if help_function is not None:
-                    help_command = template_line.split("help:::")[1].strip()
+        if "items:::" in template_line:
+            content += table_of_items
+            continue
 
-                    tokens = help_command.strip().split(" ")[1:]
+        if "include:::" in template_line:
+            content += process_include(
+                template_line,
+                file.path(template_filename),
+            )
+            continue
 
-                    help_content = help_function(tokens)
-                    if not help_content:
-                        logger.warning(f"help not found: {help_command}: {tokens}")
-                        return False
+        if "signature:::" in template_line:
+            content += signature(
+                REPO_NAME,
+                NAME,
+                ICON,
+                MODULE_NAME,
+                VERSION,
+            )
+            continue
 
-                    logger.info(f"+= help: {help_command}")
-                    print(help_content)
-                    content_section = [
-                        "```bash",
-                        help_content,
-                        "```",
-                    ]
+        if "help:::" in template_line:
+            if help_function is None:
+                logger.warning("help_function not found.")
             else:
-                for macro, macro_value in macros.items():
-                    if macro in template_line:
-                        content_section = macro_value
-                        break
+                content += process_help(
+                    template_line,
+                    help_function,
+                )
+            continue
+
+        content_section = [template_line]
+        if template_line.startswith("```mermaid"):
+            mermaid_started = True
+            logger.info("🧜🏽‍♀️  detected ...")
+        elif mermaid_started and template_line.startswith("```"):
+            mermaid_started = False
+        elif mermaid_started:
+            if '"' in template_line and ":::folder" not in template_line:
+                content_section = process_mermaid(template_line)
+        else:
+            for macro, macro_value in macros.items():
+                if macro in template_line:
+                    content_section = macro_value
+                    break
 
         content += content_section
 
