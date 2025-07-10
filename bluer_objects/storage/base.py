@@ -3,6 +3,7 @@ import glob
 from typing import Tuple, List
 
 from bluer_objects import objects
+from bluer_objects.storage.policies import DownloadPolicy
 from bluer_objects.logger import logger
 
 
@@ -18,13 +19,19 @@ class StorageInterface:
         object_name: str,
         filename: str = "",
         log: bool = True,
+        policy: DownloadPolicy = DownloadPolicy.NONE,
     ) -> bool:
         if log:
             logger.info(
-                "{}.download {}{}".format(
+                "{}.download {}{}{}".format(
                     self.__class__.__name__,
                     object_name,
                     f"/{filename}" if filename else "",
+                    (
+                        ""
+                        if policy == DownloadPolicy.NONE
+                        else " - policy:{}".format(policy.name.lower())
+                    ),
                 )
             )
 
