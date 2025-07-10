@@ -82,6 +82,8 @@ def build(
             content += [template_line.split(":::", 1)[1].strip()]
             continue
 
+        template_line = process_envs(template_line)
+
         for key, value in variables.items():
             template_line = template_line.replace(
                 f"get:::{key}",
@@ -118,10 +120,8 @@ def build(
 
             template_line = template_line.replace(
                 f"metadata:::{object_name}::{key}",
-                value,
+                str(value),
             )
-
-        template_line = process_envs(template_line)
 
         if template_line.startswith("set:::"):
             process_variable(template_line)
