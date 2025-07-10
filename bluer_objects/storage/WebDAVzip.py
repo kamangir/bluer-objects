@@ -5,9 +5,10 @@ from webdav3.client import Client
 from tqdm import tqdm
 
 from bluer_objects.storage.base import StorageInterface
-from bluer_objects import env, file, path
+from bluer_objects import env
 from bluer_objects import objects
-from bluer_objects.host import zip, unzip
+from bluer_objects.host import unzip
+from bluer_objects.storage.policies import DownloadPolicy
 from bluer_objects.logger import logger
 
 
@@ -65,6 +66,7 @@ class WebDAVzipInterface(StorageInterface):
         object_name: str,
         filename: str = "",
         log: bool = True,
+        policy: DownloadPolicy = DownloadPolicy.NONE,
     ) -> bool:
         object_path = objects.object_path(
             object_name=object_name,
@@ -99,6 +101,7 @@ class WebDAVzipInterface(StorageInterface):
         return super().download(
             object_name=object_name,
             log=log,
+            policy=policy,
         )
 
     def ls(

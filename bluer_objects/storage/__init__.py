@@ -5,6 +5,7 @@ from bluer_objects.storage.base import StorageInterface
 from bluer_objects.storage.WebDAV import WebDAVInterface
 from bluer_objects.storage.WebDAVrequest import WebDAVRequestInterface
 from bluer_objects.storage.WebDAVzip import WebDAVzipInterface
+from bluer_objects.storage.policies import DownloadPolicy
 from bluer_objects import env
 from bluer_objects.logger import logger
 
@@ -35,11 +36,13 @@ def download(
     object_name: str,
     filename: str = "",
     log: bool = True,
+    policy: DownloadPolicy = DownloadPolicy.NONE,
 ) -> bool:
     return interface.download(
         object_name=object_name,
         filename=filename,
         log=log,
+        policy=policy,
     )
 
 

@@ -4,6 +4,7 @@ from webdav3.client import Client
 from bluer_objects.storage.base import StorageInterface
 from bluer_objects import env, file, path
 from bluer_objects import objects
+from bluer_objects.storage.policies import DownloadPolicy
 from bluer_objects.logger import logger
 
 
@@ -56,6 +57,7 @@ class WebDAVInterface(StorageInterface):
         object_name: str,
         filename: str = "",
         log: bool = True,
+        policy: DownloadPolicy = DownloadPolicy.NONE,
     ) -> bool:
         local_path = objects.path_of(
             object_name=object_name,
@@ -80,6 +82,7 @@ class WebDAVInterface(StorageInterface):
             object_name=object_name,
             filename=filename,
             log=log,
+            policy=policy,
         )
 
     def upload(

@@ -11,6 +11,7 @@ from bluer_objects.storage.base import StorageInterface
 from bluer_objects.env import ABCLI_OBJECT_ROOT
 from bluer_objects import env, file, path
 from bluer_objects import objects
+from bluer_objects.storage.policies import DownloadPolicy
 from bluer_objects.logger import logger
 
 
@@ -121,6 +122,7 @@ class S3Interface(StorageInterface):
         object_name: str,
         filename: str = "",
         log: bool = True,
+        policy: DownloadPolicy = DownloadPolicy.NONE,
     ) -> bool:
         if filename:
             local_path = objects.path_of(
@@ -128,6 +130,11 @@ class S3Interface(StorageInterface):
                 filename=filename,
                 create=True,
             )
+
+            if policy == DownloadPolicy.DOESNT_EXIST and file.exists(local_path):
+                if log:
+                    logger.info(f"✅ {filename}")
+                return True
 
             if not path.create(file.path(local_path)):
                 return False
@@ -160,6 +167,7 @@ class S3Interface(StorageInterface):
                 object_name=object_name,
                 filename=filename,
                 log=log,
+                policy=policy,
             )
 
         success, list_of_files = self.ls(
@@ -174,6 +182,7 @@ class S3Interface(StorageInterface):
                 object_name=object_name,
                 filename=filename_,
                 log=log,
+                policy=policy,
             ):
                 return False
 

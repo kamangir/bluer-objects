@@ -8,6 +8,7 @@ from tqdm import tqdm
 from bluer_objects.storage.base import StorageInterface
 from bluer_objects import env, file, path
 from bluer_objects import objects
+from bluer_objects.storage.policies import DownloadPolicy
 from bluer_objects.logger import logger
 
 
@@ -136,6 +137,7 @@ class WebDAVRequestInterface(StorageInterface):
         object_name: str,
         filename: str = "",
         log: bool = True,
+        policy: DownloadPolicy = DownloadPolicy.NONE,
     ) -> bool:
         if filename:
             local_path = objects.path_of(
@@ -176,6 +178,7 @@ class WebDAVRequestInterface(StorageInterface):
                     object_name=object_name,
                     filename=filename,
                     log=log,
+                    policy=policy,
                 )
 
             logger.error(f"failed to download: {response.status_code}")
@@ -193,6 +196,7 @@ class WebDAVRequestInterface(StorageInterface):
                 object_name=object_name,
                 filename=filename_,
                 log=log,
+                policy=policy,
             ):
                 return False
 
