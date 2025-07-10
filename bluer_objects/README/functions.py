@@ -121,7 +121,7 @@ def build(
             if template_line.startswith("set:::"):
                 key, value = template_line.split("set:::", 1)[1].split(" ", 1)
                 variables[key] = value
-                logger.info(f"c{key} = {value}")
+                logger.info(f"{key} = {value}")
                 continue
 
             for key, value in variables.items():
