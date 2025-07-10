@@ -86,7 +86,7 @@ def build(
 
         for key, value in variables.items():
             template_line = template_line.replace(
-                f"get:::{key}",
+                f"get:::{qkey}",
                 value,
             )
 
@@ -119,7 +119,7 @@ def build(
                 continue
 
             template_line = template_line.replace(
-                f"metadata:::{object_name}::{key}",
+                f"metadata:::{object_name}:::{key}",
                 str(value),
             )
 
