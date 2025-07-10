@@ -86,7 +86,7 @@ def build(
 
         for key, value in variables.items():
             template_line = template_line.replace(
-                f"get:::{qkey}",
+                f"get:::{key}",
                 value,
             )
 
