@@ -2,7 +2,7 @@
 
 ```bash
 @download \
-	[filename=<filename>] \
+	[filename=<filename>,policy=different|doesnt_exist|none] \
 	[.|<object-name>] \
 	[open,QGIS]
  . download <object-name>.

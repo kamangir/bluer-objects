@@ -5,6 +5,7 @@ from blueness.argparse.generic import sys_exit
 
 from bluer_objects import NAME
 from bluer_objects import storage
+from bluer_objects.storage.policies import DownloadPolicy
 from bluer_objects.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -59,6 +60,12 @@ parser.add_argument(
     default=1,
     help="0 | 1",
 )
+parser.add_argument(
+    "--policy",
+    type=str,
+    default="none",
+    help=" | ".join(sorted([policy.name.lower() for policy in DownloadPolicy])),
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
@@ -72,6 +79,7 @@ elif args.task == "download":
     success = storage.download(
         object_name=args.object_name,
         filename=args.filename,
+        policy=DownloadPolicy[args.policy.upper()],
     )
 elif args.task == "ls":
     success, list_of_files = storage.ls(

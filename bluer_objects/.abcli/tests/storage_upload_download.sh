@@ -63,6 +63,12 @@ function test_bluer_objects_storage_upload_download() {
     [[ $? -ne 0 ]] && return 1
     bluer_ai_hr
 
+    bluer_objects_download \
+        policy=doesnt_exist \
+        $object_name
+    [[ $? -ne 0 ]] && return 1
+    bluer_ai_hr
+
     bluer_objects_upload \
         zip \
         $object_name
