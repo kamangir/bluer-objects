@@ -1,4 +1,4 @@
-# host
+# aliases: host
 
 ```bash
 @host \

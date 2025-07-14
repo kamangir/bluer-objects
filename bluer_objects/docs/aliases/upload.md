@@ -1,4 +1,4 @@
-# upload
+# aliases: upload
 
 ```bash
 @upload \

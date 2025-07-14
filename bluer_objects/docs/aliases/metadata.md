@@ -1,4 +1,4 @@
-# metadata
+# aliases: metadata
 
 ```bash
 @metadata \
