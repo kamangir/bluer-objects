@@ -1,4 +1,5 @@
-from typing import List, Tuple, Dict, Union, Callable
+import os
+from typing import List, Dict, Union, Callable
 
 from bluer_options.env import get_env
 from bluer_objects import file
@@ -196,6 +197,33 @@ def process_objects(template_line: str) -> str:
         )
 
     return template_line
+
+
+def process_title(
+    template_line: str,
+    filename: str,
+) -> List[str]:
+    template_line_pieces = [
+        piece for piece in template_line.strip().split(":::") if piece
+    ]
+    reference = template_line_pieces[1] if len(template_line_pieces) >= 2 else "docs"
+
+    filename_path_pieces = file.path(filename).split(os.sep)
+    if reference not in filename_path_pieces:
+        logger.warning(
+            "reference: {} not found in {}.".format(
+                reference,
+                template_line,
+            )
+        )
+        return ["# title: not found"]
+
+    title_pieces = filename_path_pieces[filename_path_pieces.index(reference) + 1 :]
+    filename_name = file.name(filename)
+    if filename_name != "README":
+        title_pieces.append(filename_name)
+
+    return ["# {}".format(": ".join(title_pieces))]
 
 
 def process_variable(template_line: str):

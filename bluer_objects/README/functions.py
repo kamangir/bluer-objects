@@ -17,6 +17,7 @@ from bluer_objects.README.utils import (
     process_include,
     process_mermaid,
     process_objects,
+    process_title,
     process_variable,
     signature,
     variables,
@@ -153,6 +154,13 @@ def build(
                 ICON,
                 MODULE_NAME,
                 VERSION,
+            )
+            continue
+
+        if template_line.startswith("title:::"):
+            content += process_title(
+                template_line,
+                filename,
             )
             continue
 
