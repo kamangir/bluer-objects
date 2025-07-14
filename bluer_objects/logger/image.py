@@ -6,7 +6,7 @@ import os
 
 from bluer_options import string
 
-from bluer_objects import file, objects
+from bluer_objects import file, objects, path
 from bluer_objects.graphics.signature import sign_filename
 
 LOG_IMAGE_GRID_COLS = 5
@@ -97,7 +97,10 @@ def log_image_grid(
         filename,
         [
             " | ".join(
-                objects.signature(file.name_and_extension(filename))
+                objects.signature(
+                    info=file.name_and_extension(filename),
+                    object_name=path.name(file.path(filename)),
+                )
                 + [image_shape]
                 + header
             )
