@@ -1,4 +1,4 @@
-# gif
+# aliases: gif
 
 ```bash
 @gif \

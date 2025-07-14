@@ -1,4 +1,4 @@
-# clone
+# aliases: clone
 
 ```bash
 @cp \

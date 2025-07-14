@@ -1,4 +1,4 @@
-# download
+# aliases: download
 
 ```bash
 @download \

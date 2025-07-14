@@ -1,4 +1,4 @@
-# mlflow
+# aliases: mlflow
 
 ```bash
 @mlflow \

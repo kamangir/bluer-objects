@@ -1,4 +1,4 @@
-# ls
+# aliases: ls
 
 ```bash
 @ls \
