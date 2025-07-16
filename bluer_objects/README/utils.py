@@ -113,7 +113,7 @@ def process_help(
     help_content = help_function(tokens)
     if not help_content:
         logger.warning(f"help not found: {help_command}: {tokens}")
-        return False
+        return []
 
     logger.info(f"+= help: {help_command}")
     print(help_content)
