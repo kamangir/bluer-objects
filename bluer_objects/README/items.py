@@ -4,8 +4,9 @@ from typing import List, Dict
 # name, url, marquee, description
 def Items(
     items: List[Dict[str, str]],
+    sort: bool = False,
 ) -> List[str]:
-    return [
+    output = [
         (
             "{}[![image]({})]({}) {}".format(
                 (
@@ -34,3 +35,8 @@ def Items(
         )
         for item in items
     ]
+
+    if sort:
+        output = sorted(output)
+
+    return output
