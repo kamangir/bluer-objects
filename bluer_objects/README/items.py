@@ -1,6 +1,14 @@
 from typing import List, Dict
 
 
+# {image,jpg : url}
+def ImageItems(items: Dict[str, str]) -> List[str]:
+    return [
+        "" if not image else "[![image]({})]({})".format(image, url if url else image)
+        for image, url in items.items()
+    ]
+
+
 # name, url, marquee, description
 def Items(
     items: List[Dict[str, str]],
