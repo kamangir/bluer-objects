@@ -3,8 +3,19 @@ from typing import List, Dict
 
 # {image,jpg : url}
 def ImageItems(items: Dict[str, str]) -> List[str]:
+    def add_raw(url: str) -> str:
+        return (
+            f"{url}?raw=true" if "github.com" in url and "raw=true" not in url else url
+        )
+
     return [
-        "" if not image else "[![image]({})]({})".format(image, url if url else image)
+        (
+            ""
+            if not image
+            else "[![image]({})]({})".format(
+                add_raw(image), url if url else add_raw(image)
+            )
+        )
         for image, url in items.items()
     ]
 
