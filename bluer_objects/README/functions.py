@@ -158,20 +158,29 @@ def build(
             continue
 
         if template_line.startswith("title:::"):
-            content += process_title(
+            success, updated_content = process_title(
                 template_line,
                 filename,
             )
+            if not success:
+                return success
+
+            content += updated_content
             continue
 
         if "help:::" in template_line:
             if help_function is None:
-                logger.warning("help_function not found.")
-            else:
-                content += process_help(
-                    template_line,
-                    help_function,
-                )
+                logger.error("help_function not found.")
+                return False
+
+            success, updated_content = process_help(
+                template_line,
+                help_function,
+            )
+            if not success:
+                return success
+
+            content += updated_content
             continue
 
         content_section = [template_line]

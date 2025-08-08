@@ -1,5 +1,5 @@
 import os
-from typing import List, Dict, Union, Callable
+from typing import List, Dict, Union, Callable, Tuple
 
 from bluer_options.env import get_env
 from bluer_objects import file
@@ -105,15 +105,15 @@ def process_envs(template_line: str) -> str:
 def process_help(
     template_line: str,
     help_function: Union[Callable[[List[str]], str], None] = None,
-) -> List[str]:
+) -> Tuple[bool, List[str]]:
     help_command = template_line.split("help:::")[1].strip()
 
     tokens = help_command.strip().split(" ")[1:]
 
     help_content = help_function(tokens)
     if not help_content:
-        logger.warning(f"help not found: {help_command}: {tokens}")
-        return []
+        logger.error(f"help not found: {help_command}: {tokens}")
+        return False, []
 
     logger.info(f"+= help: {help_command}")
     print(help_content)
@@ -123,7 +123,7 @@ def process_help(
         "```",
     ]
 
-    return content_section
+    return True, content_section
 
 
 def process_include(
@@ -202,7 +202,7 @@ def process_objects(template_line: str) -> str:
 def process_title(
     template_line: str,
     filename: str,
-) -> List[str]:
+) -> Tuple[bool, List[str]]:
     template_line_pieces = [
         piece for piece in template_line.strip().split(":::") if piece
     ]
@@ -210,20 +210,20 @@ def process_title(
 
     filename_path_pieces = file.path(filename).split(os.sep)
     if reference not in filename_path_pieces:
-        logger.warning(
+        logger.error(
             "reference: {} not found in {}.".format(
                 reference,
                 template_line,
             )
         )
-        return ["# title: not found"]
+        return False, []
 
     title_pieces = filename_path_pieces[filename_path_pieces.index(reference) + 1 :]
     filename_name = file.name(filename)
     if filename_name != "README":
         title_pieces.append(filename_name)
 
-    return ["# {}".format(": ".join(title_pieces))]
+    return True, ["# {}".format(": ".join(title_pieces))]
 
 
 def process_variable(template_line: str):
