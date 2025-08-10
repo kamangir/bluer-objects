@@ -12,6 +12,7 @@ NAME = module.name(__file__, NAME)
 def generate_table(
     items: List[str],
     cols: int = 3,
+    log: bool = True,
 ) -> List[str]:
     if not items:
         return []
@@ -22,13 +23,14 @@ def generate_table(
 
     row_count = int(math.ceil(len(items) / cols))
 
-    logger.info(
-        "{}.generate_table(): {} item(s), {} row(s)".format(
-            NAME,
-            len(items),
-            row_count,
+    if log:
+        logger.info(
+            "{}.generate_table(): {} item(s), {} row(s)".format(
+                NAME,
+                len(items),
+                row_count,
+            )
         )
-    )
 
     return [
         "| {} |".format(" | ".join(cols * [" "])),
