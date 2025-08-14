@@ -15,7 +15,7 @@ LOG_IMAGE_GRID_ROWS = 3
 
 def log_image_grid(
     items: Union[
-        Dict[str, Dict[str, Any]],
+        List[Dict[str, Any]],
         pd.DataFrame,
     ],
     filename: str,
@@ -36,6 +36,7 @@ def log_image_grid(
         items += [{"pass": True}]
     if shuffle:
         random.shuffle(items)
+
     items = items[: rows * cols]
 
     if relative_path:
