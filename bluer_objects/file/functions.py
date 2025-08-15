@@ -117,24 +117,28 @@ def copy(
         return False
 
     if log:
-        logger.info(f"{NAME}: {source} -> {destination}")
+        logger.info(f"{source} -copy-> {destination}")
 
     return True
 
 
 def delete(
     filename: str,
+    log: bool = False,
 ) -> bool:
     if not os.path.isfile(filename):
         return True
 
     try:
         os.remove(filename)
-
-        return True
     except:
         crash_report(f"{NAME}: delete({filename}): failed.")
         return False
+
+    if log:
+        logger.info(f"deleted {filename}.")
+
+    return True
 
 
 def download(
@@ -238,6 +242,7 @@ def list_of(
 def move(
     source: str,
     destination: str,
+    log: bool = True,
 ) -> bool:
     try:
         os.makedirs(path(destination), exist_ok=True)
@@ -247,6 +252,9 @@ def move(
     except:
         crash_report(f"{NAME}: move({source},{destination}): failed.")
         return False
+
+    if log:
+        logger.info(f"{source} -move-> {destination}")
 
     return True
 
