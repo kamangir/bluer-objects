@@ -224,7 +224,17 @@ def process_title(
         title_pieces.append(filename_name)
 
     return True, [
-        "# {}".format(": ".join([piece.replace("_", "-") for piece in title_pieces]))
+        "# {}".format(
+            ": ".join(
+                [
+                    piece.replace(
+                        "_",
+                        "-",
+                    )
+                    for piece in title_pieces
+                ]
+            )
+        )
     ]
 
 
