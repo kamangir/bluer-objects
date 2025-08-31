@@ -223,7 +223,9 @@ def process_title(
     if filename_name != "README":
         title_pieces.append(filename_name)
 
-    return True, ["# {}".format(": ".join(title_pieces))]
+    return True, [
+        "# {}".format(": ".join([piece.replace("_", "-") for piece in title_pieces]))
+    ]
 
 
 def process_variable(template_line: str):
