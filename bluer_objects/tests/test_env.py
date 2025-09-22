@@ -41,3 +41,5 @@ def test_bluer_objects_env():
     assert env.WEBDAV_HOSTNAME
     assert env.WEBDAV_LOGIN
     assert env.WEBDAV_PASSWORD
+
+    assert env.BLUER_OBJECTS_TEST_OBJECT
