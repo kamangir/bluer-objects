@@ -16,14 +16,35 @@ def help_ls(
         [
             "@ls",
             "cloud | local",
-            "<object-name>",
+            ".|<object-name>",
         ]
         + args,
         "ls <object-name>.",
         mono=mono,
     )
 
+    # ---
+
+    args = [
+        "[--delim <space>]",
+        "[--log <0>]",
+        "[--prefix <prefix>]",
+    ]
+
     usage_2 = show_usage(
+        [
+            "@ls",
+            "cloud | local",
+            "objects",
+        ]
+        + args,
+        "ls objects.",
+        mono=mono,
+    )
+
+    # ---
+
+    usage_3 = show_usage(
         [
             "@ls",
             "<path>",
@@ -36,5 +57,6 @@ def help_ls(
         [
             usage_1,
             usage_2,
+            usage_3,
         ]
     )
