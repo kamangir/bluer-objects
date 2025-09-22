@@ -9,4 +9,9 @@
 	[--scale <1>] \
 	[--suffix <.png>]
  . generate <object-name>.gif.
+@gif \
+	open \
+	[download,filename=<filename.gif>] \
+	[.|<object-name>]
+ . open <object-name>.gif.
 ```

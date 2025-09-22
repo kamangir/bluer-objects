@@ -29,6 +29,7 @@ function test_bluer_objects_help() {
         "@download" \
         \
         "@gif" \
+        "@gif open" \
         \
         "@ls" \
         \
