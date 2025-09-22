@@ -70,7 +70,6 @@ function test_bluer_objects_help() {
         \
         "@storage" \
         "@storage clear" \
-        "@storage ls" \
         "@storage status" \
         \
         "@upload" \
