@@ -3,8 +3,10 @@ import glob
 from typing import Tuple, List
 
 from bluer_objects import objects
+from bluer_objects import path
 from bluer_objects.storage.policies import DownloadPolicy
 from bluer_objects.logger import logger
+from bluer_objects.env import ABCLI_OBJECT_ROOT
 
 
 class StorageInterface:
@@ -59,6 +61,34 @@ class StorageInterface:
                         recursive=True,
                     )
                     if os.path.isfile(filename)
+                ]
+            )
+
+        if where == "cloud":
+            logger.error("not implemented")
+            return False, []
+
+        logger.error(f"Unknown 'where': {where}")
+        return False, []
+
+    def ls_objects(
+        self,
+        prefix: str,
+        where: str = "local",
+    ) -> Tuple[bool, List[str]]:
+        if where == "local":
+            return True, sorted(
+                [
+                    os.path.relpath(dirname, start=ABCLI_OBJECT_ROOT)
+                    for dirname in glob.glob(
+                        os.path.join(
+                            ABCLI_OBJECT_ROOT,
+                            "*",
+                        ),
+                        recursive=False,
+                    )
+                    if not os.path.isfile(dirname)
+                    and path.name(dirname).startswith(prefix)
                 ]
             )
 

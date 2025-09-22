@@ -56,6 +56,16 @@ def ls(
     )
 
 
+def ls_objects(
+    prefix: str,
+    where: str = "local",
+) -> Tuple[bool, List[str]]:
+    return interface.ls_objects(
+        prefix=prefix,
+        where=where,
+    )
+
+
 def upload(
     object_name: str,
     filename: str = "",

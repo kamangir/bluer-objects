@@ -29,6 +29,7 @@ function test_bluer_objects_help() {
         "@download" \
         \
         "@gif" \
+        "@gif open" \
         \
         "@ls" \
         \
@@ -69,10 +70,6 @@ function test_bluer_objects_help() {
         \
         "@storage" \
         "@storage clear" \
-        "@storage download_file" \
-        "@storage exists" \
-        "@storage list" \
-        "@storage rm" \
         "@storage status" \
         \
         "@upload" \

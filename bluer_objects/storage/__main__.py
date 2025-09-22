@@ -2,6 +2,7 @@ import argparse
 
 from blueness import module
 from blueness.argparse.generic import sys_exit
+from bluer_options.logger.config import log_list
 
 from bluer_objects import NAME
 from bluer_objects import storage
@@ -14,7 +15,7 @@ parser = argparse.ArgumentParser(NAME)
 parser.add_argument(
     "task",
     type=str,
-    help="clear | download | ls | upload",
+    help="clear | download | ls | ls_objects | upload",
 )
 parser.add_argument(
     "--object_name",
@@ -66,6 +67,11 @@ parser.add_argument(
     default="none",
     help=" | ".join(sorted([policy.name.lower() for policy in DownloadPolicy])),
 )
+parser.add_argument(
+    "--prefix",
+    type=str,
+    default="",
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
@@ -88,14 +94,19 @@ elif args.task == "ls":
     )
 
     if args.log:
-        logger.info(
-            "{:,} file(s).".format(len(list_of_files)),
-        )
-        for index, filename in enumerate(list_of_files):
-            logger.info(f"#{index+1: 4d} - {filename}")
+        log_list(logger, "", list_of_files, "file(s)", 999)
     else:
         print(delim.join(list_of_files))
+elif args.task == "ls_objects":
+    success, list_of_objects = storage.ls_objects(
+        prefix=args.prefix,
+        where=args.where,
+    )
 
+    if args.log:
+        log_list(logger, "", list_of_objects, "objects(s)", 999)
+    else:
+        print(delim.join(list_of_objects))
 elif args.task == "upload":
     success = storage.upload(
         object_name=args.object_name,
