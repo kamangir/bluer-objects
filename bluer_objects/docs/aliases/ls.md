@@ -2,19 +2,16 @@
 
 ```bash
 @ls \
-	cloud | local \
-	.|<object-name> \
+	[cloud|local] \
+	[.|<object-name>] \
 	[--delim <space>] \
 	[--log <0>]
  . ls <object-name>.
 @ls \
-	cloud | local \
+	[cloud|local] \
 	objects \
 	[--delim <space>] \
 	[--log <0>] \
 	[--prefix <prefix>]
  . ls objects.
-@ls \
-	<path>
- . ls <path>.
 ```

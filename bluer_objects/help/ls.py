@@ -15,8 +15,8 @@ def help_ls(
     usage_1 = show_usage(
         [
             "@ls",
-            "cloud | local",
-            ".|<object-name>",
+            "[cloud|local]",
+            "[.|<object-name>]",
         ]
         + args,
         "ls <object-name>.",
@@ -34,7 +34,7 @@ def help_ls(
     usage_2 = show_usage(
         [
             "@ls",
-            "cloud | local",
+            "[cloud|local]",
             "objects",
         ]
         + args,
@@ -42,21 +42,9 @@ def help_ls(
         mono=mono,
     )
 
-    # ---
-
-    usage_3 = show_usage(
-        [
-            "@ls",
-            "<path>",
-        ],
-        "ls <path>.",
-        mono=mono,
-    )
-
     return "\n".join(
         [
             usage_1,
             usage_2,
-            usage_3,
         ]
     )
