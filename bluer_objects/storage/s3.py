@@ -31,41 +31,9 @@ class S3Interface(StorageInterface):
             )
         )
 
-        try:
-            s3 = boto3.client(
-                "s3",
-                endpoint_url=env.S3_STORAGE_ENDPOINT_URL,
-                aws_access_key_id=env.S3_STORAGE_AWS_ACCESS_KEY_ID,
-                aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
-            )
-
-            paginator = s3.get_paginator("list_objects_v2")
-            pages = paginator.paginate(
-                Bucket=env.S3_STORAGE_BUCKET,
-                Prefix="test",
-            )
-        except Exception as e:
-            logger.error(e)
-            return False
-
-        list_of_objects = sorted(
-            list(
-                set(
-                    reduce(
-                        lambda x, y: x + y,
-                        [
-                            [
-                                obj["Key"].split("/", 1)[0]
-                                for obj in page.get("Contents", [])
-                            ]
-                            for page in pages
-                        ],
-                        [],
-                    )
-                )
-            )
-        )
-
+        success, list_of_objects = self.list_of_objects(prefix="test")
+        if not success:
+            return success
         logger.info(f"{len(list_of_objects)} object(s) to delete.")
 
         for object_name in tqdm(list_of_objects):
@@ -188,6 +156,47 @@ class S3Interface(StorageInterface):
 
         return True
 
+    def list_of_objects(
+        self,
+        prefix: str = "",
+    ) -> Tuple[bool, List[str]]:
+        try:
+            s3 = boto3.client(
+                "s3",
+                endpoint_url=env.S3_STORAGE_ENDPOINT_URL,
+                aws_access_key_id=env.S3_STORAGE_AWS_ACCESS_KEY_ID,
+                aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
+            )
+
+            paginator = s3.get_paginator("list_objects_v2")
+            pages = paginator.paginate(
+                Bucket=env.S3_STORAGE_BUCKET,
+                Prefix=prefix,
+            )
+        except Exception as e:
+            logger.error(e)
+            return False, []
+
+        list_of_objects = sorted(
+            list(
+                set(
+                    reduce(
+                        lambda x, y: x + y,
+                        [
+                            [
+                                obj["Key"].split("/", 1)[0]
+                                for obj in page.get("Contents", [])
+                            ]
+                            for page in pages
+                        ],
+                        [],
+                    )
+                )
+            )
+        )
+
+        return True, list_of_objects
+
     def ls(
         self,
         object_name: str,
@@ -229,6 +238,19 @@ class S3Interface(StorageInterface):
 
         return super().ls(
             object_name=object_name,
+            where=where,
+        )
+
+    def ls_objects(
+        self,
+        prefix: str,
+        where: str = "local",
+    ) -> Tuple[bool, List[str]]:
+        if where == "cloud":
+            return self.list_of_objects(prefix)
+
+        return super().ls_objects(
+            prefix=prefix,
             where=where,
         )
 
