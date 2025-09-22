@@ -70,10 +70,7 @@ function test_bluer_objects_help() {
         \
         "@storage" \
         "@storage clear" \
-        "@storage download_file" \
-        "@storage exists" \
-        "@storage list" \
-        "@storage rm" \
+        "@storage ls" \
         "@storage status" \
         \
         "@upload" \
