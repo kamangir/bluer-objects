@@ -15,9 +15,6 @@
 	[--prefix <prefix>]
  . ls objects.
 @ls \
-	[<path>] \
-	[--delim <space>] \
-	[--log <0>] \
-	[--prefix <prefix>]
+	[<path>]
  . ls <path>.
 ```

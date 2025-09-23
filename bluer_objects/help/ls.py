@@ -44,18 +44,11 @@ def help_ls(
 
     # ---
 
-    args = [
-        "[--delim <space>]",
-        "[--log <0>]",
-        "[--prefix <prefix>]",
-    ]
-
     usage_3 = show_usage(
         [
             "@ls",
             "[<path>]",
-        ]
-        + args,
+        ],
         "ls <path>.",
         mono=mono,
     )
