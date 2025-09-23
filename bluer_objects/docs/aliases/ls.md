@@ -14,4 +14,7 @@
 	[--log <0>] \
 	[--prefix <prefix>]
  . ls objects.
+@ls \
+	[<path>]
+ . ls <path>.
 ```

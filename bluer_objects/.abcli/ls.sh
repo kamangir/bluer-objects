@@ -2,7 +2,7 @@
 
 function bluer_objects_ls() {
     local options=$1
-    local where=$(bluer_ai_option_choice "$options" cloud,local local)
+    local where=$(bluer_ai_option_choice "$options" cloud,local)
     local objects=$(bluer_ai_option_int "$options" objects 0)
 
     if [[ "$objects" == 1 ]]; then
@@ -11,6 +11,11 @@ function bluer_objects_ls() {
             --where $where \
             "${@:2}"
 
+        return
+    fi
+
+    if [[ -z "$where" ]]; then
+        ls -1 "$@"
         return
     fi
 
