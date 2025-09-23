@@ -42,9 +42,30 @@ def help_ls(
         mono=mono,
     )
 
+    # ---
+
+    args = [
+        "[--delim <space>]",
+        "[--log <0>]",
+        "[--prefix <prefix>]",
+    ]
+
+    usage_3 = show_usage(
+        [
+            "@ls",
+            "[<path>]",
+        ]
+        + args,
+        "ls <path>.",
+        mono=mono,
+    )
+
+    # ---
+
     return "\n".join(
         [
             usage_1,
             usage_2,
+            usage_3,
         ]
     )

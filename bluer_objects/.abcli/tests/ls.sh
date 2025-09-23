@@ -25,4 +25,8 @@ function test_bluer_objects_ls() {
     bluer_ai_hr
 
     bluer_objects_ls local,objects --prefix 2025-09
+    [[ $? -ne 0 ]] && return 1
+    bluer_ai_hr
+
+    bluer_objects_ls $abcli_path_git
 }
