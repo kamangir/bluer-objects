@@ -24,4 +24,6 @@ def test_graphics_gif_generate_animated_gif(
         list_of_images,
         objects.path_of("test.gif", test_object),
         scale=scale,
+        frame_count=10,
+        frame_duration=100,
     )

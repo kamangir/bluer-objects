@@ -4,6 +4,7 @@
 @gif \
 	[~download,dryrun,~upload] \
 	[.|<object-name>] \
+	[--frame_count <100>] \
 	[--frame_duration <150>] \
 	[--output_filename <object-name>.gif] \
 	[--scale <1>] \
