@@ -38,6 +38,7 @@ parser.add_argument(
     "--frame_count",
     default=-1,
     type=int,
+    help="-1: all",
 )
 parser.add_argument(
     "--frame_duration",
