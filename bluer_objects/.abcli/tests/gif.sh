@@ -12,6 +12,7 @@ function test_bluer_objects_gif() {
     bluer_objects_gif \
         ~upload,$options \
         $source_object_name \
+        --frame_count 20 \
         --frame_duration 200 \
         --output_filename test.gif \
         --scale 2 \

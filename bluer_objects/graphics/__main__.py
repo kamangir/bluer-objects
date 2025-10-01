@@ -35,6 +35,12 @@ parser.add_argument(
     help="blank: <object-name>.gif",
 )
 parser.add_argument(
+    "--frame_count",
+    default=-1,
+    type=int,
+    help="-1: all",
+)
+parser.add_argument(
     "--frame_duration",
     default=150,
     type=int,
@@ -72,6 +78,7 @@ if args.task == "generate_animated_gif":
             ),
             object_name=args.object_name,
         ),
+        frame_count=args.frame_count,
         frame_duration=args.frame_duration,
         scale=args.scale,
     )

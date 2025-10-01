@@ -15,12 +15,16 @@ NAME = module.name(__file__, NAME)
 def generate_animated_gif(
     list_of_images: List[str],
     output_filename: str,
+    frame_count: int = -1,
     frame_duration: int = 150,
     scale: int = 1,
     log: bool = True,
 ) -> bool:
     if not list_of_images:
         return True
+
+    if frame_count != -1:
+        list_of_images = list_of_images[:frame_count]
 
     max_width = 0
     max_height = 0
@@ -67,7 +71,7 @@ def generate_animated_gif(
     except Exception:
         success = False
 
-    message = "{}.generate_animated_gif({}x{}x{}) -scale={}-> {} @ {:.2f}ms".format(
+    message = "{}.generate_animated_gif({}x{}x{}) -scale={}-> {} @ {:.2f}ms{}".format(
         NAME,
         len(list_of_images),
         height,
@@ -75,6 +79,7 @@ def generate_animated_gif(
         scale,
         output_filename,
         frame_duration,
+        "" if frame_count == -1 else " [{} frame(s)]".format(frame_count),
     )
 
     if success:
