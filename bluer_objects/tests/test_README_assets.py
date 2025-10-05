@@ -3,12 +3,18 @@ from bluer_objects.README.consts import assets_path
 
 
 @pytest.mark.parametrize(
-    ["suffix", "volume"],
+    ["suffix"],
     [
         [
-            "this",
-            "that/which",
+            "",
+            "2",
+            2,
         ],
+    ],
+)
+@pytest.mark.parametrize(
+    ["volume"],
+    [
         [
             "",
             "2",
