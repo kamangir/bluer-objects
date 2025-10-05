@@ -15,4 +15,7 @@ def assets_path(
     suffix: str,
     volume: Union[str, int] = "",
 ) -> str:
-    return f"{assets}{str(volume)}/{suffix}"
+    return "{}/{}".format(
+        asset_volume(volume=volume),
+        suffix,
+    )
