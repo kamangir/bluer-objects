@@ -12,7 +12,7 @@ assets2 = asset_volume(volume="2")
 
 
 def assets_path(
-    path: str,
+    suffix: str,
     volume: Union[str, int] = "",
 ) -> str:
-    return f"{assets}{str(volume)}/{path}"
+    return f"{assets}{str(volume)}/{suffix}"
