@@ -1,7 +1,7 @@
 from typing import Union
 
 github_kamangir = "https://github.com/kamangir"
-designs_repo = f"{github_kamangir}/designs/"
+designs_repo = f"{github_kamangir}/bluer-designs/"
 
 
 def designs_url(suffix: str) -> str:
