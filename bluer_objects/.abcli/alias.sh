@@ -2,6 +2,8 @@
 
 alias @ai=bluer_ai
 
+alias @assets=bluer_objects_assets
+
 alias @create_test_asset=bluer_objects_create_test_asset
 
 alias @download=bluer_objects_download

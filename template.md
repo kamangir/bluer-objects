@@ -12,6 +12,7 @@ pip install bluer-objects
 
 # aliases
 
+[@assets](./bluer_objects/docs/aliases/assets.md), 
 [@clone](./bluer_objects/docs/aliases/clone.md), 
 [@download](./bluer_objects/docs/aliases/download.md), 
 [@gif](./bluer_objects/docs/aliases/gif.md), 

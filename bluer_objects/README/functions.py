@@ -42,6 +42,7 @@ def build(
     help_function: Union[Callable[[List[str]], str], None] = None,
     legacy_mode: bool = True,
     assets_repo: str = "kamangir/assets",
+    download: bool = True,
 ) -> bool:
     if path:
         if path.endswith(".md"):
@@ -103,7 +104,7 @@ def build(
                 object_name,
                 key,
                 {},
-                download=True,
+                download=download,
             )
 
             logger.info(f"metadata[{object_name_and_key}] = {value}")
