@@ -30,18 +30,29 @@ def build_me() -> bool:
             ),
         )
         for path in [
+            "../docs/aliases",
+            "../docs",
             "../..",
             ".",
-            # aliases
-            "../docs/aliases/clone.md",
-            "../docs/aliases/download.md",
-            "../docs/aliases/gif.md",
-            "../docs/aliases/host.md",
-            "../docs/aliases/ls.md",
-            "../docs/aliases/metadata.md",
-            "../docs/aliases/mlflow.md",
-            "../docs/aliases/upload.md",
-            # modules
-            "../mlflow/lock",
+        ]
+        + [
+            f"../docs/aliases/{alias}.md"
+            for alias in [
+                "assets",
+                "clone",
+                "download",
+                "gif",
+                "host",
+                "ls",
+                "metadata",
+                "mlflow",
+                "upload",
+            ]
+        ]
+        + [
+            f"../mlflow/{module_name}"
+            for module_name in [
+                "lock",
+            ]
         ]
     )
