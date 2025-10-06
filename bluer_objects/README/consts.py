@@ -1,6 +1,11 @@
 from typing import Union
 
 github_kamangir = "https://github.com/kamangir"
+designs_repo = f"{github_kamangir}/designs/"
+
+
+def designs_url(suffix: str) -> str:
+    return f"{designs_repo}/blob/main/{suffix}"
 
 
 def asset_volume(volume: Union[str, int] = "") -> str:
