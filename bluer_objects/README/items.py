@@ -69,7 +69,7 @@ def Items_of_dict(
         [
             {
                 "name": thing_name,
-                "marquee": info["marquee"],
+                "marquee": info.get("marquee", ""),
                 "url": f"./{thing_name}.md",
             }
             for thing_name, info in dict_of_things.items()
