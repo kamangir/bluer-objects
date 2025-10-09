@@ -76,7 +76,7 @@ def Items_of_dict(
                 for thing_name, info in dict_of_things.items()
                 if thing_name != "template"
             ],
-            key=lambda x: x["name"],
+            key=lambda x: x["order"] if "order" in x else x["name"],
         )
     )
 
