@@ -7,10 +7,12 @@
  . get $abcli_host_name.
 @host \
 	reboot \
-	[dryrun]
- . reboot host.
+	[dryrun,rpi] \
+	[<machine-name>]
+ . reboot.
 @host \
 	shutdown \
-	[dryrun]
- . shutdown host.
+	[dryrun,rpi] \
+	[<machine-name>]
+ . shutdown.
 ```
