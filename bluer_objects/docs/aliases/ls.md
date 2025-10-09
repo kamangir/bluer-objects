@@ -8,8 +8,7 @@
 	[--log <0>]
  . ls <object-name>.
 @ls \
-	[cloud|local] \
-	objects \
+	[cloud|local,objects] \
 	[--delim <space>] \
 	[--log <0>] \
 	[--prefix <prefix>]
