@@ -66,15 +66,18 @@ def Items_of_dict(
     dict_of_things: Dict[str, Dict],
 ) -> List[str]:
     return Items(
-        [
-            {
-                "name": thing_name,
-                "marquee": info.get("marquee", ""),
-                "url": f"./{thing_name}.md",
-            }
-            for thing_name, info in dict_of_things.items()
-            if thing_name != "template"
-        ]
+        sorted(
+            [
+                {
+                    "name": thing_name,
+                    "marquee": info.get("marquee", ""),
+                    "url": f"./{thing_name}.md",
+                }
+                for thing_name, info in dict_of_things.items()
+                if thing_name != "template"
+            ],
+            key=lambda x: x["name"],
+        )
     )
 
 
