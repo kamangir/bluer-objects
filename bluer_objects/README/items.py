@@ -59,3 +59,33 @@ def Items(
         output = sorted(output)
 
     return output
+
+
+# dict of {name, url, marquee, description}
+def Items_of_dict(
+    dict_of_things: Dict[str, Dict],
+) -> List[str]:
+    return Items(
+        [
+            {
+                "name": thing_name,
+                "marquee": info["marquee"],
+                "url": f"./{thing_name}.md",
+            }
+            for thing_name, info in dict_of_things.items()
+            if thing_name != "template"
+        ]
+    )
+
+
+# dict of {name, url, marquee, description}
+def list_of_dict(
+    dict_of_things: Dict[str, Dict],
+) -> List[str]:
+    return sorted(
+        [
+            f"- [{thing_name}](./{thing_name}.md)"
+            for thing_name in dict_of_things
+            if thing_name != "template"
+        ]
+    )
