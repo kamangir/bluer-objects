@@ -24,15 +24,16 @@ def help_reboot(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = xtra("dryrun", mono=mono)
+    options = xtra("dryrun,rpi", mono=mono)
 
     return show_usage(
         [
             "@host",
             "reboot",
             f"[{options}]",
+            "[<machine-name>]",
         ],
-        "reboot host.",
+        "reboot.",
         mono=mono,
     )
 
@@ -41,15 +42,16 @@ def help_shutdown(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = xtra("dryrun", mono=mono)
+    options = xtra("dryrun,rpi", mono=mono)
 
     return show_usage(
         [
             "@host",
             "shutdown",
             f"[{options}]",
+            "[<machine-name>]",
         ],
-        "shutdown host.",
+        "shutdown.",
         mono=mono,
     )
 
