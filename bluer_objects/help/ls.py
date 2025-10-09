@@ -34,8 +34,7 @@ def help_ls(
     usage_2 = show_usage(
         [
             "@ls",
-            "[cloud|local]",
-            "objects",
+            "[cloud|local,objects]",
         ]
         + args,
         "ls objects.",
