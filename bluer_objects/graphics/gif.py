@@ -30,13 +30,12 @@ def generate_animated_gif(
     max_height = 0
     frames = []
     for filename in tqdm(list_of_images):
-        image = Image.open(filename)
+        with Image.open(filename) as image:
+            frames.append(image.copy())
 
-        frames.append(image)
-
-        width, height = image.size
-        max_width = max(max_width, width)
-        max_height = max(max_height, height)
+            width, height = image.size
+            max_width = max(max_width, width)
+            max_height = max(max_height, height)
 
     padded_frames = []
     for image in frames:
