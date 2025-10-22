@@ -12,7 +12,7 @@ function bluer_objects_file() {
 
     local filename=$3
 
-    $prefix python3 -m bluer_objects.file \
+    $prefix $(which python) -m bluer_objects.file \
         "$task" \
         --filename "$filename" \
         "${@:4}"
