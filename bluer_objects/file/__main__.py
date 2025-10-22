@@ -88,7 +88,8 @@ if args.task == "replace":
 
         if success and args.cat:
             for line in content:
-                logger.info(line)
+                if any(this in line for this in args.this.split("+")):
+                    logger.info(line)
 
 elif args.task == "size":
     size = file.size(args.filename)
