@@ -38,6 +38,10 @@ function test_bluer_objects_help() {
         \
         "@ls" \
         \
+        "@file" \
+        "@file replace" \
+        "@file size" \
+        \
         "@host" \
         "@host get" \
         "@host reboot" \

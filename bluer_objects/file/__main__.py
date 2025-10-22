@@ -31,9 +31,10 @@ parser.add_argument(
     help="<that-1+that-2+that-3>",
 )
 parser.add_argument(
-    "--size",
+    "--pretty",
     type=int,
-    default=16,
+    default=1,
+    help="0 | 1",
 )
 args = parser.parse_args()
 
@@ -48,7 +49,8 @@ if args.task == "replace":
 
         success = file.save_text(args.filename, content)
 elif args.task == "size":
-    print(string.pretty_bytes(file.size(args.filename)))
+    size = file.size(args.filename)
+    print(string.pretty_bytes(size) if args.pretty == 1 else size)
     success = True
 else:
     success = None

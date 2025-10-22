@@ -41,6 +41,7 @@ def build_me() -> bool:
                 "assets",
                 "clone",
                 "download",
+                "file",
                 "gif",
                 "host",
                 "ls",
