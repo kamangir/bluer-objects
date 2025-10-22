@@ -2,6 +2,7 @@
 
 ```bash
 @file \
+	[sudo] \
 	replace \
 	<filename> \
 	--cat 1 \
@@ -11,6 +12,7 @@
 	--whole_line 1
  . <this> -> <that> in <filename>.
 @file \
+	[-] \
 	size \
 	<filename> \
 	--pretty 0

@@ -7,6 +7,8 @@ def help_replace(
     tokens: List[str],
     mono: bool,
 ) -> str:
+    options = xtra("sudo", mono=mono)
+
     args = [
         "--cat 1",
         "--save 0",
@@ -18,6 +20,7 @@ def help_replace(
     return show_usage(
         [
             "@file",
+            f"[{options}]",
             "replace",
             "<filename>",
         ]
@@ -31,6 +34,8 @@ def help_size(
     tokens: List[str],
     mono: bool,
 ) -> str:
+    options = "-"
+
     args = [
         "--pretty 0",
     ]
@@ -38,6 +43,7 @@ def help_size(
     return show_usage(
         [
             "@file",
+            f"[{options}]",
             "size",
             "<filename>",
         ]

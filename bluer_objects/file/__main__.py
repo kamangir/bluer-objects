@@ -64,7 +64,9 @@ args = parser.parse_args()
 
 success = False
 if args.task == "replace":
-    logger.info(f"{NAME}.{args.task}: {args.this} -> {args.that} in {args.filename}")
+    logger.info(
+        f'{NAME}.{args.task}: "{args.this}" -> "{args.that}" in {args.filename}'
+    )
 
     success, content = file.load_text(
         args.filename,

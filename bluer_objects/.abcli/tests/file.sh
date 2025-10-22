@@ -12,39 +12,53 @@ function test_file_replace() {
     cp -v \
         $(test_file_asset) \
         $filename
+    [[ $? -ne 0 ]] && return 1
 
-    bluer_ai_eval ,$options \
-        bluer_objects_file replace \
+    bluer_objects_file - \
+        replace \
         $filename \
         --this function+local \
         --that FUNCTION+LOCAL \
+        --cat 1 \
         "${@:2}"
+    [[ $? -ne 0 ]] && return 1
+    bluer_ai_hr
 
-    bluer_ai_cat $filename
+    # ---
 
+    bluer_objects_file - \
+        replace \
+        $filename \
+        --this "FUNCTION test_file_asset() {+echo" \
+        --that ":)+:(" \
+        --cat 1 \
+        --whole_line 1 \
+        "${@:2}"
+    [[ $? -ne 0 ]] && return 1
     rm -v $filename
 }
 
 function test_file_size() {
     local options=$1
 
-    # ---
-
-    local size=$(bluer_objects_file size \
+    local size=$(bluer_objects_file - \
+        size \
         $(test_file_asset))
 
     bluer_ai_assert \
         "$size" \
-        "0.85 kB"
+        "1.18 kB"
     [[ $? -ne 0 ]] && return 1
+    bluer_ai_hr
 
     # ---
 
-    local size=$(bluer_objects_file size \
+    local size=$(bluer_objects_file - \
+        size \
         $(test_file_asset) \
         --pretty 0)
 
     bluer_ai_assert \
         "$size" \
-        "867"
+        "1209"
 }
