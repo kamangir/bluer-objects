@@ -31,24 +31,69 @@ parser.add_argument(
     help="<that-1+that-2+that-3>",
 )
 parser.add_argument(
-    "--size",
+    "--pretty",
     type=int,
-    default=16,
+    default=1,
+    help="0 | 1",
+)
+parser.add_argument(
+    "--save",
+    type=int,
+    default=1,
+    help="0 | 1",
+)
+parser.add_argument(
+    "--whole_line",
+    type=int,
+    default=0,
+    help="0 | 1",
+)
+parser.add_argument(
+    "--log",
+    type=int,
+    default=0,
+    help="0 | 1",
+)
+parser.add_argument(
+    "--cat",
+    type=int,
+    default=0,
+    help="0 | 1",
 )
 args = parser.parse_args()
 
 success = False
 if args.task == "replace":
-    logger.info(f"{NAME}.{args.task}: {args.this} -> {args.that} in {args.filename}")
+    logger.info(
+        f'{NAME}.{args.task}: "{args.this}" -> "{args.that}" in {args.filename}'
+    )
 
-    success, content = file.load_text(args.filename)
+    success, content = file.load_text(
+        args.filename,
+        log=args.log == 1,
+    )
     if success:
         for this, that in tqdm(zip(args.this.split("+"), args.that.split("+"))):
-            content = [line.replace(this, that) for line in content]
+            if args.whole_line:
+                content = [that if line == this else line for line in content]
+            else:
+                content = [line.replace(this, that) for line in content]
 
-        success = file.save_text(args.filename, content)
+        if args.save == 1:
+            success = file.save_text(
+                args.filename,
+                content,
+                log=args.log == 1,
+            )
+
+        if success and args.cat:
+            for line in content:
+                if any(this in line for this in args.this.split("+")):
+                    logger.info(line)
+
 elif args.task == "size":
-    print(string.pretty_bytes(file.size(args.filename)))
+    size = file.size(args.filename)
+    print(string.pretty_bytes(size) if args.pretty == 1 else size)
     success = True
 else:
     success = None

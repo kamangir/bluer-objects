@@ -6,6 +6,7 @@ from bluer_objects.help.clone import help_clone
 from bluer_objects.help.create_test_asset import help_create_test_asset
 from bluer_objects.help.download import help_download
 from bluer_objects.help.gif import help_functions as help_gif
+from bluer_objects.help.file import help_functions as help_file
 from bluer_objects.help.host import help_functions as help_host
 from bluer_objects.help.ls import help_ls
 from bluer_objects.help.metadata import help_functions as help_metadata
@@ -21,6 +22,7 @@ help_functions.update(
         "clone": help_clone,
         "create_test_asset": help_create_test_asset,
         "download": help_download,
+        "file": help_file,
         "gif": help_gif,
         "host": help_host,
         "ls": help_ls,
