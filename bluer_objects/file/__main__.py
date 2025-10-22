@@ -84,7 +84,7 @@ if args.task == "replace":
                 log=args.log == 1,
             )
 
-        if args.cat:
+        if success and args.cat:
             for line in content:
                 logger.info(line)
 
