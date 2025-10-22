@@ -21,6 +21,8 @@ function test_file_replace() {
         "${@:2}"
 
     bluer_ai_cat $filename
+
+    rm -v $filename
 }
 
 function test_file_size() {
