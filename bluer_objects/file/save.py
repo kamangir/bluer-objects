@@ -30,10 +30,15 @@ def finish_saving(
     success: bool,
     message: str,
     log: bool = True,
-    e: Union[Exception, None] = None,
+    exception: Union[Exception, None] = None,
 ) -> bool:
     if not success:
-        crash_report("{}: failed: {}".format(message, e))
+        crash_report(
+            "{}: failed: {}".format(
+                message,
+                exception,
+            )
+        )
     elif log:
         logger.info(message)
 
@@ -247,13 +252,14 @@ def save_yaml(
     if not prepare_for_saving(filename):
         return False
 
-    e = None
+    exception = None
     success = True
     try:
         with open(filename, "w") as f:
             yaml.dump(data, f)
     except Exception as e:
         success = False
+        exception = e
 
     return finish_saving(
         success,
@@ -263,5 +269,5 @@ def save_yaml(
             filename,
         ),
         log,
-        e,
+        exception,
     )
