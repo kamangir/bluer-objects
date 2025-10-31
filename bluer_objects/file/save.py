@@ -251,6 +251,9 @@ def save_yaml(
         with open(filename, "w") as f:
             yaml.dump(data, f)
     except:
+        import ipdb
+
+        ipdb.set_trace()
         success = False
 
     return finish_saving(
