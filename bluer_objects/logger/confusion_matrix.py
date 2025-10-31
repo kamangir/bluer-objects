@@ -3,7 +3,6 @@ import numpy as np
 from typing import List
 
 from bluer_objects.graphics.signature import justify_text
-from bluer_objects.host import signature
 from bluer_objects import file
 
 
@@ -18,8 +17,9 @@ def log_confusion_matrix(
     y_name: str = "label",
     line_width: int = 80,
     log: bool = True,
+    figsize: tuple = (10, 10),
 ) -> bool:
-    fig, ax = plt.subplots(figsize=(10, 10))
+    fig, ax = plt.subplots(figsize=figsize)
     cax = ax.imshow(
         confusion_matrix,
         interpolation="nearest",
@@ -35,7 +35,7 @@ def log_confusion_matrix(
     )
     ax.set_xlabel(
         justify_text(
-            " | ".join([x_name] + footer + signature()),
+            " | ".join([x_name] + footer),
             line_width=line_width,
             return_str=True,
         )

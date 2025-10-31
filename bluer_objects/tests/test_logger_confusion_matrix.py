@@ -2,7 +2,6 @@ import numpy as np
 
 from bluer_objects import objects
 from bluer_objects.logger.confusion_matrix import log_confusion_matrix
-from bluer_objects.tests.test_graphics import test_image
 
 
 def test_logger_confusion_matrix():
