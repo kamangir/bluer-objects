@@ -1,4 +1,4 @@
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Union
 import yaml
 import numpy as np
 import json
@@ -30,9 +30,10 @@ def finish_saving(
     success: bool,
     message: str,
     log: bool = True,
+    e: Union[Exception, None] = None,
 ) -> bool:
     if not success:
-        crash_report(f"{message}: failed.")
+        crash_report("{}: failed: {}".format(message, e))
     elif log:
         logger.info(message)
 
@@ -246,14 +247,12 @@ def save_yaml(
     if not prepare_for_saving(filename):
         return False
 
+    e = None
     success = True
     try:
         with open(filename, "w") as f:
             yaml.dump(data, f)
-    except:
-        import ipdb
-
-        ipdb.set_trace()
+    except Exception as e:
         success = False
 
     return finish_saving(
@@ -262,6 +261,7 @@ def save_yaml(
             NAME,
             ", ".join(data.keys()),
             filename,
+            e,
         ),
         log,
     )
