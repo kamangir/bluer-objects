@@ -261,7 +261,7 @@ def save_yaml(
             NAME,
             ", ".join(data.keys()),
             filename,
-            e,
         ),
         log,
+        e,
     )
