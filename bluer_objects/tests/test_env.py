@@ -13,7 +13,9 @@ def test_required_env():
     test_bluer_ai_env()
 
 
-def test_bluer_objects_env():
+def test_bluer_objects_env(
+    webdav: bool = True,
+):
     assert env.ABCLI_MLFLOW_EXPERIMENT_PREFIX
 
     assert env.S3_STORAGE_BUCKET
@@ -38,8 +40,9 @@ def test_bluer_objects_env():
     assert isinstance(env.MLFLOW_LOCK_WAIT_FOR_EXCLUSIVITY, int)
     assert env.MLFLOW_LOCK_WAIT_FOR_EXCLUSIVITY > 0
 
-    assert env.WEBDAV_HOSTNAME
-    assert env.WEBDAV_LOGIN
-    assert env.WEBDAV_PASSWORD
+    if webdav:
+        assert env.WEBDAV_HOSTNAME
+        assert env.WEBDAV_LOGIN
+        assert env.WEBDAV_PASSWORD
 
     assert env.BLUER_OBJECTS_TEST_OBJECT
