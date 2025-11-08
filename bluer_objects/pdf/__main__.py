@@ -16,6 +16,10 @@ parser.add_argument(
     help="convert",
 )
 parser.add_argument(
+    "--docs_path",
+    type=str,
+)
+parser.add_argument(
     "--module_name",
     type=str,
 )
@@ -24,7 +28,7 @@ parser.add_argument(
     type=str,
 )
 parser.add_argument(
-    "--suffix",
+    "--suffixes",
     type=str,
 )
 args = parser.parse_args()
@@ -32,9 +36,10 @@ args = parser.parse_args()
 success = False
 if args.task == "convert":
     success = convert(
+        docs_path=args.docs_path,
         module_name=args.module_name,
+        list_of_suffixes=args.suffixes.split(","),
         object_name=args.object_name,
-        suffix=args.suffix,
     )
 else:
     success = None

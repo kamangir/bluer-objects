@@ -3,8 +3,9 @@
 ```bash
 @pdf \
 	convert \
+	[install] \
 	<module-name> \
-	<docs/this/that.md> \
+	<.,this,this/that.md> \
 	[-|<object-name>]
  . md -> pdf.
 ```

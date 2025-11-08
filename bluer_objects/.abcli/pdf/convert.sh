@@ -1,20 +1,28 @@
 #! /usr/bin/env bash
 
 function bluer_objects_pdf_convert() {
-    local module_name=${1:-bluer_ai}
+    [[ "$install" == 1 ]] &&
+        pip install pypandoc
+
+    local module_name=${2:-bluer_ai}
     if alias "$module_name" &>/dev/null; then
         module_name=$(alias "$module_name" | sed -E "s/^alias $module_name='(.*)'$/\1/")
     fi
 
-    local object_name=$(bluer_ai_clarify_object $2 pdf-$(bluer_ai_string_timestamp))
+    local docs_path=$(python3 -m $module_name locate)/docs/
 
-    local suffix=${3:-docs/README.md}
+    local suffixes=${3:-.}
+
+    local object_name=$(bluer_ai_clarify_object $4 pdf-$(bluer_ai_string_timestamp))
+
+    bluer_ai_log "$module_name/$suffixes -> $object_name ..."
 
     bluer_ai_eval dryrun=$do_dryrun \
         python3 -m bluer_objects.pdf \
         convert \
+        --docs_path $docs_path \
         --module_name $module_name \
         --object_name $object_name \
-        --suffix $suffix \
-        "${@:3}"
+        --suffixes $suffixes \
+        "${@:5}"
 }

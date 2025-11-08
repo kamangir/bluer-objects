@@ -11,12 +11,15 @@ def help_convert(
     tokens: List[str],
     mono: bool,
 ) -> str:
+    options = xtra("install", mono=mono)
+
     return show_usage(
         [
             "@pdf",
             "convert",
+            f"[{options}]",
             "<module-name>",
-            "<docs/this/that.md>",
+            "<.,this,this/that.md>",
             "[-|<object-name>]",
         ],
         "md -> pdf.",
