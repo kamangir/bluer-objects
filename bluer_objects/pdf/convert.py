@@ -1,11 +1,13 @@
 from tqdm import tqdm
 from typing import List
 import os
+import pypandoc
 
 from blueness import module
+from bluer_options.logger import crash_report
 
 from bluer_objects import NAME
-from bluer_objects.env import abcli_path_git
+from bluer_objects import objects
 from bluer_objects.logger import logger
 
 
@@ -32,10 +34,24 @@ def convert(
 
         if not suffix.endswith(".md"):
             suffix = os.path.join(suffix, "README.md")
-        filename = os.path.join(docs_path, suffix)
+        input_filename = os.path.join(docs_path, suffix)
+        outputs_filename = objects.path_of(
+            filename=f"{module_name}/{suffix}",
+            object_name=object_name,
+        )
 
-        
+        logger.info(f"{input_filename} -> {outputs_filename}")
 
-        logger.info("🪄")
+        try:
+            pypandoc.convert_text(
+                open(input_filename).read(),
+                "pdf",
+                format="md",
+                outputfile=outputs_filename,
+                extra_args=["--standalone"],
+            )
+        except Exception as e:
+            crash_report(e)
+            return False
 
     return True

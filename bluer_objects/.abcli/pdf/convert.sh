@@ -1,8 +1,10 @@
 #! /usr/bin/env bash
 
 function bluer_objects_pdf_convert() {
-    [[ "$install" == 1 ]] &&
+    if [[ "$install" == 1 ]]; then
         pip install pypandoc
+        brew install pandoc
+    fi
 
     local module_name=${2:-bluer_ai}
     if alias "$module_name" &>/dev/null; then
