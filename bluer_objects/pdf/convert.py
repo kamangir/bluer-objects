@@ -43,13 +43,16 @@ def convert(
         logger.info(f"{input_filename} -> {outputs_filename}")
 
         try:
-            pypandoc.convert_text(
-                open(input_filename).read(),
-                "pdf",
-                format="md",
-                outputfile=outputs_filename,
-                extra_args=["--standalone"],
-            )
+            with open(input_filename, "r", encoding="utf-8") as f:
+                pypandoc.convert_text(
+                    f.read(),
+                    "pdf",
+                    format="md",
+                    outputfile=outputs_filename,
+                    extra_args=[
+                        "--standalone",
+                    ],
+                )
         except Exception as e:
             crash_report(e)
             return False
