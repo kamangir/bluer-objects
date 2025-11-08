@@ -7,7 +7,7 @@ from blueness import module
 from bluer_options.logger import crash_report
 
 from bluer_objects import NAME
-from bluer_objects import objects
+from bluer_objects import file, objects
 from bluer_objects.logger import logger
 
 
@@ -36,7 +36,10 @@ def convert(
             suffix = os.path.join(suffix, "README.md")
         input_filename = os.path.join(docs_path, suffix)
         outputs_filename = objects.path_of(
-            filename=f"{module_name}/{suffix}",
+            filename=file.add_extension(
+                f"{module_name}/{suffix}",
+                "pdf",
+            ),
             object_name=object_name,
         )
 
