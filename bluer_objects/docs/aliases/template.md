@@ -9,5 +9,6 @@ title:::
 - [@ls](./ls.md)
 - [@metadata](./metadata.md)
 - [@mlflow](./mlflow.md)
+- [@pdf](./pdf.md)
 - [@upload](./upload.md)
 

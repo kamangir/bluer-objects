@@ -33,6 +33,8 @@ alias @mysql=abcli_mysql
 
 alias @objects=bluer_objects
 
+alias @pdf=bluer_objects_pdf
+
 alias @random=bluer_ai_string_random
 
 alias @select=bluer_ai_select

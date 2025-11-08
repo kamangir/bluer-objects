@@ -20,6 +20,7 @@ pip install bluer-objects
 [@ls](./bluer_objects/docs/aliases/ls.md), 
 [@metadata](./bluer_objects/docs/aliases/metadata.md), 
 [@mlflow](./bluer_objects/docs/aliases/mlflow.md), 
+[@pdf](./bluer_objects/docs/aliases/pdf.md), 
 [@upload](./bluer_objects/docs/aliases/upload.md).
 
 ---

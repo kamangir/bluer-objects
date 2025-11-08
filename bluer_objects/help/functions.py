@@ -11,6 +11,7 @@ from bluer_objects.help.host import help_functions as help_host
 from bluer_objects.help.ls import help_ls
 from bluer_objects.help.metadata import help_functions as help_metadata
 from bluer_objects.help.mlflow import help_functions as help_mlflow
+from bluer_objects.help.pdf import help_functions as help_pdf
 from bluer_objects.help.upload import help_upload
 from bluer_objects.help.web import help_functions as help_web
 
@@ -28,6 +29,7 @@ help_functions.update(
         "ls": help_ls,
         "metadata": help_metadata,
         "mlflow": help_mlflow,
+        "pdf": help_pdf,
         "upload": help_upload,
         "web": help_web,
     }

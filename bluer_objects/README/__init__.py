@@ -47,6 +47,7 @@ def build_me() -> bool:
                 "ls",
                 "metadata",
                 "mlflow",
+                "pdf",
                 "upload",
             ]
         ]
