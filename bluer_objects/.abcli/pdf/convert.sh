@@ -4,6 +4,8 @@ function bluer_objects_pdf_convert() {
     if [[ "$install" == 1 ]]; then
         pip install pypandoc
         brew install pandoc
+
+        brew install wkhtmltopdf
     fi
 
     local module_name=${2:-bluer_ai}

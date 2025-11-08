@@ -2,6 +2,7 @@ from tqdm import tqdm
 from typing import List
 import os
 import pypandoc
+import subprocess
 
 from blueness import module
 from bluer_options.logger import crash_report
@@ -34,28 +35,42 @@ def convert(
 
         if not suffix.endswith(".md"):
             suffix = os.path.join(suffix, "README.md")
-        input_filename = os.path.join(docs_path, suffix)
-        outputs_filename = objects.path_of(
-            filename=file.add_extension(
-                f"{module_name}/{suffix}",
-                "pdf",
+        filename_md = os.path.join(docs_path, suffix)
+        filename_pdf = file.add_extension(
+            objects.path_of(
+                filename=f"docs/{module_name}/{suffix}",
+                object_name=object_name,
             ),
-            object_name=object_name,
+            "pdf",
+        )
+        filename_html = file.add_extension(
+            filename_pdf,
+            "html",
         )
 
-        logger.info(f"{input_filename} -> {outputs_filename}")
+        if file.exists(filename_pdf):
+            logger.info(f"✅ {filename_pdf}")
+            continue
+
+        logger.info(f"{filename_md} -> {filename_pdf}")
 
         try:
-            with open(input_filename, "r", encoding="utf-8") as f:
-                pypandoc.convert_text(
-                    f.read(),
-                    "pdf",
-                    format="md",
-                    outputfile=outputs_filename,
-                    extra_args=[
-                        "--standalone",
-                    ],
-                )
+            pypandoc.convert_file(
+                filename_md,
+                "html",
+                outputfile=filename_html,
+            )
+
+            subprocess.run(
+                [
+                    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+                    "--headless",
+                    "--disable-gpu",
+                    f"--print-to-pdf={filename_pdf}",
+                    os.path.abspath(filename_html),
+                ],
+                check=True,
+            )
         except Exception as e:
             crash_report(e)
             return False
