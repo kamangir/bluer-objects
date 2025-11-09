@@ -20,7 +20,7 @@ setup(
         f"{NAME}.mlflow",
         f"{NAME}.mlflow.lock",
         f"{NAME}.pdf",
-        f"{NAME}.convert",
+        f"{NAME}.pdf.convert",
         f"{NAME}.README",
         f"{NAME}.storage",
         f"{NAME}.testing",
