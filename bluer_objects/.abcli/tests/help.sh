@@ -29,6 +29,9 @@ function test_bluer_objects_help() {
         "@objects test" \
         "@objects test list" \
         \
+        "@pdf" \
+        "@pdf convert" \
+        \
         "@cp" \
         \
         "@download" \

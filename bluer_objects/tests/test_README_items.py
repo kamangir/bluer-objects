@@ -5,7 +5,11 @@ from bluer_objects import env
 
 dict_of_validations = dict_of_validations = {
     "village-1": {
-        "ugv_name": "arzhang",
+        "ugv_name": [
+            "arzhang1:ugv",
+            "arzhang2:ugv",
+            "arzhang3:anchor",
+        ],
         "items": ImageItems(
             {
                 f"{assets2}/arzhang/20250905_120526.jpg": "",
@@ -19,7 +23,11 @@ dict_of_validations = dict_of_validations = {
         "marquee": f"{assets}/2025-09-05-11-48-27-d56azo/VID-20250905-WA0014_1.gif",
     },
     "village-2": {
-        "ugv_name": "arzhang",
+        "ugv_name": [
+            "arzhang1:ugv",
+            "arzhang2:ugv",
+            "arzhang3:anchor",
+        ],
         "items": ImageItems(
             {
                 f"{assets2}/arzhang/20250922_094548.jpg": "",
