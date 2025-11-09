@@ -128,7 +128,7 @@ def convert(
     if combine:
         logger.info(f"combining {len(list_of_pdfs)} pdf(s)...")
         combined_filename = objects.path_of(
-            filename=f"{object_name}.pdf",
+            filename="release.pdf",
             object_name=object_name,
         )
 
