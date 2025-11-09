@@ -3,7 +3,7 @@
 ```bash
 @pdf \
 	convert \
-	[install,combine] \
+	[install,combine,~compress] \
 	<module-name> \
 	<.,this,this/that.md> \
 	[-|<object-name>]

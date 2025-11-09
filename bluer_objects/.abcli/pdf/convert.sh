@@ -2,15 +2,18 @@
 
 function bluer_objects_pdf_convert() {
     local options=$1
-    local install=$(bluer_ai_option_int "$options" install 0)
-    local combine=$(bluer_ai_option_int "$options" combine 0)
-    if [[ "$install" == 1 ]]; then
+    local do_install=$(bluer_ai_option_int "$options" install 0)
+    local do_combine=$(bluer_ai_option_int "$options" combine 0)
+    local do_compress=$(bluer_ai_option_int "$options" compress 1)
+    if [[ "$do_install" == 1 ]]; then
         pip install pypandoc
         brew install pandoc
 
         brew install wkhtmltopdf
 
         pip install PyPDF2
+
+        brew install ghostscript
     fi
 
     local module_name=${2:-bluer_ai}
@@ -33,6 +36,27 @@ function bluer_objects_pdf_convert() {
         --module_name $module_name \
         --object_name $object_name \
         --suffixes $suffixes \
-        --combine $combine \
+        --combine $do_combine \
         "${@:5}"
+    [[ $? -ne 0 ]] && return 1
+
+    if [[ "$do_compress" == 1 ]]; then
+        bluer_ai_log "compressing..."
+
+        local object_path=$ABCLI_OBJECT_ROOT/$object_name
+        mv -v \
+            $object_path/$object_name.pdf \
+            $object_path/_$object_name.pdf
+
+        gs -sDEVICE=pdfwrite \
+            -dCompatibilityLevel=1.4 \
+            -dPDFSETTINGS=/ebook \
+            -dNOPAUSE \
+            -dBATCH \
+            -sOutputFile=$object_path/$object_name.pdf \
+            $object_path/_$object_name.pdf
+        [[ $? -ne 0 ]] && return 1
+
+        rm -v $object_path/_$object_name.pdf
+    fi
 }

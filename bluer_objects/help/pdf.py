@@ -7,7 +7,7 @@ def help_convert(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = "install,combine"
+    options = "install,combine,~compress"
 
     return show_usage(
         [
