@@ -19,6 +19,8 @@ setup(
         f"{NAME}.metadata",
         f"{NAME}.mlflow",
         f"{NAME}.mlflow.lock",
+        f"{NAME}.pdf",
+        f"{NAME}.pdf.convert",
         f"{NAME}.README",
         f"{NAME}.storage",
         f"{NAME}.testing",

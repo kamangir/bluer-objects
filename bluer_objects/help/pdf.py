@@ -15,7 +15,7 @@ def help_convert(
             "convert",
             f"[{options}]",
             "<module-name>",
-            "<.,this,this/that.md>",
+            "<.,this,this/that.md,this/that.jpg,this/that.pdf>",
             "[-|<object-name>]",
         ],
         "md -> pdf.",

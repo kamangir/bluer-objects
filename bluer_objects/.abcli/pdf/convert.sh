@@ -45,19 +45,19 @@ function bluer_objects_pdf_convert() {
 
         local object_path=$ABCLI_OBJECT_ROOT/$object_name
         mv -v \
-            $object_path/$object_name.pdf \
-            $object_path/_$object_name.pdf
+            $object_path/release.pdf \
+            $object_path/_release.pdf
 
         gs -sDEVICE=pdfwrite \
             -dCompatibilityLevel=1.4 \
             -dPDFSETTINGS=/ebook \
             -dNOPAUSE \
             -dBATCH \
-            -sOutputFile=$object_path/$object_name.pdf \
-            $object_path/_$object_name.pdf
+            -sOutputFile=$object_path/release.pdf \
+            $object_path/_release.pdf
         [[ $? -ne 0 ]] && return 1
 
-        rm $object_path/_$object_name.pdf
-        bluer_ai_log "-> $object_path/$object_name.pdf"
+        rm $object_path/_release.pdf
+        bluer_ai_log "-> $object_path/release.pdf"
     fi
 }
