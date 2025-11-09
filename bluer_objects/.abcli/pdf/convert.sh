@@ -4,7 +4,7 @@ function bluer_objects_pdf_convert() {
     local options=$1
     local do_install=$(bluer_ai_option_int "$options" install 0)
     local do_combine=$(bluer_ai_option_int "$options" combine 0)
-    local do_compress=$(bluer_ai_option_int "$options" compress 1)
+    local do_compress=$(bluer_ai_option_int "$options" compress $do_combine)
     if [[ "$do_install" == 1 ]]; then
         pip install pypandoc
         brew install pandoc
