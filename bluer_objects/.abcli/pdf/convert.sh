@@ -7,13 +7,13 @@ function bluer_objects_pdf_convert() {
     local do_compress=$(bluer_ai_option_int "$options" compress $do_combine)
     if [[ "$do_install" == 1 ]]; then
         pip install pypandoc
-        brew install pandoc
-
-        brew install wkhtmltopdf
-
         pip install PyPDF2
 
-        brew install ghostscript
+        if [[ "$abcli_is_mac" == true ]]; then
+            brew install pandoc
+            brew install wkhtmltopdf
+            brew install ghostscript
+        fi
     fi
 
     local module_name=${2:-bluer_ai}
@@ -57,6 +57,7 @@ function bluer_objects_pdf_convert() {
             $object_path/_$object_name.pdf
         [[ $? -ne 0 ]] && return 1
 
-        rm -v $object_path/_$object_name.pdf
+        rm $object_path/_$object_name.pdf
+        bluer_ai_log "-> $object_path/$object_name.pdf"
     fi
 }
