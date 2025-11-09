@@ -1,11 +1,16 @@
 #! /usr/bin/env bash
 
 function bluer_objects_pdf_convert() {
+    local options=$1
+    local install=$(bluer_ai_option_int "$options" install 0)
+    local combine=$(bluer_ai_option_int "$options" combine 0)
     if [[ "$install" == 1 ]]; then
         pip install pypandoc
         brew install pandoc
 
         brew install wkhtmltopdf
+
+        pip install PyPDF2
     fi
 
     local module_name=${2:-bluer_ai}
@@ -28,5 +33,6 @@ function bluer_objects_pdf_convert() {
         --module_name $module_name \
         --object_name $object_name \
         --suffixes $suffixes \
+        --combine $combine \
         "${@:5}"
 }

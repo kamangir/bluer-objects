@@ -3,9 +3,11 @@ from typing import List
 import os
 import pypandoc
 import subprocess
+from PyPDF2 import PdfMerger
 
 from blueness import module
 from bluer_options.logger import crash_report
+from bluer_objects.metadata import get_from_object, post_to_object
 
 from bluer_objects import NAME
 from bluer_objects import file, objects, path
@@ -20,6 +22,7 @@ def convert(
     module_name: str,
     list_of_suffixes: List[str],
     object_name: str,
+    combine: bool,
 ) -> bool:
     logger.info(f"docs_path: {docs_path}")
 
@@ -32,6 +35,13 @@ def convert(
         code, pre { white-space: pre-wrap; }
     </style>
     """
+
+    list_of_pdfs: List[str] = get_from_object(
+        object_name,
+        "list_of_pdfs",
+        [],
+    )
+    logger.info(f"found {len(list_of_pdfs)} pdf(s)...")
 
     for suffix in tqdm(list_of_suffixes):
         logger.info(
@@ -57,6 +67,9 @@ def convert(
             filename_html,
             "pdf",
         )
+
+        if filename_pdf not in list_of_pdfs:
+            list_of_pdfs.append(filename_pdf)
 
         if file.exists(filename_pdf):
             logger.info(f"✅ {filename_pdf}")
@@ -103,5 +116,33 @@ def convert(
         except Exception as e:
             crash_report(e)
             return False
+
+    logger.info(f"{len(list_of_pdfs)} pdf(s) so far ...")
+    if not post_to_object(
+        object_name,
+        "list_of_pdfs",
+        list_of_pdfs,
+    ):
+        return False
+
+    if combine:
+        logger.info(f"combining {len(list_of_pdfs)} pdf(s)...")
+        combined_filename = objects.path_of(
+            filename=f"{object_name}.pdf",
+            object_name=object_name,
+        )
+
+        try:
+            merger = PdfMerger()
+            for filename in list_of_pdfs:
+                merger.append(filename)
+
+            merger.write(combined_filename)
+            merger.close()
+        except Exception as e:
+            crash_report(e)
+            return False
+
+        logger.info(f"-> {combined_filename}")
 
     return True

@@ -31,6 +31,12 @@ parser.add_argument(
     "--suffixes",
     type=str,
 )
+parser.add_argument(
+    "--combine",
+    type=int,
+    default=0,
+    help="0 | 1",
+)
 args = parser.parse_args()
 
 success = False
@@ -40,6 +46,7 @@ if args.task == "convert":
         module_name=args.module_name,
         list_of_suffixes=args.suffixes.split(","),
         object_name=args.object_name,
+        combine=args.combine == 1,
     )
 else:
     success = None

@@ -5,7 +5,7 @@ function test_bluer_objects_pdf_convert() {
 
     bluer_ai_eval ,$options \
         bluer_objects_pdf_convert \
-        install \
+        install,combine \
         bluer_objects \
         .,aliases,aliases/assets.md \
         "${@:2}"

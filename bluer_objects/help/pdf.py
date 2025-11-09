@@ -7,7 +7,7 @@ def help_convert(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = xtra("install", mono=mono)
+    options = "install,combine"
 
     return show_usage(
         [
