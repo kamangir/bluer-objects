@@ -1,15 +1,21 @@
 from typing import List
 
-from bluer_options.terminal import show_usage
+from bluer_options.terminal import show_usage, xtra
 
 
 def help_convert(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = "install,combine,~compress"
+    options = "".join(
+        [
+            xtra("install,", mono=mono),
+            "combine",
+            xtra(",~compress", mono=mono),
+        ]
+    )
 
-    return show_usage(
+    usage_1 = show_usage(
         [
             "@pdf",
             "convert",
@@ -20,6 +26,28 @@ def help_convert(
         ],
         "md -> pdf.",
         mono=mono,
+    )
+
+    # ---
+
+    options = f"filename=<filename.yaml>,{options},yaml"
+
+    usage_2 = show_usage(
+        [
+            "@pdf",
+            "convert",
+            f"[{options}]",
+            "[.|<object-name>]",
+        ],
+        "md -> pdf.",
+        mono=mono,
+    )
+
+    return "\n".join(
+        [
+            usage_1,
+            usage_2,
+        ]
     )
 
 
