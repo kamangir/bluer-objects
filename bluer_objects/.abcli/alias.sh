@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 
 alias @ai=bluer_ai
+alias @i=bluer_ai
 
 alias @assets=bluer_objects_assets
 
