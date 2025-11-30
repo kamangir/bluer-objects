@@ -35,7 +35,7 @@ def convert(
     logger.info(f"found {len(list_of_pdfs)} pdf(s)...")
 
     list_of_pdfs_len_target = -1 if count == -1 else len(list_of_pdfs) + count
-    for index, suffix in tqdm(enumerate(list_of_suffixes)):
+    for suffix in tqdm(list_of_suffixes):
         if (
             list_of_pdfs_len_target != -1
             and len(list_of_pdfs) >= list_of_pdfs_len_target

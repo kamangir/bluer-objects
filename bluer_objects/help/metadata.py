@@ -196,7 +196,6 @@ def help_upload(
 
 help_functions = {
     "download": help_download,
-    "upload": help_upload,
     "edit": help_edit,
     "get": help_get,
     "post": help_post,

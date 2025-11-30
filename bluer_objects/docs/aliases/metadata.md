@@ -6,10 +6,6 @@
 	[. | <object-name>]
  . download <object-name>/metadata
 @metadata \
-	upload \
-	[. | <object-name>]
- . upload <object-name>/metadata
-@metadata \
 	edit \
 	[download] \
 	[.|<object-name>]
@@ -53,4 +49,8 @@
 	<path> \
 	[--verbose 1]
  . <path>[<key>] = <value>
+@metadata \
+	upload \
+	[. | <object-name>]
+ . upload <object-name>/metadata
 ```
