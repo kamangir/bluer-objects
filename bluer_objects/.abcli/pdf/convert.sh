@@ -26,7 +26,7 @@ function bluer_objects_pdf_convert() {
             module_name=$(alias "$module_name" | sed -E "s/^alias $module_name='(.*)'$/\1/")
         fi
 
-        local docs_path=$(python3 -m $module_name locate)/docs/
+        local path_prefix=$(python3 -m $module_name locate)/docs/
 
         local suffixes=${3:-metadata}
 
@@ -37,7 +37,7 @@ function bluer_objects_pdf_convert() {
         bluer_ai_eval dryrun=$do_dryrun \
             python3 -m bluer_objects.pdf \
             convert \
-            --docs_path $docs_path \
+            --path_prefix $path_prefix \
             --object_name $object_name \
             --suffixes $suffixes \
             --combine $do_combine \

@@ -17,7 +17,7 @@ parser.add_argument(
     help="convert",
 )
 parser.add_argument(
-    "--docs_path",
+    "--path_prefix",
     type=str,
 )
 parser.add_argument(
@@ -58,7 +58,7 @@ if args.task == "convert":
         )
     else:
         success = convert(
-            docs_path=args.docs_path,
+            path_prefix=args.path_prefix,
             list_of_suffixes=args.suffixes.split(","),
             object_name=args.object_name,
             combine=args.combine == 1,

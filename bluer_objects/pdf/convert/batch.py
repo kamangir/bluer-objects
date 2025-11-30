@@ -31,9 +31,10 @@ def batch(
     )
 
     return convert(
-        docs_path=abcli_path_git,
+        path_prefix=abcli_path_git,
         list_of_suffixes=list_of_suffixes,
         object_name=object_name,
         combine=combine,
         count=count,
+        incremental=False,
     )

@@ -19,20 +19,26 @@ NAME = module.name(__file__, NAME)
 
 
 def convert(
-    docs_path: str,
+    path_prefix: str,
     list_of_suffixes: List[str],
     object_name: str,
     combine: bool,
     count: int = -1,
+    incremental: bool = True,
 ) -> bool:
-    logger.info(f"docs_path: {docs_path}")
+    logger.info(f"path_prefix: {path_prefix}")
 
-    list_of_pdfs: List[str] = get_from_object(
-        object_name,
-        "list_of_pdfs",
-        [],
+    list_of_pdfs: List[str] = (
+        get_from_object(
+            object_name,
+            "list_of_pdfs",
+            [],
+        )
+        if incremental
+        else []
     )
-    logger.info(f"found {len(list_of_pdfs)} pdf(s)...")
+    if incremental:
+        logger.info(f"found {len(list_of_pdfs)} pdf(s)...")
 
     list_of_pdfs_len_target = -1 if count == -1 else len(list_of_pdfs) + count
     for suffix in tqdm(list_of_suffixes):
@@ -51,7 +57,7 @@ def convert(
             )
         )
 
-        source_filename = os.path.join(docs_path, suffix)
+        source_filename = os.path.join(path_prefix, suffix)
         if path.exists(source_filename):
             source_filename = os.path.join(source_filename, "README.md")
             suffix = os.path.join(suffix, "README.md")
@@ -87,13 +93,14 @@ def convert(
             logger.error(f"{source_filename}: cannot convert to pdf.")
             return False
 
-    logger.info(f"{len(list_of_pdfs)} pdf(s) so far ...")
-    if not post_to_object(
-        object_name,
-        "list_of_pdfs",
-        list_of_pdfs,
-    ):
-        return False
+    if incremental:
+        logger.info(f"{len(list_of_pdfs)} pdf(s) so far ...")
+        if not post_to_object(
+            object_name,
+            "list_of_pdfs",
+            list_of_pdfs,
+        ):
+            return False
 
     if combine:
         return combine_pdfs(
