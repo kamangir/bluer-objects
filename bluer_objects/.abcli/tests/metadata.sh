@@ -54,3 +54,38 @@ function test_bluer_objects_metadata() {
 
     return 0
 }
+
+function test_bluer_objects_metadata_upload_download_edit() {
+    local object_name=test_bluer_objects_metadata_upload_download_edit-$(bluer_ai_string_timestamp)
+
+    local key=key-$(bluer_ai_string_timestamp)
+    local value=value-$(bluer_ai_string_timestamp)
+
+    bluer_objects_metadata_post \
+        $key \
+        $value \
+        object \
+        $object_name \
+        --verbose 1
+    [[ $? -ne 0 ]] && return 1
+
+    bluer_objects_metadata_upload \
+        $object_name
+    [[ $? -ne 0 ]] && return 1
+
+    rm -v $ABCLI_OBJECT_ROOT/$object_name/metadata.yaml
+    [[ $? -ne 0 ]] && return 1
+
+    bluer_objects_metadata_download \
+        $object_name
+    [[ $? -ne 0 ]] && return 1
+
+    local value_received=$(bluer_objects_metadata_get \
+        key=$key,object \
+        $object_name)
+
+    bluer_ai_assert \
+        $value \
+        $value_received \
+        yes
+}

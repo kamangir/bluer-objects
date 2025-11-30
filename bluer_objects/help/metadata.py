@@ -3,6 +3,39 @@ from typing import List
 from bluer_options.terminal import show_usage, xtra
 
 
+def help_download(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        [
+            "@metadata",
+            "download",
+            "[. | <object-name>]",
+        ],
+        "download <object-name>/metadata",
+        mono=mono,
+    )
+
+
+def help_edit(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    options = "download"
+
+    return show_usage(
+        [
+            "@metadata",
+            "edit",
+            f"[{options}]",
+            "[.|<object-name>]",
+        ],
+        "edit <object-name>/metadata",
+        mono=mono,
+    )
+
+
 def help_get(
     tokens: List[str],
     mono: bool,
@@ -146,7 +179,25 @@ def help_post(
     )
 
 
+def help_upload(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        [
+            "@metadata",
+            "upload",
+            "[. | <object-name>]",
+        ],
+        "upload <object-name>/metadata",
+        mono=mono,
+    )
+
+
 help_functions = {
+    "download": help_download,
+    "edit": help_edit,
     "get": help_get,
     "post": help_post,
+    "upload": help_upload,
 }

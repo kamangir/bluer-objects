@@ -2,6 +2,15 @@
 
 ```bash
 @metadata \
+	download \
+	[. | <object-name>]
+ . download <object-name>/metadata
+@metadata \
+	edit \
+	[download] \
+	[.|<object-name>]
+ . edit <object-name>/metadata
+@metadata \
 	get \
 	[delim=+,dict.keys,dict.values,filename,key=<key>] \
 	<filename.yaml>
@@ -40,4 +49,8 @@
 	<path> \
 	[--verbose 1]
  . <path>[<key>] = <value>
+@metadata \
+	upload \
+	[. | <object-name>]
+ . upload <object-name>/metadata
 ```

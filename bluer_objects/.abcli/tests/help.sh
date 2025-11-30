@@ -55,8 +55,11 @@ function test_bluer_objects_help() {
         "@lock unlock" \
         \
         "@metadata" \
+        "@metadata download" \
+        "@metadata edit" \
         "@metadata get" \
         "@metadata post" \
+        "@metadata upload" \
         \
         "@mlflow" \
         "@mlflow browse" \

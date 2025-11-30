@@ -4,7 +4,8 @@ from blueness import module
 from blueness.argparse.generic import sys_exit
 
 from bluer_objects import NAME
-from bluer_objects.pdf.convert.functions import convert
+from bluer_objects.pdf.convert.batch import batch as batch_convert
+from bluer_objects.pdf.convert.convert import convert
 from bluer_objects.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -16,11 +17,7 @@ parser.add_argument(
     help="convert",
 )
 parser.add_argument(
-    "--docs_path",
-    type=str,
-)
-parser.add_argument(
-    "--module_name",
+    "--path_prefix",
     type=str,
 )
 parser.add_argument(
@@ -37,17 +34,36 @@ parser.add_argument(
     default=0,
     help="0 | 1",
 )
+parser.add_argument(
+    "--use_metadata",
+    type=int,
+    default=0,
+    help="0 | 1",
+)
+parser.add_argument(
+    "--count",
+    type=int,
+    default=-1,
+    help="-1: all",
+)
 args = parser.parse_args()
 
 success = False
 if args.task == "convert":
-    success = convert(
-        docs_path=args.docs_path,
-        module_name=args.module_name,
-        list_of_suffixes=args.suffixes.split(","),
-        object_name=args.object_name,
-        combine=args.combine == 1,
-    )
+    if args.use_metadata == 1:
+        success = batch_convert(
+            object_name=args.object_name,
+            combine=args.combine == 1,
+            count=args.count,
+        )
+    else:
+        success = convert(
+            path_prefix=args.path_prefix,
+            list_of_suffixes=args.suffixes.split(","),
+            object_name=args.object_name,
+            combine=args.combine == 1,
+            count=args.count,
+        )
 else:
     success = None
 
