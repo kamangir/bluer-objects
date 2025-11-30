@@ -20,10 +20,10 @@ NAME = module.name(__file__, NAME)
 
 def convert(
     docs_path: str,
-    module_name: str,
     list_of_suffixes: List[str],
     object_name: str,
     combine: bool,
+    count: int = -1,
 ) -> bool:
     logger.info(f"docs_path: {docs_path}")
 
@@ -34,11 +34,18 @@ def convert(
     )
     logger.info(f"found {len(list_of_pdfs)} pdf(s)...")
 
-    for suffix in tqdm(list_of_suffixes):
+    list_of_pdfs_len_target = -1 if count == -1 else len(list_of_pdfs) + count
+    for index, suffix in tqdm(enumerate(list_of_suffixes)):
+        if (
+            list_of_pdfs_len_target != -1
+            and len(list_of_pdfs) >= list_of_pdfs_len_target
+        ):
+            logger.info(f"max count {count}, stopping.")
+            break
+
         logger.info(
-            "{}.convert {}/{} -> {}".format(
+            "{}.convert {} -> {}".format(
                 NAME,
-                module_name,
                 suffix,
                 object_name,
             )
@@ -52,7 +59,6 @@ def convert(
         if source_filename.endswith(".md"):
             if not convert_md(
                 source_filename,
-                module_name,
                 suffix,
                 object_name,
                 list_of_pdfs,

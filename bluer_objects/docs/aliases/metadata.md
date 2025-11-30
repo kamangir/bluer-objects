@@ -2,6 +2,19 @@
 
 ```bash
 @metadata \
+	download \
+	[. | <object-name>]
+ . download <object-name>/metadata
+@metadata \
+	upload \
+	[. | <object-name>]
+ . upload <object-name>/metadata
+@metadata \
+	edit \
+	[download] \
+	[.|<object-name>]
+ . edit <object-name>/metadata
+@metadata \
 	get \
 	[delim=+,dict.keys,dict.values,filename,key=<key>] \
 	<filename.yaml>
