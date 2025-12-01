@@ -34,17 +34,24 @@ parser.add_argument(
     default=0,
     help="0 | 1",
 )
-parser.add_argument(
-    "--use_metadata",
-    type=int,
-    default=0,
-    help="0 | 1",
-)
+
 parser.add_argument(
     "--count",
     type=int,
     default=-1,
     help="-1: all",
+)
+parser.add_argument(
+    "--list_missing",
+    type=int,
+    default=1,
+    help="0 | 1",
+)
+parser.add_argument(
+    "--use_metadata",
+    type=int,
+    default=0,
+    help="0 | 1",
 )
 args = parser.parse_args()
 
@@ -55,6 +62,7 @@ if args.task == "convert":
             object_name=args.object_name,
             combine=args.combine == 1,
             count=args.count,
+            list_missing=args.list_missing == 1,
         )
     else:
         success = convert(
