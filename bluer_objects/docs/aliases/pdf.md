@@ -13,6 +13,7 @@
 	convert \
 	[combine,~compress,filename=<release.pdf>,install,upload] \
 	[.|<object-name>] \
-	[--count <2>]
+	[--count <2>] \
+	[--list_missing 0]
  . md -> pdf.
 ```

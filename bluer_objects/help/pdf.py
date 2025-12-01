@@ -44,7 +44,10 @@ def help_convert(
             f"[{options}]",
             "[.|<object-name>]",
         ]
-        + args,
+        + args
+        + [
+            "[--list_missing 0]",
+        ],
         "md -> pdf.",
         mono=mono,
     )
