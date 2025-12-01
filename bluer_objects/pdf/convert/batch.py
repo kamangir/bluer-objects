@@ -73,7 +73,7 @@ def batch(
         )
 
         list_of_prefixes: List[str] = sorted(
-            list(set([suffix.split(os.sep)[0] for suffix in list_of_suffixes]))
+            list({suffix.split(os.sep)[0] for suffix in list_of_suffixes})
         )
         log_list(
             logger,
