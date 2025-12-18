@@ -26,9 +26,13 @@ else:
 
 def clear(
     do_dryrun: bool = True,
+    log: bool = True,
+    public: bool = False,
 ) -> bool:
     return interface.clear(
         do_dryrun=do_dryrun,
+        log=log,
+        public=public,
     )
 
 

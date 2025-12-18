@@ -4,11 +4,13 @@ function bluer_ai_storage_clear() {
     local options=$1
     local do_cloud=$(bluer_ai_option_int "$options" cloud 0)
     local do_dryrun=$(bluer_ai_option_int "$options" dryrun 1)
+    local do_public=$(bluer_ai_option_int "$options" public 0)
 
     if [[ "$do_cloud" == 1 ]]; then
         python3 -m bluer_objects.storage \
             clear \
             --do_dryrun $do_dryrun \
+            --public $do_public \
             "${@:2}"
         return
     fi

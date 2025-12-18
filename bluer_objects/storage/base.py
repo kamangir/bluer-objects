@@ -13,7 +13,18 @@ class StorageInterface:
     def clear(
         self,
         do_dryrun: bool = True,
+        log: bool = True,
+        public: bool = False,
     ) -> bool:
+        logger.info(
+            "{}.clear({})".format(
+                self.__class__.__name__,
+                ",".join(
+                    (["dryrun"] if do_dryrun else []) + (["public"] if public else [])
+                ),
+            )
+        )
+
         return True
 
     def download(

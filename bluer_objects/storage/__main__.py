@@ -80,6 +80,7 @@ success = False
 if args.task == "clear":
     success = storage.clear(
         do_dryrun=args.do_dryrun == 1,
+        public=args.public == 1,
     )
 elif args.task == "download":
     success = storage.download(

@@ -23,15 +23,21 @@ class S3Interface(StorageInterface):
         self,
         do_dryrun: bool = True,
         log: bool = True,
+        public: bool = False,
     ) -> bool:
-        logger.info(
-            "{}.clear({})".format(
-                self.__class__.__name__,
-                "dryrun" if do_dryrun else "",
-            )
-        )
+        if not super().clear(
+            do_dryrun=do_dryrun,
+            log=log,
+            public=public,
+        ):
+            return False
 
-        success, list_of_objects = self.list_of_objects(prefix="test")
+        bucket_name = env.S3_PUBLIC_STORAGE_BUCKET if public else env.S3_STORAGE_BUCKET
+
+        success, list_of_objects = self.list_of_objects(
+            prefix="test",
+            bucket_name=bucket_name,
+        )
         if not success:
             return success
         logger.info(f"{len(list_of_objects)} object(s) to delete.")
@@ -40,6 +46,7 @@ class S3Interface(StorageInterface):
             if not self.delete(
                 object_name=object_name,
                 do_dryrun=do_dryrun,
+                bucket_name=bucket_name,
             ):
                 return False
 
@@ -50,6 +57,7 @@ class S3Interface(StorageInterface):
         object_name: str,
         do_dryrun: bool = True,
         log: bool = True,
+        bucket_name: str = env.S3_STORAGE_BUCKET,
     ) -> bool:
         if log:
             logger.info(
@@ -69,10 +77,13 @@ class S3Interface(StorageInterface):
                 aws_access_key_id=env.S3_STORAGE_AWS_ACCESS_KEY_ID,
                 aws_secret_access_key=env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
             )
-            bucket = s3.Bucket(env.S3_STORAGE_BUCKET)
+            bucket = s3.Bucket(bucket_name)
 
-            objects_to_delete = bucket.objects.filter(Prefix=f"{object_name}/")
-            delete_requests = [{"Key": obj.key} for obj in objects_to_delete]
+            if object_name.endswith(".tar.gz"):
+                delete_requests = [{"Key": object_name}]
+            else:
+                objects_to_delete = bucket.objects.filter(Prefix=f"{object_name}/")
+                delete_requests = [{"Key": obj.key} for obj in objects_to_delete]
 
             if not delete_requests:
                 logger.warning(f"no files found under {object_name}.")
@@ -159,6 +170,7 @@ class S3Interface(StorageInterface):
     def list_of_objects(
         self,
         prefix: str = "",
+        bucket_name: str = env.S3_STORAGE_BUCKET,
     ) -> Tuple[bool, List[str]]:
         try:
             s3 = boto3.client(
@@ -170,7 +182,7 @@ class S3Interface(StorageInterface):
 
             paginator = s3.get_paginator("list_objects_v2")
             pages = paginator.paginate(
-                Bucket=env.S3_STORAGE_BUCKET,
+                Bucket=bucket_name,
                 Prefix=prefix,
             )
         except Exception as e:
