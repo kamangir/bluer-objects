@@ -20,13 +20,14 @@ class WebDAVRequestInterface(StorageInterface):
         self,
         do_dryrun: bool = True,
         log: bool = True,
+        public: bool = False,
     ) -> bool:
-        logger.info(
-            "{}.clear({})".format(
-                self.__class__.__name__,
-                "dryrun" if do_dryrun else "",
-            )
-        )
+        if not super().clear(
+            do_dryrun=do_dryrun,
+            log=log,
+            public=public,
+        ):
+            return False
 
         success, list_of_objects = self.list_raw(
             suffix="",

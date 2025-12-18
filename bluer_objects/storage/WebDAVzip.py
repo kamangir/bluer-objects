@@ -30,13 +30,15 @@ class WebDAVzipInterface(StorageInterface):
     def clear(
         self,
         do_dryrun: bool = True,
+        log: bool = True,
+        public: bool = False,
     ) -> bool:
-        logger.info(
-            "{}.clear({})".format(
-                self.__class__.__name__,
-                "dryrun" if do_dryrun else "",
-            )
-        )
+        if not super().clear(
+            do_dryrun=do_dryrun,
+            log=log,
+            public=public,
+        ):
+            return False
 
         count: int = 0
         for thing in tqdm(self.client.list()):
