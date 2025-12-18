@@ -71,8 +71,11 @@ class S3Interface(StorageInterface):
             )
             bucket = s3.Bucket(env.S3_STORAGE_BUCKET)
 
-            objects_to_delete = bucket.objects.filter(Prefix=f"{object_name}/")
-            delete_requests = [{"Key": obj.key} for obj in objects_to_delete]
+            if object_name.endswith(".tar.gz"):
+                delete_requests = [{"Key": object_name}]
+            else:
+                objects_to_delete = bucket.objects.filter(Prefix=f"{object_name}/")
+                delete_requests = [{"Key": obj.key} for obj in objects_to_delete]
 
             if not delete_requests:
                 logger.warning(f"no files found under {object_name}.")
