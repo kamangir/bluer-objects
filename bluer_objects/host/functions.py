@@ -11,7 +11,7 @@ NAME = module.name(__file__, NAME)
 
 
 def shell(
-    command: str,
+    command: Union[str, List[str]],
     clean_after: bool = False,
     return_output: bool = False,
     work_dir: str = ".",
@@ -20,6 +20,9 @@ def shell(
     bool,
     Tuple[bool, List[str]],
 ]:
+    if isinstance(command, list):
+        command = " ".join(command)
+
     if log:
         logger.info(f"{NAME}.shell({command})")
 
