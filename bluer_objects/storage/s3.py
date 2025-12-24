@@ -136,7 +136,7 @@ class S3Interface(StorageInterface):
                     f"{object_name}/{filename}",
                     local_path,
                 )
-            except ClientError as e:
+            except Exception as e:
                 if int(e.response["Error"]["Code"]) == 404:  # Not found
                     return True
                 logger.error(e)
