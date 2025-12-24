@@ -141,6 +141,9 @@ class S3Interface(StorageInterface):
                     return True
                 logger.error(e)
                 return False
+            except Exception as e:
+                logger.error(e)
+                return False
 
             return super().download(
                 object_name=object_name,
@@ -234,19 +237,25 @@ class S3Interface(StorageInterface):
                 logger.error(e)
                 return False, []
 
-            return True, sorted(
-                reduce(
-                    lambda x, y: x + y,
-                    [
+            try:
+                list_of_files = sorted(
+                    reduce(
+                        lambda x, y: x + y,
                         [
-                            obj["Key"].split(prefix, 1)[1]
-                            for obj in page.get("Contents", [])
-                        ]
-                        for page in pages
-                    ],
-                    [],
+                            [
+                                obj["Key"].split(prefix, 1)[1]
+                                for obj in page.get("Contents", [])
+                            ]
+                            for page in pages
+                        ],
+                        [],
+                    )
                 )
-            )
+            except Exception as e:
+                logger.error(e)
+                return False, []
+
+            return True, list_of_files
 
         return super().ls(
             object_name=object_name,
