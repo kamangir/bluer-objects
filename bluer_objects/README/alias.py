@@ -5,12 +5,13 @@ import os
 import re
 
 from bluer_objects import file
-from bluer_objects.logger import logger
 
 
 def list_of_aliases(
     module_name: str,
     log: bool = False,
+    as_markdown: bool = False,
+    itemized: bool = False,
 ) -> List[str]:
     module = importlib.import_module(module_name)
     module_path = str(Path(module.__file__).parent)
@@ -35,7 +36,15 @@ def list_of_aliases(
         return m.group(1) if m else ""
 
     return [
-        alias_name
-        for alias_name in [extract_alias_name(line) for line in content]
+        (
+            (
+                f"- [@{alias_name}](./{alias_name}.md)"
+                if itemized
+                else f"[@{alias_name}](./bluer_agent/docs/aliases/{alias_name}.md) "
+            )
+            if as_markdown
+            else alias_name
+        )
+        for alias_name in sorted([extract_alias_name(line) for line in content])
         if alias_name
     ]
