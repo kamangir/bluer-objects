@@ -10,7 +10,7 @@ from bluer_objects import file
 def list_of_aliases(
     module_name: str,
     log: bool = False,
-    as_markdown: bool = False,
+    as_markdown: bool = True,
     itemized: bool = False,
 ) -> List[str]:
     module = importlib.import_module(module_name)
@@ -30,6 +30,12 @@ def list_of_aliases(
     )
     if not success:
         return output
+
+    content = (
+        lambda content, marker: (
+            content[: content.index(marker)] if marker in content else content
+        )
+    )(content, "# ignore")
 
     def extract_alias_name(s: str) -> str:
         m = re.fullmatch(r"alias\s+@([^=]+)=.+", s.strip())
