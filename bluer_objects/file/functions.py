@@ -170,7 +170,7 @@ def download(
 
     if log:
         logger.info(
-            "{}: {} -{}-> {filename}".format(
+            "{}: {} -{}-> {}".format(
                 NAME,
                 url,
                 string.pretty_bytes(size(filename)),
