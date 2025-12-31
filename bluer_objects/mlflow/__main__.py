@@ -6,6 +6,7 @@ from blueness.argparse.generic import sys_exit
 from blueness import module
 
 from bluer_objects import NAME
+from bluer_objects import env
 from bluer_objects.mlflow.logging import (
     log_artifacts,
     log_run,
@@ -25,14 +26,23 @@ from bluer_objects.mlflow.runs import (
 )
 from bluer_objects.mlflow.tags import (
     create_filter_string,
-    get_tags,
     search,
-    set_tags,
 )
 from bluer_objects.mlflow.testing import (
     test,
 )
 from bluer_objects.logger import logger
+
+if env.MLFLOW_USE_STORAGE:
+    from bluer_objects.mlflow.storage import (
+        get_tags,
+        set_tags,
+    )
+else:
+    from bluer_objects.mlflow.tags import (
+        get_tags,
+        set_tags,
+    )
 
 NAME = module.name(__file__, NAME)
 
