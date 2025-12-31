@@ -24,8 +24,6 @@ def get_tags(
     )
     if not success:
         return False, {}
-    
-    
 
     return True, {}
 
