@@ -12,22 +12,13 @@ def set_tag(
     icon="#️⃣ ",
     upload: bool = True,
 ) -> bool:
-    object_name = f"__keys_{key}"
-    filename = f"{object_name}.yaml"
-
-    ...
-
-    object_name = f"__objects"
-    filename = f"{object_name}.yaml"
-
-    ...
-
-    for suffix in [
-        f"keys/{key}/{object_name}",
-        f"objects/{object_name}/{key}",
-    ]:
+    for object_name_, filename_ in {
+        f"__keys_{key}": f"{object_name}.yaml",
+        "__objects": f"{object_name}.yaml",
+    }.items():
         if not write(
-            suffix=suffix,
+            object_name=object_name_,
+            filename=filename_,
             data={"value": value},
             upload=upload,
             log=log,

@@ -8,7 +8,8 @@ object_name = "tags"
 
 
 def write(
-    suffix: str,
+    object_name: str,
+    filename: str,
     data: Dict,
     upload: bool = True,
     log: bool = True,
@@ -17,7 +18,7 @@ def write(
     return file.save_yaml(
         filename=objects.path_of(
             object_name=object_name,
-            filename=suffix,
+            filename=filename,
         ),
         data=data,
         log=verbose,
@@ -25,7 +26,7 @@ def write(
         not upload
         or storage.upload(
             object_name=object_name,
-            filename=suffix,
+            filename=filename,
             log=log,
         )
     )
