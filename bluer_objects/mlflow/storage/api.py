@@ -12,6 +12,16 @@ def set_tag(
     icon="#️⃣ ",
     upload: bool = True,
 ) -> bool:
+    object_name = f"__keys_{key}"
+    filename = f"{object_name}.yaml"
+
+    ...
+
+    object_name = f"__objects"
+    filename = f"{object_name}.yaml"
+
+    ...
+
     for suffix in [
         f"keys/{key}/{object_name}",
         f"objects/{object_name}/{key}",
