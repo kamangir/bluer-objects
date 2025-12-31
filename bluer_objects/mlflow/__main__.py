@@ -33,8 +33,8 @@ from bluer_objects.mlflow.testing import (
 )
 from bluer_objects.logger import logger
 
-if env.MLFLOW_STORAGE_ENABLED:
-    from bluer_objects.mlflow.storage import (
+if env.MLFLOW_IS_SERVERLESS:
+    from bluer_objects.mlflow.serverless import (
         get_tags,
         set_tags,
     )

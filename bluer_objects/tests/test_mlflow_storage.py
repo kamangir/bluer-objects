@@ -3,7 +3,7 @@ import pytest
 from bluer_options.options import Options
 
 from bluer_objects.objects import unique_object
-from bluer_objects.mlflow.storage import tags
+from bluer_objects.mlflow.serverless import write
 
 
 @pytest.mark.parametrize(
@@ -13,13 +13,13 @@ from bluer_objects.mlflow.storage import tags
 def test_mlflow_storage_tag_set_get(tags_str: str):
     object_name = unique_object("test_mlflow_storage_tag_set_get")
 
-    assert tags.set_tags(
+    assert write.set_tags(
         object_name,
         tags_str,
         log=False,
     )
 
-    success, tags_read = tags.get_tags(object_name)
+    success, tags_read = write.get_tags(object_name)
     assert success
 
     tags_option = Options(tags_str)
