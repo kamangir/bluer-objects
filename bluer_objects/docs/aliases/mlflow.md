@@ -107,7 +107,8 @@
 	tags \
 	set \
 	[.|<object-name>] \
-	[<keyword-1>=<value>,<keyword-2>,~<keyword-3>]
+	[<keyword-1>=<value>,<keyword-2>,~<keyword-3>] \
+	[--verbose 1]
  . set tags in mlflow.
 @mlflow \
 	test \

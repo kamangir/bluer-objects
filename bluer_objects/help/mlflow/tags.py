@@ -98,6 +98,10 @@ def help_set(
 ) -> str:
     options = "<keyword-1>=<value>,<keyword-2>,~<keyword-3>"
 
+    args = [
+        "[--verbose 1]",
+    ]
+
     return show_usage(
         [
             "@mlflow",
@@ -105,7 +109,8 @@ def help_set(
             "set",
             "[.|<object-name>]",
             f"[{options}]",
-        ],
+        ]
+        + args,
         "set tags in mlflow.",
         mono=mono,
     )

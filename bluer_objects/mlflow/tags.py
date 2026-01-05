@@ -25,6 +25,7 @@ def create_filter_string(tags: str) -> str:
 def get_tags(
     object_name: str,
     exclude_system_tags: bool = True,
+    verbose: bool = False,
 ) -> Tuple[bool, Dict[str, str]]:
     experiment_name = to_experiment_name(object_name)
 
@@ -65,6 +66,7 @@ def set_tags(
     tags: Union[str, Dict[str, str]],
     log: bool = True,
     icon="#️⃣ ",
+    verbose: bool = False,
 ) -> bool:
     experiment_name = to_experiment_name(object_name)
 

@@ -16,6 +16,7 @@ def set_tags(
     object_name: str,
     tags: Union[str, Dict[str, str]],
     log: bool = True,
+    verbose: bool = False,
     icon="#️⃣ ",
 ) -> bool:
     tags = Options(tags)
@@ -30,17 +31,15 @@ def set_tags(
     if not storage.download(
         object_name="_serverless_objects",
         filename=f"{object_name}.yaml",
-        log=log,
+        log=verbose,
     ):
         return False
 
-    success, current_tags = file.load_yaml(
+    _, current_tags = file.load_yaml(
         filename,
         ignore_error=True,
         default={},
     )
-    if not success:
-        return success
     if not isinstance(current_tags, dict):
         logger.error(
             "dict expected, {} received".format(
@@ -55,14 +54,14 @@ def set_tags(
     if not file.save_yaml(
         filename,
         current_tags,
-        log=log,
+        log=verbose,
     ):
         return False
 
     if not storage.upload(
         object_name="_serverless_objects",
         filename=f"{object_name}.yaml",
-        log=log,
+        log=verbose,
     ):
         return False
 
@@ -74,14 +73,14 @@ def set_tags(
                 filename=f"{object_name}.yaml",
             ),
             {"value": value},
-            log=log,
+            log=verbose,
         ):
             return False
 
         if not storage.upload(
             object_name=f"_serverless_key_{key}",
             filename=f"{object_name}.yaml",
-            log=log,
+            log=verbose,
         ):
             return False
 

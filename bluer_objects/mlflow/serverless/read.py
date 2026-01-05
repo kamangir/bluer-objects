@@ -16,12 +16,12 @@ NAME = module.name(__file__, NAME)
 def get_tags(
     object_name: str,
     exclude_system_tags: bool = True,
-    log: bool = True,
+    verbose: bool = False,
 ) -> Tuple[bool, Dict[str, str]]:
     if not storage.download(
         object_name="_serverless_objects",
         filename=f"{object_name}.yaml",
-        log=log,
+        log=verbose,
     ):
         return True, {}
 

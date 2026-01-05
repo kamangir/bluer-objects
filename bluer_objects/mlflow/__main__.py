@@ -172,6 +172,12 @@ parser.add_argument(
     default="",
     help="",
 )
+parser.add_argument(
+    "--verbose",
+    type=int,
+    default=0,
+    help="0 | 1",
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
@@ -198,7 +204,10 @@ elif args.task == "rm":
         True,
     )
 elif args.task == "get_tags":
-    success, tags = get_tags(args.object_name)
+    success, tags = get_tags(
+        args.object_name,
+        verbose=args.verbose == 1,
+    )
     print(tags if not args.tag else tags.get(args.tag, args.default))
 elif args.task == "get_id":
     success, id = get_id(args.object_name)
@@ -257,6 +266,7 @@ elif args.task == "set_tags":
     success = set_tags(
         args.object_name,
         args.tags,
+        verbose=args.verbose == 1,
     )
 elif args.task == "transition":
     success = transition(
