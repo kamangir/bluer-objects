@@ -1,6 +1,8 @@
 from typing import List
 
-from bluer_options.terminal import show_usage, xtra
+from bluer_options.terminal import show_usage
+
+from bluer_objects import env
 
 search_args = [
     "[--count <-1>]",
@@ -80,11 +82,15 @@ def help_search(
         mono=mono,
     )
 
-    return "\n".join(
-        [
-            usage_1,
-            usage_2,
-        ]
+    return (
+        usage_2
+        if env.MLFLOW_IS_SERVERLESS
+        else "\n".join(
+            [
+                usage_1,
+                usage_2,
+            ]
+        )
     )
 
 
