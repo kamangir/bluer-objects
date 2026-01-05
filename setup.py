@@ -19,7 +19,7 @@ setup(
         f"{NAME}.metadata",
         f"{NAME}.mlflow",
         f"{NAME}.mlflow.lock",
-        f"{NAME}.mlflow.storage",
+        f"{NAME}.mlflow.serverless",
         f"{NAME}.pdf",
         f"{NAME}.pdf.convert",
         f"{NAME}.README",

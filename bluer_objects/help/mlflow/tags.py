@@ -16,8 +16,7 @@ def help_clone(
 ) -> str:
     return show_usage(
         [
-            "@mlflow",
-            "tags",
+            "@tags",
             "clone",
             "[..|<object-1>]",
             "[.|<object-2>]",
@@ -35,8 +34,7 @@ def help_get(
 
     return show_usage(
         [
-            "@mlflow",
-            "tags",
+            "@tags",
             "get",
             "[.|<object-name>]",
         ]
@@ -54,8 +52,7 @@ def help_search(
 
     usage_1 = show_usage(
         [
-            "@mlflow",
-            "tags",
+            "@tags",
             "search",
             f"[{options}]",
         ]
@@ -74,8 +71,7 @@ def help_search(
 
     usage_2 = show_usage(
         [
-            "@mlflow",
-            "tags",
+            "@tags",
             "search",
             f"[{options}]",
         ]
@@ -104,8 +100,7 @@ def help_set(
 
     return show_usage(
         [
-            "@mlflow",
-            "tags",
+            "@tags",
             "set",
             "[.|<object-name>]",
             f"[{options}]",

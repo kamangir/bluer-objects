@@ -2,7 +2,7 @@
 
 🌀 `bluer-objects` are the inputs and outputs of [AI algo](https://github.com/kamangir/giza). They are maintained in cloud storage (supports [WebDav](https://pypi.org/project/webdavclient3/)) and their metadata is tracked by [MLflow](https://mlflow.org/). Examples are the Sentinel-2 [datacube](https://github.com/kamangir/blue-geo/tree/main/blue_geo/datacube) `datacube-EarthSearch-sentinel_2_l1c-S2A_10UDC_20240731_0_L1C` and 🌐 [`@geo watch` outputs](https://github.com/kamangir/blue-geo/tree/main/blue_geo/watch).
 
-also home to 🌀 [bluer README](./bluer_objects/README/), and the 🔒 [`lock`](./bluer_objects/mlflow/lock/).
+also home to 🌀 [bluer README](./bluer_objects/README/), the 🔒 [`lock`](./bluer_objects/mlflow/lock/), and serverless [mlflow](./bluer_objects/mlflow/serverless/)
 
 # installation
 
@@ -12,16 +12,7 @@ pip install bluer-objects
 
 # aliases
 
-[@assets](./bluer_objects/docs/aliases/assets.md), 
-[@clone](./bluer_objects/docs/aliases/clone.md), 
-[@download](./bluer_objects/docs/aliases/download.md), 
-[@gif](./bluer_objects/docs/aliases/gif.md), 
-[@host](./bluer_objects/docs/aliases/host.md), 
-[@ls](./bluer_objects/docs/aliases/ls.md), 
-[@metadata](./bluer_objects/docs/aliases/metadata.md), 
-[@mlflow](./bluer_objects/docs/aliases/mlflow.md), 
-[@pdf](./bluer_objects/docs/aliases/pdf.md), 
-[@upload](./bluer_objects/docs/aliases/upload.md).
+aliases:::
 
 ---
 
