@@ -6,6 +6,7 @@ from blueness import module
 from bluer_options.logger import crash_report
 
 from bluer_objects import NAME
+from bluer_objects import env
 from bluer_objects.env import ABCLI_MLFLOW_EXPERIMENT_PREFIX
 from bluer_objects.logger import logger
 
@@ -16,6 +17,9 @@ def get_id(
     object_name: str,
     create: bool = False,
 ) -> Tuple[bool, str]:
+    if env.MLFLOW_IS_SERVERLESS:
+        return True, "serverless-id"
+
     experiment_name = to_experiment_name(object_name)
 
     try:
@@ -38,6 +42,9 @@ def rm(
     object_name: str,
     is_id: bool = False,
 ) -> bool:
+    if env.MLFLOW_IS_SERVERLESS:
+        return True
+
     if is_id:
         experiment_id = object_name
     else:

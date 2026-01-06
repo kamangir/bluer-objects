@@ -88,6 +88,16 @@
 	[--offset <0>]
  . search mlflow.
 @tags \
+	search \
+	[--count <-1>] \
+	[--delim <space>] \
+	[--filter_string <filter-string>] \
+	[--log <0>] \
+	[--offset <0>] \
+	[--server_style 1]
+ . search mlflow server for <filter-string>.
+   <filter-string>: https://www.mlflow.org/docs/latest/search-experiments.html
+@tags \
 	set \
 	[.|<object-name>] \
 	[<keyword-1>=<value>,<keyword-2>,~<keyword-3>] \

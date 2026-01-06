@@ -50,28 +50,9 @@ def help_search(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = "explicit"
-
-    usage_1 = show_usage(
-        [
-            "@tags",
-            "search",
-            f"[{options}]",
-        ]
-        + search_args
-        + ["[--filter_string <filter-string>]"],
-        "search mlflow for <filter-string>",
-        {
-            "<finter-string>: https://www.mlflow.org/docs/latest/search-experiments.html": ""
-        },
-        mono=mono,
-    )
-
-    # ---
-
     options = "<keyword-1>=<value-1>,<keyword-2>,~<keyword-3>"
 
-    usage_2 = show_usage(
+    usage_1 = show_usage(
         [
             "@tags",
             "search",
@@ -82,15 +63,39 @@ def help_search(
         mono=mono,
     )
 
-    return (
-        usage_2
-        if env.MLFLOW_IS_SERVERLESS
-        else "\n".join(
-            [
-                usage_1,
-                usage_2,
-            ]
-        )
+    if env.MLFLOW_IS_SERVERLESS:
+        return usage_1
+
+    # ---
+
+    args = sorted(
+        [
+            "[--server_style 1]",
+            "[--filter_string <filter-string>]",
+        ]
+        + search_args
+    )
+
+    usage_2 = show_usage(
+        [
+            "@tags",
+            "search",
+        ]
+        + args,
+        "search mlflow server for <filter-string>.",
+        {
+            "<filter-string>: https://www.mlflow.org/docs/latest/search-experiments.html": ""
+        },
+        mono=mono,
+    )
+
+    # ---
+
+    return "\n".join(
+        [
+            usage_1,
+            usage_2,
+        ]
     )
 
 

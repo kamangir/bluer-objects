@@ -7,13 +7,17 @@ from bluer_options.options import Options
 from bluer_options.logger import crash_report
 
 from bluer_objects import NAME
+from bluer_objects import env
+from bluer_objects.mlflow import serverless
 from bluer_objects.mlflow.objects import to_experiment_name, to_object_name
 from bluer_objects.logger import logger
 
 NAME = module.name(__file__, NAME)
 
 
-def create_filter_string(tags: str) -> str:
+def create_server_style_filter_string(
+    tags: Union[str, dict],
+) -> str:
     tags_options = Options(tags)
 
     # https://www.mlflow.org/docs/latest/search-experiments.html
@@ -27,6 +31,12 @@ def get_tags(
     exclude_system_tags: bool = True,
     verbose: bool = False,
 ) -> Tuple[bool, Dict[str, str]]:
+    if env.MLFLOW_IS_SERVERLESS:
+        return serverless.get_tags(
+            object_name,
+            verbose=verbose,
+        )
+
     experiment_name = to_experiment_name(object_name)
 
     try:
@@ -49,16 +59,40 @@ def get_tags(
 
 
 # https://www.mlflow.org/docs/latest/search-experiments.html
-def search(filter_string: str) -> List[str]:
+def search(
+    filter_string: Union[str, dict],
+    server_style: bool = False,
+) -> Tuple[bool, List[str]]:
+    if server_style and env.MLFLOW_IS_SERVERLESS:
+        logger.error("server_style search is not supported when mlflow is serverless.")
+        return False, []
+
+    if server_style:
+        filter_string = create_server_style_filter_string(filter_string)
+    elif filter_string == "-":
+        filter_string = ""
+
+    if env.MLFLOW_IS_SERVERLESS:
+        return serverless.search(filter_string=filter_string)
+
     client = MlflowClient()
 
-    return [
-        to_object_name(experiment.name)
-        for experiment in client.search_experiments(
-            filter_string=filter_string,
-            view_type=ViewType.ALL,
-        )
-    ]
+    success = False
+    output = []
+
+    try:
+        output = [
+            to_object_name(experiment.name)
+            for experiment in client.search_experiments(
+                filter_string=filter_string,
+                view_type=ViewType.ALL,
+            )
+        ]
+        success = True
+    except Exception as e:
+        logger.error(e)
+
+    return success, output
 
 
 def set_tags(
@@ -68,6 +102,15 @@ def set_tags(
     icon="#️⃣ ",
     verbose: bool = False,
 ) -> bool:
+    if env.MLFLOW_IS_SERVERLESS:
+        return serverless.set_tags(
+            object_name,
+            tags=tags,
+            log=log,
+            icon=icon,
+            verbose=verbose,
+        )
+
     experiment_name = to_experiment_name(object_name)
 
     try:

@@ -5,6 +5,7 @@ from blueness import module
 from bluer_options.logger import crash_report
 
 from bluer_objects import NAME
+from bluer_objects import env
 from bluer_objects.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -14,6 +15,9 @@ def list_registered_models() -> Tuple[
     bool,
     List[str],
 ]:
+    if env.MLFLOW_IS_SERVERLESS:
+        return True, []
+
     try:
         client = MlflowClient()
         return True, [dict(rm)["name"] for rm in client.search_registered_models()]
@@ -29,6 +33,9 @@ def transition(
     stage_name: str,
     description: str,
 ) -> bool:
+    if env.MLFLOW_IS_SERVERLESS:
+        return True
+
     logger.info(
         '{}.transition: {}(#{}) ->  {} - "{}")'.format(
             NAME,

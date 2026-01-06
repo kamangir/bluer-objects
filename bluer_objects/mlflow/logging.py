@@ -17,6 +17,9 @@ def log_artifacts(
     object_name: str,
     model_name: str = "",
 ) -> bool:
+    if env.MLFLOW_IS_SERVERLESS:
+        return True
+
     if not start_run(object_name):
         return False
 
@@ -49,6 +52,9 @@ def log_artifacts(
 
 
 def log_run(object_name: str) -> bool:
+    if env.MLFLOW_IS_SERVERLESS:
+        return True
+
     if not start_run(object_name):
         return False
 
