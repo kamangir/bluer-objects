@@ -24,7 +24,6 @@ from bluer_objects.mlflow.runs import (
     start_run,
 )
 from bluer_objects.mlflow.tags import (
-    create_filter_string,
     get_tags,
     search,
     set_tags,
@@ -42,7 +41,23 @@ parser.add_argument(
     "task",
     type=str,
     default="",
-    help="clone_tags|create_filter_string|get_id|get_run_id|get_tags|list_registered_models|log_artifacts|log_run|rm|search|set_tags|start_end_run|test|transition",
+    help=" | ".join(
+        [
+            "clone_tags",
+            "get_id",
+            "get_run_id",
+            "get_tags",
+            "list_registered_models",
+            "log_artifacts",
+            "log_run",
+            "rm",
+            "search",
+            "set_tags",
+            "start_end_run",
+            "test",
+            "transition",
+        ]
+    ),
 )
 parser.add_argument(
     "--count",
@@ -115,13 +130,13 @@ parser.add_argument(
     "--log",
     type=int,
     default=1,
-    help="0|1",
+    help="0 | 1",
 )
 parser.add_argument(
-    "--explicit_query",
+    "--server_style",
     type=int,
     default=0,
-    help="0|1",
+    help="0 | 1",
 )
 parser.add_argument(
     "--start_end",
@@ -162,6 +177,12 @@ parser.add_argument(
     default="",
     help="",
 )
+parser.add_argument(
+    "--verbose",
+    type=int,
+    default=0,
+    help="0 | 1",
+)
 args = parser.parse_args()
 
 delim = " " if args.delim == "space" else args.delim
@@ -171,9 +192,6 @@ if args.task == "clone_tags":
     success, tags = get_tags(args.source_objects)
     if success:
         success = set_tags(args.destination_object, tags)
-elif args.task == "create_filter_string":
-    success = True
-    print(create_filter_string(args.tags))
 elif args.task == "rm":
     success = reduce(
         lambda x, y: x and y,
@@ -188,7 +206,10 @@ elif args.task == "rm":
         True,
     )
 elif args.task == "get_tags":
-    success, tags = get_tags(args.object_name)
+    success, tags = get_tags(
+        args.object_name,
+        verbose=args.verbose == 1,
+    )
     print(tags if not args.tag else tags.get(args.tag, args.default))
 elif args.task == "get_id":
     success, id = get_id(args.object_name)
@@ -217,36 +238,33 @@ elif args.task == "log_artifacts":
 elif args.task == "log_run":
     success = log_run(args.object_name)
 elif args.task == "search":
-    success = True
-
-    filter_string = (
-        create_filter_string(args.tags)
-        if args.explicit_query == 0
-        else "" if args.filter_string == "-" else args.filter_string
+    success, list_of_objects = search(
+        filter_string=args.tags,
+        server_style=args.server_style == 1,
     )
 
-    list_of_objects = search(filter_string)
+    if success:
+        list_of_objects = list_of_objects[args.offset :]
 
-    list_of_objects = list_of_objects[args.offset :]
+        if args.count != -1:
+            list_of_objects = list_of_objects[: args.count]
 
-    if args.count != -1:
-        list_of_objects = list_of_objects[: args.count]
-
-    if args.log:
-        logger.info(
-            "{:,} {}.".format(
-                len(list_of_objects),
-                args.item_name_plural,
-            ),
-        )
-        for index, object_name in enumerate(list_of_objects):
-            logger.info(f"#{index+1: 4d} - {object_name}")
-    else:
-        print(delim.join(list_of_objects))
+        if args.log:
+            logger.info(
+                "{:,} {}.".format(
+                    len(list_of_objects),
+                    args.item_name_plural,
+                ),
+            )
+            for index, object_name in enumerate(list_of_objects):
+                logger.info(f"#{index+1: 4d} - {object_name}")
+        else:
+            print(delim.join(list_of_objects))
 elif args.task == "set_tags":
     success = set_tags(
         args.object_name,
         args.tags,
+        verbose=args.verbose == 1,
     )
 elif args.task == "transition":
     success = transition(

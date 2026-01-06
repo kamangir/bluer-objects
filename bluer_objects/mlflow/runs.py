@@ -5,10 +5,10 @@ from mlflow.tracking import MlflowClient
 from mlflow.entities import ViewType
 
 from blueness import module
-from bluer_options import string
 from bluer_options.logger import crash_report
 
 from bluer_objects import NAME
+from bluer_objects import env
 from bluer_objects.mlflow.objects import get_id
 from bluer_objects.mlflow.tags import get_tags
 from bluer_objects.logger import logger
@@ -19,6 +19,9 @@ NAME = module.name(__file__, NAME)
 def end_run(
     object_name: str,
 ) -> bool:
+    if env.MLFLOW_IS_SERVERLESS:
+        return True
+
     try:
         mlflow.end_run()
         logger.info("⏹️  {}".format(object_name))
@@ -36,6 +39,9 @@ def get_run_id(
     create: bool = False,
     is_id: bool = False,
 ) -> Tuple[bool, List[str]]:
+    if env.MLFLOW_IS_SERVERLESS:
+        return True, []
+
     if is_id:
         experiment_id = object_name
     else:
@@ -62,6 +68,9 @@ def get_run_id(
 def start_run(
     object_name: str,
 ) -> bool:
+    if env.MLFLOW_IS_SERVERLESS:
+        return True
+
     success, experiment_id = get_id(object_name, create=True)
     if not success:
         return False

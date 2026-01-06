@@ -24,6 +24,6 @@ function test_bluer_objects_mlflow_tags_search() {
     local options=$1
 
     bluer_objects_mlflow_tags search \
-        cloned.firms_area-template-v1=True \
+        this=that,what,~who \
         --log 0
 }

@@ -3,9 +3,6 @@
 function test_bluer_objects_help() {
     local options=$1
 
-    # legacy, not tested:
-    #  - @mysql
-
     local module
     for module in \
         "@assets" \

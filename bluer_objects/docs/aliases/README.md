@@ -1,14 +1,19 @@
 # aliases
 
 - [@assets](./assets.md)
+- [@cache](./cache.md)
 - [@clone](./clone.md)
+- [@cp](./cp.md)
+- [@create_test_asset](./create_test_asset.md)
 - [@download](./download.md)
 - [@file](./file.md)
 - [@gif](./gif.md)
 - [@host](./host.md)
+- [@lock](./lock.md)
 - [@ls](./ls.md)
 - [@metadata](./metadata.md)
 - [@mlflow](./mlflow.md)
 - [@pdf](./pdf.md)
+- [@tags](./tags.md)
 - [@upload](./upload.md)
-
+- [@web](./web.md)

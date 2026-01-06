@@ -9,8 +9,7 @@ def help_read(
 ) -> str:
     return show_usage(
         [
-            "@mlflow",
-            "cache",
+            "@cache",
             "read",
             "<keyword>",
         ],
@@ -25,8 +24,7 @@ def help_write(
 ) -> str:
     return show_usage(
         [
-            "@mlflow",
-            "cache",
+            "@cache",
             "write",
             "<keyword>",
             "<value>",

@@ -14,14 +14,33 @@ def test_required_env():
 
 
 def test_bluer_objects_env():
-    assert env.ABCLI_MLFLOW_EXPERIMENT_PREFIX
+    for var in [
+        env.MLFLOW_IS_SERVERLESS,
+    ]:
+        assert var in (0, 1)
 
-    assert env.S3_STORAGE_BUCKET
-    assert env.S3_PUBLIC_STORAGE_BUCKET
+    for var in [
+        env.ABCLI_MLFLOW_EXPERIMENT_PREFIX,
+        env.BLUER_OBJECTS_TEST_OBJECT,
+        env.MLFLOW_DEPLOYMENT,
+        env.S3_PUBLIC_STORAGE_BUCKET,
+        env.S3_STORAGE_AWS_ACCESS_KEY_ID,
+        env.S3_STORAGE_AWS_SECRET_ACCESS_KEY,
+        env.S3_STORAGE_BUCKET,
+        env.S3_STORAGE_ENDPOINT_URL,
+        env.WEBDAV_HOSTNAME,
+        env.WEBDAV_LOGIN,
+        env.WEBDAV_PASSWORD,
+    ]:
+        assert isinstance(var, str)
+        assert var
 
-    assert env.S3_STORAGE_ENDPOINT_URL
-    assert env.S3_STORAGE_AWS_ACCESS_KEY_ID
-    assert env.S3_STORAGE_AWS_SECRET_ACCESS_KEY
+    for var in [
+        env.MLFLOW_LOCK_WAIT_FOR_CLEARANCE,
+        env.MLFLOW_LOCK_WAIT_FOR_EXCLUSIVITY,
+    ]:
+        assert isinstance(var, int)
+        assert var > 0
 
     assert env.BLUER_OBJECTS_STORAGE_INTERFACE in [
         S3Interface.name,
@@ -29,17 +48,3 @@ def test_bluer_objects_env():
         WebDAVRequestInterface.name,
         WebDAVzipInterface.name,
     ]
-
-    assert env.MLFLOW_DEPLOYMENT
-
-    assert isinstance(env.MLFLOW_LOCK_WAIT_FOR_CLEARANCE, int)
-    assert env.MLFLOW_LOCK_WAIT_FOR_CLEARANCE > 0
-
-    assert isinstance(env.MLFLOW_LOCK_WAIT_FOR_EXCLUSIVITY, int)
-    assert env.MLFLOW_LOCK_WAIT_FOR_EXCLUSIVITY > 0
-
-    assert env.WEBDAV_HOSTNAME
-    assert env.WEBDAV_LOGIN
-    assert env.WEBDAV_PASSWORD
-
-    assert env.BLUER_OBJECTS_TEST_OBJECT

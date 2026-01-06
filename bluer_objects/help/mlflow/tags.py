@@ -1,6 +1,8 @@
 from typing import List
 
-from bluer_options.terminal import show_usage, xtra
+from bluer_options.terminal import show_usage
+
+from bluer_objects import env
 
 search_args = [
     "[--count <-1>]",
@@ -16,8 +18,7 @@ def help_clone(
 ) -> str:
     return show_usage(
         [
-            "@mlflow",
-            "tags",
+            "@tags",
             "clone",
             "[..|<object-1>]",
             "[.|<object-2>]",
@@ -35,8 +36,7 @@ def help_get(
 
     return show_usage(
         [
-            "@mlflow",
-            "tags",
+            "@tags",
             "get",
             "[.|<object-name>]",
         ]
@@ -50,32 +50,11 @@ def help_search(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = "explicit"
+    options = "<keyword-1>=<value-1>,<keyword-2>,~<keyword-3>"
 
     usage_1 = show_usage(
         [
-            "@mlflow",
-            "tags",
-            "search",
-            f"[{options}]",
-        ]
-        + search_args
-        + ["[--filter_string <filter-string>]"],
-        "search mlflow for <filter-string>",
-        {
-            "<finter-string>: https://www.mlflow.org/docs/latest/search-experiments.html": ""
-        },
-        mono=mono,
-    )
-
-    # ---
-
-    options = "<keyword-1>=<value-1>,<keyword-2>,~<keyword-3>"
-
-    usage_2 = show_usage(
-        [
-            "@mlflow",
-            "tags",
+            "@tags",
             "search",
             f"[{options}]",
         ]
@@ -83,6 +62,34 @@ def help_search(
         "search mlflow.",
         mono=mono,
     )
+
+    if env.MLFLOW_IS_SERVERLESS:
+        return usage_1
+
+    # ---
+
+    args = sorted(
+        [
+            "[--server_style 1]",
+            "[--filter_string <filter-string>]",
+        ]
+        + search_args
+    )
+
+    usage_2 = show_usage(
+        [
+            "@tags",
+            "search",
+        ]
+        + args,
+        "search mlflow server for <filter-string>.",
+        {
+            "<filter-string>: https://www.mlflow.org/docs/latest/search-experiments.html": ""
+        },
+        mono=mono,
+    )
+
+    # ---
 
     return "\n".join(
         [
@@ -98,14 +105,18 @@ def help_set(
 ) -> str:
     options = "<keyword-1>=<value>,<keyword-2>,~<keyword-3>"
 
+    args = [
+        "[--verbose 1]",
+    ]
+
     return show_usage(
         [
-            "@mlflow",
-            "tags",
+            "@tags",
             "set",
             "[.|<object-name>]",
             f"[{options}]",
-        ],
+        ]
+        + args,
         "set tags in mlflow.",
         mono=mono,
     )

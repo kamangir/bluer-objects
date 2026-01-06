@@ -2,7 +2,7 @@
 
 🌀 `bluer-objects` are the inputs and outputs of [AI algo](https://github.com/kamangir/giza). They are maintained in cloud storage (supports [WebDav](https://pypi.org/project/webdavclient3/)) and their metadata is tracked by [MLflow](https://mlflow.org/). Examples are the Sentinel-2 [datacube](https://github.com/kamangir/blue-geo/tree/main/blue_geo/datacube) `datacube-EarthSearch-sentinel_2_l1c-S2A_10UDC_20240731_0_L1C` and 🌐 [`@geo watch` outputs](https://github.com/kamangir/blue-geo/tree/main/blue_geo/watch).
 
-Also home to 🌀 [bluer README](./bluer_objects/README/), and the 🔒 [`Lock`](./bluer_objects/mlflow/lock/).
+also home to 🌀 [bluer README](./bluer_objects/README/), the 🔒 [`lock`](./bluer_objects/mlflow/lock/), and [serverless mlflow](./bluer_objects/mlflow/serverless/).
 
 # installation
 
@@ -12,16 +12,23 @@ pip install bluer-objects
 
 # aliases
 
-[@assets](./bluer_objects/docs/aliases/assets.md), 
-[@clone](./bluer_objects/docs/aliases/clone.md), 
-[@download](./bluer_objects/docs/aliases/download.md), 
-[@gif](./bluer_objects/docs/aliases/gif.md), 
-[@host](./bluer_objects/docs/aliases/host.md), 
-[@ls](./bluer_objects/docs/aliases/ls.md), 
-[@metadata](./bluer_objects/docs/aliases/metadata.md), 
-[@mlflow](./bluer_objects/docs/aliases/mlflow.md), 
-[@pdf](./bluer_objects/docs/aliases/pdf.md), 
-[@upload](./bluer_objects/docs/aliases/upload.md).
+[@assets](./bluer_objects/docs/aliases/assets.md) 
+[@cache](./bluer_objects/docs/aliases/cache.md) 
+[@clone](./bluer_objects/docs/aliases/clone.md) 
+[@cp](./bluer_objects/docs/aliases/cp.md) 
+[@create_test_asset](./bluer_objects/docs/aliases/create_test_asset.md) 
+[@download](./bluer_objects/docs/aliases/download.md) 
+[@file](./bluer_objects/docs/aliases/file.md) 
+[@gif](./bluer_objects/docs/aliases/gif.md) 
+[@host](./bluer_objects/docs/aliases/host.md) 
+[@lock](./bluer_objects/docs/aliases/lock.md) 
+[@ls](./bluer_objects/docs/aliases/ls.md) 
+[@metadata](./bluer_objects/docs/aliases/metadata.md) 
+[@mlflow](./bluer_objects/docs/aliases/mlflow.md) 
+[@pdf](./bluer_objects/docs/aliases/pdf.md) 
+[@tags](./bluer_objects/docs/aliases/tags.md) 
+[@upload](./bluer_objects/docs/aliases/upload.md) 
+[@web](./bluer_objects/docs/aliases/web.md) 
 
 ---
 
@@ -32,4 +39,4 @@ pip install bluer-objects
 
 [![pylint](https://github.com/kamangir/bluer-objects/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/bluer-objects/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/bluer-objects/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/bluer-objects.svg)](https://pypi.org/project/bluer-objects/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/bluer-objects)](https://pypistats.org/packages/bluer-objects)
 
-built by 🌀 [`bluer README`](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README), based on 🌀 [`bluer_objects-6.380.1`](https://github.com/kamangir/bluer-objects).
+built by 🌀 [`bluer README`](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README), based on 🌀 [`bluer_objects-6.412.1`](https://github.com/kamangir/bluer-objects).

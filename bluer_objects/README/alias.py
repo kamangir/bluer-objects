@@ -46,7 +46,7 @@ def list_of_aliases(
             (
                 f"- [@{alias_name}](./{alias_name}.md)"
                 if itemized
-                else f"[@{alias_name}](./bluer_agent/docs/aliases/{alias_name}.md) "
+                else f"[@{alias_name}](./{module_name}/docs/aliases/{alias_name}.md) "
             )
             if as_markdown
             else alias_name
