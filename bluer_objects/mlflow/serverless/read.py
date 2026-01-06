@@ -15,5 +15,5 @@ def get_tags(
     return api.read(
         object_name="_serverless_objects",
         filename=f"{object_name}.yaml",
-        log=verbose,
+        verbose=verbose,
     )
