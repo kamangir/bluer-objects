@@ -62,18 +62,23 @@ def get_tags(
 def search(
     filter_string: Union[str, dict],
     server_style: bool = False,
+    verbose: bool = False,
 ) -> Tuple[bool, List[str]]:
     if server_style and env.MLFLOW_IS_SERVERLESS:
         logger.error("server_style search is not supported when mlflow is serverless.")
         return False, []
 
-    if server_style:
-        filter_string = create_server_style_filter_string(filter_string)
-    elif filter_string == "-":
+    if filter_string == "-":
         filter_string = ""
 
     if env.MLFLOW_IS_SERVERLESS:
-        return serverless.search(filter_string=filter_string)
+        return serverless.search(
+            filter_string=filter_string,
+            log=verbose,
+        )
+
+    if not server_style:
+        filter_string = create_server_style_filter_string(filter_string)
 
     client = MlflowClient()
 
@@ -107,8 +112,8 @@ def set_tags(
             object_name,
             tags=tags,
             log=log,
-            icon=icon,
             verbose=verbose,
+            icon=icon,
         )
 
     experiment_name = to_experiment_name(object_name)

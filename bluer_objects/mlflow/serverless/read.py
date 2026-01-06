@@ -1,14 +1,9 @@
-from typing import Tuple, Dict, Union
+from typing import Tuple, Dict
 
 from blueness import module
-from bluer_options.options import Options
 
 from bluer_objects import NAME
-from bluer_objects import env
-from bluer_objects import file
-from bluer_objects import objects
-from bluer_objects import storage
-from bluer_objects.logger import logger
+from bluer_objects.mlflow.serverless import api
 
 NAME = module.name(__file__, NAME)
 
@@ -17,18 +12,8 @@ def get_tags(
     object_name: str,
     verbose: bool = False,
 ) -> Tuple[bool, Dict[str, str]]:
-    if not storage.download(
+    return api.read(
         object_name="_serverless_objects",
         filename=f"{object_name}.yaml",
         log=verbose,
-    ):
-        return True, {}
-
-    return file.load_yaml(
-        objects.path_of(
-            object_name="_serverless_objects",
-            filename=f"{object_name}.yaml",
-        ),
-        ignore_error=True,
-        default={},
     )

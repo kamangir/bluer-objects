@@ -69,6 +69,7 @@ def signature(info=None, object_name="."):
 def unique_object(
     prefix: str = "",
     include_time: bool = True,
+    log: bool = True,
 ):
     object_name = string.pretty_date(
         as_filename=True,
@@ -80,6 +81,7 @@ def unique_object(
 
     path.create(object_path(object_name))
 
-    logger.info(f"📂 {object_name}")
+    if log:
+        logger.info(f"📂 {object_name}")
 
     return object_name
