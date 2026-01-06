@@ -24,7 +24,6 @@ from bluer_objects.mlflow.runs import (
     start_run,
 )
 from bluer_objects.mlflow.tags import (
-    create_server_style_filter_string,
     get_tags,
     search,
     set_tags,
