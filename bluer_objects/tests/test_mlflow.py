@@ -22,14 +22,32 @@ def test_from_and_to_experiment_name():
 
 
 def test_mlflow_testing():
+    MLFLOW_IS_SERVERLESS = env.MLFLOW_IS_SERVERLESS
+    env.MLFLOW_IS_SERVERLESS = False
+
     assert testing.test()
+
+    env.MLFLOW_IS_SERVERLESS = MLFLOW_IS_SERVERLESS
 
 
 @pytest.mark.parametrize(
     ["tags_str"],
     [["x=1,y=2,z=3"]],
 )
-def test_mlflow_tags_set_get(tags_str: str):
+@pytest.mark.parametrize(
+    ["serverless"],
+    [
+        [False],
+        [True],
+    ],
+)
+def test_mlflow_tags_set_get(
+    tags_str: str,
+    serverless: bool,
+):
+    MLFLOW_IS_SERVERLESS = env.MLFLOW_IS_SERVERLESS
+    env.MLFLOW_IS_SERVERLESS = serverless
+
     object_name = unique_object("test_mlflow_tag_set_get")
 
     assert tags.set_tags(
@@ -45,19 +63,39 @@ def test_mlflow_tags_set_get(tags_str: str):
     for keyword, value in tags_option.items():
         assert tags_read[keyword] == value
 
+    env.MLFLOW_IS_SERVERLESS = MLFLOW_IS_SERVERLESS
+
 
 @pytest.mark.parametrize(
     [
         "filter_string",
         "server_style",
+        "serverless",
+        "success_expected",
     ],
     [
         [
             "this=that,what,~who",
             False,
+            True,
+            True,
+        ],
+        [
+            "this=that,what,~who",
+            False,
+            False,
+            True,
         ],
         [
             'tags."this" = "that" and tags."what" = "True" and tags."who" = "False"',
+            True,
+            True,
+            False,
+        ],
+        [
+            'tags."this" = "that" and tags."what" = "True" and tags."who" = "False"',
+            True,
+            False,
             True,
         ],
     ],
@@ -65,13 +103,18 @@ def test_mlflow_tags_set_get(tags_str: str):
 def test_mlflow_tags_search(
     filter_string: str,
     server_style: bool,
+    serverless: bool,
+    success_expected: bool,
 ):
     MLFLOW_IS_SERVERLESS = env.MLFLOW_IS_SERVERLESS
-    env.MLFLOW_IS_SERVERLESS = server_style
+    env.MLFLOW_IS_SERVERLESS = serverless
 
-    success, list_of_objects = tags.search(filter_string)
+    success, list_of_objects = tags.search(
+        filter_string,
+        server_style=server_style,
+    )
 
-    assert success
+    assert success == success_expected
     assert is_list_of_str(list_of_objects)
 
     env.MLFLOW_IS_SERVERLESS = MLFLOW_IS_SERVERLESS
@@ -86,12 +129,28 @@ def test_mlflow_tags_search(
         ]
     ],
 )
-def test_mlflow_cache_read_write(keyword: str, value: str):
+@pytest.mark.parametrize(
+    ["serverless"],
+    [
+        [True],
+        [False],
+    ],
+)
+def test_mlflow_cache_read_write(
+    keyword: str,
+    value: str,
+    serverless: bool,
+):
+    MLFLOW_IS_SERVERLESS = env.MLFLOW_IS_SERVERLESS
+    env.MLFLOW_IS_SERVERLESS = serverless
+
     assert cache.write(keyword, value)
 
     success, value_read = cache.read(keyword)
     assert success
     assert value_read == value
+
+    env.MLFLOW_IS_SERVERLESS = MLFLOW_IS_SERVERLESS
 
 
 @pytest.mark.parametrize(

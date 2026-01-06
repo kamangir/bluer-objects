@@ -240,7 +240,7 @@ elif args.task == "log_run":
     success = log_run(args.object_name)
 elif args.task == "search":
     success, list_of_objects = search(
-        filter_string=args.filter_string,
+        filter_string=args.tags,
         server_style=args.server_style == 1,
     )
 
