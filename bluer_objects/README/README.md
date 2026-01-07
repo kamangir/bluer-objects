@@ -21,6 +21,7 @@ metadata:::<object-name>
 metadata:::<object-name>:::this.that
 
 object:::<object-name>
+object:::<object-name>:::<filename>
 
 set:::<object_name> <object-name>
 set:::<object_name> env:::ENV_NAME
