@@ -182,22 +182,25 @@ def process_objects(template_line: str) -> str:
     def object_name(token: str):
         return token.split(":::")[1].strip()
 
-    def filename(token: str):
+    def suffix(token: str):
         words = token.split(":::")
-        if len(words) > 2:
-            return words[2].strip()
+        object_name_ = object_name(token)
 
-        return "{}.tar.gz".format(object_name(token))
+        return (
+            "{}/{}".format(object_name_, words[2].strip())
+            if len(words) > 2
+            else f"{object_name_}.tar.gz"
+        )
 
     if "object:::" in template_line:
         template_line = " ".join(
             [
                 (
                     "[{}](https://{}.{}/{})".format(
-                        object_name(token),
+                        suffix(token),
                         env.S3_PUBLIC_STORAGE_BUCKET,
                         env.S3_STORAGE_ENDPOINT_URL.split("https://", 1)[1],
-                        filename(token),
+                        suffix(token),
                     )
                     if token.startswith("object:::")
                     else token
