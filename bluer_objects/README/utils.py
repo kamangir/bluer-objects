@@ -179,15 +179,25 @@ def process_mermaid(template_line: str) -> List[str]:
 
 
 def process_objects(template_line: str) -> str:
+    def object_name(token: str):
+        return token.split(":::")[1].strip()
+
+    def filename(token: str):
+        words = token.split(":::")
+        if len(words) > 2:
+            return words[2].strip()
+
+        return "{}.tar.gz".format(object_name(token))
+
     if "object:::" in template_line:
         template_line = " ".join(
             [
                 (
-                    "[{}](https://{}.{}/{}.tar.gz)".format(
-                        token.split(":::")[1].strip(),
+                    "[{}](https://{}.{}/{})".format(
+                        object_name(token),
                         env.S3_PUBLIC_STORAGE_BUCKET,
                         env.S3_STORAGE_ENDPOINT_URL.split("https://", 1)[1],
-                        token.split(":::")[1].strip(),
+                        filename(token),
                     )
                     if token.startswith("object:::")
                     else token
