@@ -179,18 +179,15 @@ def process_mermaid(template_line: str) -> List[str]:
 
 
 def process_objects(template_line: str) -> str:
-    def object_name(token: str):
-        return token.split(":::")[1].strip()
-
     def suffix(token: str):
         words = token.split(":::")
-        object_name_ = object_name(token)
+        object_name = token.split(":::")[1].strip()
 
-        return (
-            "{}/{}".format(object_name_, words[2].strip())
-            if len(words) > 2
-            else f"{object_name_}.tar.gz"
-        )
+        if len(words) <= 2:
+            return f"{object_name}.tar.gz"
+
+        filename = words[2].strip()
+        return f"{object_name}/{filename}"
 
     if "object:::" in template_line:
         template_line = " ".join(
