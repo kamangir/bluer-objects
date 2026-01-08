@@ -10,8 +10,8 @@ asset management in [github/kamangir/assets](https://github.com/kamangir/assets)
  . cd assets volume.
 @assets \
 	mv \
-	[create,extension=<png>,vol=<2>] \
-	[<path>] \
+	[~create,extension=<jpg>,vol=<2>] \
+	[<this/that>] \
 	[push,browse,~increment_version,offline,~status]
  . mv assets to volume.
 @assets \
