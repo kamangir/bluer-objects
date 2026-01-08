@@ -21,6 +21,7 @@ def test_bluer_objects_env():
 
     for var in [
         env.ABCLI_MLFLOW_EXPERIMENT_PREFIX,
+        env.BLUER_OBJECTS_DEFAULT_ASSETS_VOL,
         env.BLUER_OBJECTS_TEST_OBJECT,
         env.MLFLOW_DEPLOYMENT,
         env.S3_PUBLIC_STORAGE_BUCKET,

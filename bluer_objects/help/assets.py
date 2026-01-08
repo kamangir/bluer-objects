@@ -1,7 +1,9 @@
 from typing import List
 
-from bluer_options.terminal import show_usage, xtra
 from bluer_ai.help.git import push_options
+from bluer_options.terminal import show_usage, xtra
+
+from bluer_objects import env
 
 
 def help_cd(
@@ -11,7 +13,7 @@ def help_cd(
     options = "".join(
         [
             xtra("create,", mono=mono),
-            "vol=<2>",
+            "vol=<{}>".format(env.BLUER_OBJECTS_DEFAULT_ASSETS_VOL),
         ]
     )
 
@@ -31,19 +33,14 @@ def help_mv(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = "".join(
-        [
-            xtra("create,", mono=mono),
-            "extension=<png>,vol=<2>",
-        ]
-    )
+    options = xtra("~create,extension=<jpg>,vol=<2>", mono=mono)
 
     return show_usage(
         [
             "@assets",
             "mv",
             f"[{options}]",
-            "[<path>]",
+            "[<this/that>]",
             "[push,{}]".format(
                 push_options(
                     mono=mono,

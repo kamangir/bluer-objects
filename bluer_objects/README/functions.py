@@ -195,8 +195,26 @@ def build(
                 content_section = process_mermaid(template_line)
         else:
             for macro, macro_value in macros.items():
-                if macro in template_line:
-                    content_section = macro_value
+                if macro not in template_line:
+                    continue
+
+                if template_line.replace(macro, "").strip():
+                    # this and that macro::: is going to be ...
+                    content_section = [
+                        template_line.replace(
+                            macro,
+                            (
+                                " ".join(macro_value)
+                                if isinstance(macro_value, list)
+                                else macro_value
+                            ),
+                        )
+                    ]
+                else:
+                    # macro:::
+                    content_section = (
+                        macro_value if isinstance(macro_value, list) else [macro_value]
+                    )
                     break
 
         content += content_section
