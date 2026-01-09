@@ -3,10 +3,11 @@ import os
 import yaml
 
 from blueness import module
+from bluer_options import env
 
 from bluer_objects import NAME as MY_NAME
 from bluer_objects.metadata import get_from_object
-from bluer_objects import file, env
+from bluer_objects import file
 from bluer_objects import markdown
 from bluer_objects.README.utils import (
     apply_legacy,
@@ -42,7 +43,7 @@ def build(
     help_function: Union[Callable[[List[str]], str], None] = None,
     legacy_mode: bool = True,
     assets_repo: str = "kamangir/assets",
-    download: bool = True,
+    download: bool = env.BLUER_AI_IS_ONLINE,
 ) -> bool:
     if path:
         if path.endswith(".md"):
@@ -56,7 +57,7 @@ def build(
         MODULE_NAME = REPO_NAME
 
     logger.info(
-        "{}.build: {}-{}: {}[{}]: {} -{}> {}".format(
+        "{}.build: {}-{}: {}[{}]: {} -{}{}> {}".format(
             MY_NAME,
             NAME,
             VERSION,
@@ -64,6 +65,7 @@ def build(
             MODULE_NAME,
             template_filename,
             "+legacy-" if legacy_mode else "",
+            "download-" if download else "",
             filename,
         )
     )
