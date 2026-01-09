@@ -19,6 +19,12 @@ parser.add_argument(
     "--url",
     type=str,
 )
+parser.add_argument(
+    "--timeout",
+    type=int,
+    default="3",
+    help="in seconds",
+)
 args = parser.parse_args()
 
 success = False

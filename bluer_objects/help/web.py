@@ -7,12 +7,17 @@ def help_is_accessible(
     tokens: List[str],
     mono: bool,
 ) -> str:
+    args = [
+        "[--timeout 3]",
+    ]
+
     return show_usage(
         [
             "@web",
             "is_accessible",
             "<url>",
-        ],
+        ]
+        + args,
         "is <url> accessible?",
         mono=mono,
     )
