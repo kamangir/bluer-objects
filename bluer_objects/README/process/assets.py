@@ -5,22 +5,24 @@ def process_assets(
     template_line: str,
     assets_repo: str,
 ) -> str:
+    prefix = f"https://github.com/{assets_repo}/blob/main"
+
     if "assets:::" in template_line:
         template_line = " ".join(
             [
                 (
                     (
-                        "![image](https://github.com/{}/blob/main/{}?raw=true)".format(
-                            assets_repo,
+                        "![image]({}/{}?raw=true)".format(
+                            prefix,
                             token.split(":::")[1].strip(),
                         )
                         if any(
                             token.endswith(extension)
                             for extension in ["png", "jpg", "jpeg", "gif"]
                         )
-                        else "[{}](https://github.com/{}/blob/main/{})".format(
+                        else "[{}]({}/{})".format(
                             file.name_and_extension(token.split(":::")[1].strip()),
-                            assets_repo,
+                            prefix,
                             token.split(":::")[1].strip(),
                         )
                     )
