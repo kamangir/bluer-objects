@@ -1,6 +1,7 @@
 from bluer_objects import NAME
-from bluer_objects.README import aliases, modules
+from bluer_objects.README.build import modules
 from bluer_objects.README.alias import list_of_aliases
+from bluer_objects.README.build import aliases
 
 docs = (
     [

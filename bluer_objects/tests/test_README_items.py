@@ -1,4 +1,4 @@
-from bluer_objects.README.items import ImageItems, Items, Items_of_dict, list_of_dict
+from bluer_objects.README.build.items import ImageItems, Items, Items_of_dict, list_of_dict
 from bluer_objects.README.consts import assets, assets2
 from bluer_objects import markdown
 from bluer_objects import env

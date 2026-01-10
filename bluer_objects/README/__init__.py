@@ -4,9 +4,9 @@ from bluer_options.help.functions import get_help
 
 from bluer_objects import NAME, VERSION, REPO_NAME, ICON
 from bluer_objects import file
-from bluer_objects.README.docs import docs
+from bluer_objects.README.build.docs import docs
 from bluer_objects.README.functions import build
-from bluer_objects.README.items import Items
+from bluer_objects.README.build.items import Items
 from bluer_objects.help.functions import help_functions
 
 

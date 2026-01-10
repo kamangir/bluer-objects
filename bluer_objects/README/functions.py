@@ -9,20 +9,17 @@ from bluer_objects import NAME as MY_NAME
 from bluer_objects.metadata import get_from_object
 from bluer_objects import file
 from bluer_objects import markdown
-from bluer_objects.README.utils import (
-    apply_legacy,
-    process_assets,
-    process_details,
-    process_envs,
-    process_help,
-    process_include,
-    process_mermaid,
-    process_objects,
-    process_title,
-    process_variable,
-    signature,
-    variables,
-)
+from bluer_objects.README.process.assets import process_assets
+from bluer_objects.README.process.details import process_details
+from bluer_objects.README.process.envs import process_envs
+from bluer_objects.README.process.help import process_help
+from bluer_objects.README.process.include import process_include
+from bluer_objects.README.process.legacy import apply_legacy
+from bluer_objects.README.process.mermaid import process_mermaid
+from bluer_objects.README.process.objects import process_objects
+from bluer_objects.README.process.title import process_title
+from bluer_objects.README.process.variables import process_variable, variables
+from bluer_objects.README.process.signature import signature
 from bluer_objects.logger import logger
 
 MY_NAME = module.name(__file__, MY_NAME)
