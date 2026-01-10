@@ -86,10 +86,6 @@ function test_bluer_objects_help() {
         \
         "@upload" \
         \
-        "@web" \
-        "@web is_accessible" \
-        "@web where_am_i" \
-        \
         "@wait" \
         \
         "bluer_objects"; do
