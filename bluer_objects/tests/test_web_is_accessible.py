@@ -1,4 +1,4 @@
-from bluer_ai.web.functions import is_accessible
+from bluer_ai.web.accessible import is_accessible
 from bluer_ai.env import abcli_is_github_workflow
 
 

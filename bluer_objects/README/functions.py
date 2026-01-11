@@ -40,7 +40,7 @@ def build(
     help_function: Union[Callable[[List[str]], str], None] = None,
     legacy_mode: bool = True,
     assets_repo: str = "kamangir/assets",
-    download: bool = env.BLUER_AI_IS_ONLINE,
+    download: bool = env.BLUER_AI_WEB_STATUS != "offline",
 ) -> bool:
     if path:
         if path.endswith(".md"):
