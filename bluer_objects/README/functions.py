@@ -2,13 +2,15 @@ from typing import List, Dict, Union, Callable
 import os
 import yaml
 
+from bluer_objects import NAME as MY_NAME
 from blueness import module
 from bluer_options import env
-
-from bluer_objects import NAME as MY_NAME
-from bluer_objects.metadata import get_from_object
+from bluer_objects.env import abcli_path_git
 from bluer_objects import file
+from bluer_objects import path as path_
 from bluer_objects import markdown
+from bluer_objects.metadata import get_from_object
+from bluer_objects.README.consts import assets_url
 from bluer_objects.README.process.assets import process_assets
 from bluer_objects.README.process.details import process_details
 from bluer_objects.README.process.envs import process_envs
@@ -217,5 +219,19 @@ def build(
                     break
 
         content += content_section
+
+    if env.BLUER_AI_WEB_STATUS != "online":
+        logger.info("🇮🇷 national internet adjustments...")
+        for volume in ["", "2"]:
+            content = [
+                line.replace(
+                    assets_url(volume=volume),
+                    path_.relative(
+                        f"{abcli_path_git}/assets{volume}/",
+                        file.path(filename),
+                    ),
+                )
+                for line in content
+            ]
 
     return file.save_text(filename, content)
