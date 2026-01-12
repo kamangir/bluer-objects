@@ -2,13 +2,14 @@ from typing import List, Dict, Union, Callable
 import os
 import yaml
 
-from bluer_objects import NAME as MY_NAME
 from blueness import module
 from bluer_options import env
-from bluer_objects.env import abcli_path_git
+from bluer_options.logger import shorten_text
+from bluer_objects import NAME as MY_NAME
 from bluer_objects import file
 from bluer_objects import path as path_
 from bluer_objects import markdown
+from bluer_objects.env import abcli_path_git
 from bluer_objects.metadata import get_from_object
 from bluer_objects.README.consts import assets_url
 from bluer_objects.README.process.assets import process_assets
@@ -108,7 +109,7 @@ def build(
                 download=download,
             )
 
-            logger.info(f"metadata[{object_name_and_key}] = {value}")
+            logger.info(shorten_text(f"metadata[{object_name_and_key}] = {value}"))
 
             if template_line.startswith("metadata:::"):
                 content += (
