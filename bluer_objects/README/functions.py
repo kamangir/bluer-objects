@@ -11,7 +11,7 @@ from bluer_objects import path as path_
 from bluer_objects import markdown
 from bluer_objects.env import abcli_path_git
 from bluer_objects.metadata import get_from_object
-from bluer_objects.README.consts import assets_url
+from bluer_objects.README.consts import assets_url, designs_url
 from bluer_objects.README.process.assets import process_assets
 from bluer_objects.README.process.details import process_details
 from bluer_objects.README.process.envs import process_envs
@@ -223,12 +223,18 @@ def build(
 
     if env.BLUER_AI_WEB_STATUS != "online":
         logger.info("🇮🇷 national internet adjustments...")
-        for volume in ["", "2"]:
+        for this, that in {
+            **{
+                assets_url(volume=volume): f"{abcli_path_git}/assets{volume}/"
+                for volume in ["", "2"]
+            },
+            **{designs_url(""): f"{abcli_path_git}/bluer-designs/"},
+        }.items():
             content = [
                 line.replace(
-                    assets_url(volume=volume),
+                    this,
                     path_.relative(
-                        f"{abcli_path_git}/assets{volume}/",
+                        that,
                         file.path(filename),
                     ),
                 )
