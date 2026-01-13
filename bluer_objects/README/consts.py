@@ -17,10 +17,12 @@ def designs_url(suffix: str) -> str:
 def assets_url(
     suffix: str = "",
     volume: Union[str, int] = "",
+    blob: bool = False,
 ) -> str:
-    return "{}/assets{}/raw/main{}".format(
+    return "{}/assets{}/{}/main{}".format(
         github_kamangir,
         str(volume),
+        "blob" if blob else "raw",
         f"/{suffix}" if suffix else "",
     )
 

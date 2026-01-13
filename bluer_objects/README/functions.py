@@ -225,7 +225,16 @@ def build(
         logger.info("🇮🇷 national internet adjustments...")
         for this, that in {
             **{
-                assets_url(volume=volume): f"{abcli_path_git}/assets{volume}/"
+                assets_url(
+                    volume=volume,
+                ): f"{abcli_path_git}/assets{volume}/"
+                for volume in ["", "2"]
+            },
+            **{
+                assets_url(
+                    volume=volume,
+                    blob=True,
+                ): f"{abcli_path_git}/assets{volume}/"
                 for volume in ["", "2"]
             },
             **{designs_url(""): f"{abcli_path_git}/bluer-designs/"},
