@@ -7,11 +7,8 @@ from bluer_options import env
 from bluer_options.logger import shorten_text
 from bluer_objects import NAME as MY_NAME
 from bluer_objects import file
-from bluer_objects import path as path_
 from bluer_objects import markdown
-from bluer_objects.env import abcli_path_git
 from bluer_objects.metadata import get_from_object
-from bluer_objects.README.consts import assets_url, designs_url
 from bluer_objects.README.process.assets import process_assets
 from bluer_objects.README.process.details import process_details
 from bluer_objects.README.process.envs import process_envs
@@ -19,6 +16,7 @@ from bluer_objects.README.process.help import process_help
 from bluer_objects.README.process.include import process_include
 from bluer_objects.README.process.legacy import apply_legacy
 from bluer_objects.README.process.mermaid import process_mermaid
+from bluer_objects.README.process.national_internet import process_national_internet
 from bluer_objects.README.process.objects import process_objects
 from bluer_objects.README.process.title import process_title
 from bluer_objects.README.process.variables import process_variable, variables
@@ -221,28 +219,9 @@ def build(
 
         content += content_section
 
-    if env.BLUER_AI_WEB_STATUS != "online":
-        logger.info("🇮🇷 national internet adjustments...")
-        for this, that in {
-            **{
-                assets_url(
-                    volume=volume,
-                    blob=blob,
-                ): f"{abcli_path_git}/assets{volume}/"
-                for volume in ["", "2"]
-                for blob in [False, True]
-            },
-            designs_url(""): f"{abcli_path_git}/bluer-designs/",
-        }.items():
-            content = [
-                line.replace(
-                    this,
-                    path_.relative(
-                        that,
-                        file.path(filename),
-                    ),
-                )
-                for line in content
-            ]
+    content = process_national_internet(
+        filename,
+        content,
+    )
 
     return file.save_text(filename, content)
