@@ -227,17 +227,12 @@ def build(
             **{
                 assets_url(
                     volume=volume,
+                    blob=blob,
                 ): f"{abcli_path_git}/assets{volume}/"
                 for volume in ["", "2"]
+                for blob in [False, True]
             },
-            **{
-                assets_url(
-                    volume=volume,
-                    blob=True,
-                ): f"{abcli_path_git}/assets{volume}/"
-                for volume in ["", "2"]
-            },
-            **{designs_url(""): f"{abcli_path_git}/bluer-designs/"},
+            designs_url(""): f"{abcli_path_git}/bluer-designs/",
         }.items():
             content = [
                 line.replace(
