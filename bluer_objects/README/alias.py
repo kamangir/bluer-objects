@@ -4,6 +4,8 @@ from pathlib import Path
 import os
 import re
 
+from bluer_ai import NAME as BLUER_AI_NAME
+
 from bluer_objects import file
 
 
@@ -18,7 +20,11 @@ def list_of_aliases(
 
     alias_sh_path = os.path.join(
         module_path,
-        ".abcli/alias.sh",
+        (
+            ".abcli/plugins/alias.sh"
+            if module_name == BLUER_AI_NAME
+            else ".abcli/alias.sh"
+        ),
     )
 
     output: List[str] = []
@@ -41,6 +47,12 @@ def list_of_aliases(
         m = re.fullmatch(r"alias\s+@([^=]+)=.+", s.strip())
         return m.group(1) if m else ""
 
+    list_of_aliases = [
+        alias_name
+        for alias_name in sorted([extract_alias_name(line) for line in content])
+        if alias_name not in ["", "."]
+    ]
+
     return [
         (
             (
@@ -51,6 +63,5 @@ def list_of_aliases(
             if as_markdown
             else alias_name
         )
-        for alias_name in sorted([extract_alias_name(line) for line in content])
-        if alias_name
+        for alias_name in list_of_aliases
     ]
