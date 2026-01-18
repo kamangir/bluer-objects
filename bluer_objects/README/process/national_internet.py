@@ -23,7 +23,7 @@ def process_national_internet(
         "{}/{}/{}/main".format(
             github_kamangir,
             repo_name,
-            "blob" if blob else "raw",
+            where,
         ): "{}/{}".format(
             abcli_path_git,
             repo_name,
@@ -35,9 +35,10 @@ def process_national_internet(
             ]
             + [module.replace("_", "-") for module in list_of_modules]
         )
-        for blob in [
-            False,
-            True,
+        for where in [
+            "blob",
+            "raw",
+            "tree",
         ]
     }.items():
         content = [
