@@ -3,11 +3,15 @@
 function test_bluer_objects_pdf_convert_inline() {
     local options=$1
 
+    local do_install=1
+    [[ "$abcli_is_mac" == true ]] &&
+        do_install=0
+
     local object_name=test_bluer_objects_pdf_convert-$(bluer_ai_string_timestamp)
 
     bluer_ai_eval ,$options \
         bluer_objects_pdf_convert \
-        inline,install,combine,$2 \
+        inline,install=$do_install,combine,$2 \
         bluer_objects \
         aliases,aliases/assets.md \
         $object_name \
@@ -23,7 +27,7 @@ function test_bluer_objects_pdf_convert() {
 
     bluer_ai_eval ,$options \
         bluer_objects_pdf_convert \
-        install,combine,$2 \
+        install=$do_install,combine,$2 \
         $object_name \
         "${@:3}"
 
