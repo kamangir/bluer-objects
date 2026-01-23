@@ -42,6 +42,7 @@ def build(
     legacy_mode: bool = True,
     assets_repo: str = "kamangir/assets",
     download: bool = env.BLUER_AI_WEB_STATUS != "offline",
+    verbose: bool = False,
 ) -> bool:
     if path:
         if path.endswith(".md"):
@@ -67,6 +68,10 @@ def build(
             filename,
         )
     )
+
+    if verbose:
+        logger.info(f"filename: {filename}")
+        logger.info(f"items: {items}")
 
     table_of_items = markdown.generate_table(items, cols=cols) if cols > 0 else items
 
