@@ -5,8 +5,7 @@ function bluer_objects_assets_publish() {
 
     local do_download=$(bluer_ai_option_int "$options" download 0)
 
-    local do_pull=1
-    [[ "$BLUER_AI_WEB_STATUS" != "online" ]] && do_pull=0
+    local do_pull=$BLUER_AI_INTERNET_OUTSIDE_IS_ACCESSIBLE
     do_pull=$(bluer_ai_option_int "$options" pull $do_pull)
     local do_push=$(bluer_ai_option_int "$options" push 0)
     local extensions=$(bluer_ai_option "$options" extensions png)
