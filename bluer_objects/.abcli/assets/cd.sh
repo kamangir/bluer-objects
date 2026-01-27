@@ -3,7 +3,7 @@
 function bluer_objects_assets_cd() {
     local options=$1
     local do_create=$(bluer_ai_option_int "$options" create 0)
-    local volume=$(bluer_ai_option "$options" vol)
+    local volume=$(bluer_ai_option "$options" vol $BLUER_OBJECTS_DEFAULT_ASSETS_VOL)
 
     local path=$2
     path=$abcli_path_git/assets$volume/$path

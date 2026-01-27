@@ -79,8 +79,7 @@ def convert(
             ):
                 return False
         elif file.extension(source_filename) in [
-            extension.split(".", 1)[1]
-            for extension in Image.registered_extensions().keys()
+            extension.split(".", 1)[1] for extension in Image.registered_extensions()
         ]:
             if not convert_image(
                 source_filename,

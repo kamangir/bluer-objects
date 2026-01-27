@@ -23,10 +23,11 @@ setup(
         f"{NAME}.pdf",
         f"{NAME}.pdf.convert",
         f"{NAME}.README",
+        f"{NAME}.README.build",
+        f"{NAME}.README.process",
         f"{NAME}.storage",
         f"{NAME}.testing",
         f"{NAME}.tests",
-        f"{NAME}.web",
     ],
     include_package_data=True,
     package_data={

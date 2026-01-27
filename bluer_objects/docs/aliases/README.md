@@ -16,4 +16,3 @@
 - [@pdf](./pdf.md)
 - [@tags](./tags.md)
 - [@upload](./upload.md)
-- [@web](./web.md)

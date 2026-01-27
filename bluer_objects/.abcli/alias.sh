@@ -30,8 +30,6 @@ alias @pdf=bluer_objects_pdf
 
 alias @upload=bluer_objects_upload
 
-alias @web=bluer_objects_web
-
 # ignore
 alias @i=bluer_ai
 alias @ai=bluer_ai

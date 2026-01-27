@@ -1,5 +1,7 @@
 import pytest
 
+from bluer_options.env import BLUER_AI_INTERNET_INSIDE_IS_ACCESSIBLE
+
 from bluer_objects import objects, file
 
 
@@ -10,6 +12,9 @@ from bluer_objects import objects, file
     ],
 )
 def test_file_download(url: str):
+    if not BLUER_AI_INTERNET_INSIDE_IS_ACCESSIBLE:
+        return
+
     object_name = objects.unique_object("test_file_download")
 
     filename = objects.path_of(

@@ -3,25 +3,24 @@ import os
 import yaml
 
 from blueness import module
-
+from bluer_options.logger import shorten_text
+from bluer_options.env import BLUER_AI_INTERNET_INSIDE_IS_ACCESSIBLE
 from bluer_objects import NAME as MY_NAME
-from bluer_objects.metadata import get_from_object
-from bluer_objects import file, env
+from bluer_objects import file
 from bluer_objects import markdown
-from bluer_objects.README.utils import (
-    apply_legacy,
-    process_assets,
-    process_details,
-    process_envs,
-    process_help,
-    process_include,
-    process_mermaid,
-    process_objects,
-    process_title,
-    process_variable,
-    signature,
-    variables,
-)
+from bluer_objects.metadata import get_from_object
+from bluer_objects.README.process.assets import process_assets
+from bluer_objects.README.process.details import process_details
+from bluer_objects.README.process.envs import process_envs
+from bluer_objects.README.process.help import process_help
+from bluer_objects.README.process.include import process_include
+from bluer_objects.README.process.legacy import apply_legacy
+from bluer_objects.README.process.mermaid import process_mermaid
+from bluer_objects.README.process.national_internet import process_national_internet
+from bluer_objects.README.process.objects import process_objects
+from bluer_objects.README.process.title import process_title
+from bluer_objects.README.process.variables import process_variable, variables
+from bluer_objects.README.process.signature import signature
 from bluer_objects.logger import logger
 
 MY_NAME = module.name(__file__, MY_NAME)
@@ -42,7 +41,8 @@ def build(
     help_function: Union[Callable[[List[str]], str], None] = None,
     legacy_mode: bool = True,
     assets_repo: str = "kamangir/assets",
-    download: bool = True,
+    download: bool = bool(BLUER_AI_INTERNET_INSIDE_IS_ACCESSIBLE),
+    verbose: bool = False,
 ) -> bool:
     if path:
         if path.endswith(".md"):
@@ -56,7 +56,7 @@ def build(
         MODULE_NAME = REPO_NAME
 
     logger.info(
-        "{}.build: {}-{}: {}[{}]: {} -{}> {}".format(
+        "{}.build: {}-{}: {}[{}]: {} -{}{}> {}".format(
             MY_NAME,
             NAME,
             VERSION,
@@ -64,9 +64,14 @@ def build(
             MODULE_NAME,
             template_filename,
             "+legacy-" if legacy_mode else "",
+            "download-" if download else "",
             filename,
         )
     )
+
+    if verbose:
+        logger.info(f"filename: {filename}")
+        logger.info(f"items: {items}")
 
     table_of_items = markdown.generate_table(items, cols=cols) if cols > 0 else items
 
@@ -107,7 +112,7 @@ def build(
                 download=download,
             )
 
-            logger.info(f"metadata[{object_name_and_key}] = {value}")
+            logger.info(shorten_text(f"metadata[{object_name_and_key}] = {value}"))
 
             if template_line.startswith("metadata:::"):
                 content += (
@@ -218,5 +223,10 @@ def build(
                     break
 
         content += content_section
+
+    content = process_national_internet(
+        filename,
+        content,
+    )
 
     return file.save_text(filename, content)

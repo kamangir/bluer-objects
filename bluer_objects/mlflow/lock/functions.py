@@ -28,7 +28,7 @@ def lock(
 
     start_time = time.time()
     while True:
-        if timeout > 0 and time.time() - start_time > timeout:
+        if time.time() - start_time > timeout > 0:
             if verbose:
                 logger.warning(
                     "{}.lock: {}.{} timeout.".format(

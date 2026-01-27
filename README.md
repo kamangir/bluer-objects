@@ -28,7 +28,6 @@ pip install bluer-objects
 [@pdf](./bluer_objects/docs/aliases/pdf.md) 
 [@tags](./bluer_objects/docs/aliases/tags.md) 
 [@upload](./bluer_objects/docs/aliases/upload.md) 
-[@web](./bluer_objects/docs/aliases/web.md) 
 
 ---
 
@@ -39,4 +38,4 @@ pip install bluer-objects
 
 [![pylint](https://github.com/kamangir/bluer-objects/actions/workflows/pylint.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/pylint.yml) [![pytest](https://github.com/kamangir/bluer-objects/actions/workflows/pytest.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/pytest.yml) [![bashtest](https://github.com/kamangir/bluer-objects/actions/workflows/bashtest.yml/badge.svg)](https://github.com/kamangir/bluer-objects/actions/workflows/bashtest.yml) [![PyPI version](https://img.shields.io/pypi/v/bluer-objects.svg)](https://pypi.org/project/bluer-objects/) [![PyPI - Downloads](https://img.shields.io/pypi/dd/bluer-objects)](https://pypistats.org/packages/bluer-objects)
 
-built by 🌀 [`bluer README`](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README), based on 🌀 [`bluer_objects-6.422.1`](https://github.com/kamangir/bluer-objects).
+built by 🌀 [`bluer README`](https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README), based on 🌀 [`bluer_objects-6.473.1`](https://github.com/kamangir/bluer-objects).
