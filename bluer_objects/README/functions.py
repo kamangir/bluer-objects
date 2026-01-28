@@ -4,7 +4,7 @@ import yaml
 
 from blueness import module
 from bluer_options.logger import shorten_text
-from bluer_options.env import BLUER_AI_INTERNET_INSIDE_IS_ACCESSIBLE
+from bluer_options.env import BLUER_AI_STORAGE_IS_ACCESSIBLE
 from bluer_objects import NAME as MY_NAME
 from bluer_objects import file
 from bluer_objects import markdown
@@ -41,7 +41,7 @@ def build(
     help_function: Union[Callable[[List[str]], str], None] = None,
     legacy_mode: bool = True,
     assets_repo: str = "kamangir/assets",
-    download: bool = bool(BLUER_AI_INTERNET_INSIDE_IS_ACCESSIBLE),
+    download: bool = bool(BLUER_AI_STORAGE_IS_ACCESSIBLE),
     verbose: bool = False,
 ) -> bool:
     if path:

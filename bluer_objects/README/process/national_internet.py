@@ -1,7 +1,7 @@
 from typing import List
 
 from bluer_options.help.parsing import list_of_modules
-from bluer_options.env import BLUER_AI_INTERNET_OUTSIDE_IS_ACCESSIBLE
+from bluer_options.env import BLUER_AI_WEB_IS_ACCESSIBLE
 
 from bluer_objects import file
 from bluer_objects import path
@@ -14,7 +14,7 @@ def process_national_internet(
     filename: str,
     content: List[str],
 ) -> List[str]:
-    if BLUER_AI_INTERNET_OUTSIDE_IS_ACCESSIBLE:
+    if BLUER_AI_WEB_IS_ACCESSIBLE:
         return content
 
     logger.info("🇮🇷 national internet adjustments...")
