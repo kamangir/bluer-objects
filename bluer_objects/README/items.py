@@ -1,6 +1,6 @@
 from typing import List, Dict
 
-from bluer_objects import ICON
+from bluer_objects import MARQUEE
 
 
 # {image,jpg : url}
@@ -73,7 +73,7 @@ def Items_of_dict(
                 {
                     "order": info.get("order", thing_name),
                     "name": thing_name,
-                    "marquee": info.get("marquee", ICON),
+                    "marquee": info.get("marquee", MARQUEE),
                     "url": f"./{thing_name}.md",
                 }
                 for thing_name, info in dict_of_things.items()
