@@ -1,5 +1,7 @@
 from typing import List, Dict
 
+from bluer_objects import ICON
+
 
 # {image,jpg : url}
 def ImageItems(items: Dict[str, str]) -> List[str]:
@@ -71,7 +73,7 @@ def Items_of_dict(
                 {
                     "order": info.get("order", thing_name),
                     "name": thing_name,
-                    "marquee": info.get("marquee", ""),
+                    "marquee": info.get("marquee", ICON),
                     "url": f"./{thing_name}.md",
                 }
                 for thing_name, info in dict_of_things.items()
