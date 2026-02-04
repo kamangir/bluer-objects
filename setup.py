@@ -35,6 +35,7 @@ setup(
             "config.env",
             "sample.env",
             ".abcli/**/*.sh",
+            "assets/*.html",
         ],
     },
     extras_require={
