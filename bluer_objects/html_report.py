@@ -7,10 +7,18 @@ from bluer_objects import file
 class HTMLReport:
     def __init__(
         self,
-        template: str,
+        template: str = "",
         log: bool = True,
+        dummy: bool = False,
     ):
         self.log = log
+        self.dummy: bool = template == ""
+
+        self.valid: bool = True
+        self.content: List[str] = []
+
+        if self.dummy:
+            return
 
         self.valid, self.content = file.load_text(
             filename=template,
@@ -22,6 +30,9 @@ class HTMLReport:
         macros: Dict[str, List[str]],
         contains: bool = False,
     ) -> "HTMLReport":
+        if self.dummy or not self.valid:
+            return self
+
         for this, that in macros.items():
             self.content = (
                 reduce(
@@ -39,6 +50,12 @@ class HTMLReport:
         self,
         filename: str,
     ) -> bool:
+        if self.dummy:
+            return True
+
+        if not self.valid:
+            return False
+
         return file.save_text(
             filename,
             self.content,
