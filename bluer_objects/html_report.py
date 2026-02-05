@@ -64,7 +64,7 @@ class HTMLReport:
         self.replace(
             {
                 "elapsed_time:::": self.elapsed_timer.as_str(),
-                "objects_signature:::": " | ".join(
+                "object_signature:::": " | ".join(
                     objects.signature(
                         object_name=object_name,
                         info=filename,
@@ -74,7 +74,10 @@ class HTMLReport:
         )
 
         return file.save_text(
-            filename,
+            objects.path_of(
+                object_name=object_name,
+                filename=filename,
+            ),
             self.content,
             log=self.log,
         )
