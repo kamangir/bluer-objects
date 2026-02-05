@@ -6,41 +6,30 @@ from bluer_objects import objects
 
 
 @pytest.mark.parametrize(
-    ["filename", "dummy", "expected_success"],
+    ["filename"],
     [
         [
             file.absolute(
                 "../assets/template.html",
                 file.path(__file__),
             ),
-            False,
-            True,
         ],
         [
             file.absolute(
                 "../assets/non-existing-file.html",
                 file.path(__file__),
             ),
-            False,
-            False,
         ],
         [
             "",
-            True,
-            True,
         ],
     ],
 )
 def test_html_report(
     filename: str,
-    dummy: bool,
-    expected_success: bool,
 ):
     assert (
-        HTMLReport(
-            template=filename,
-            dummy=dummy,
-        )
+        HTMLReport(template=filename)
         .replace(
             {
                 "title:::": "some title",
@@ -57,4 +46,4 @@ def test_html_report(
                 filename="report.html",
             )
         )
-    ) == expected_success
+    )

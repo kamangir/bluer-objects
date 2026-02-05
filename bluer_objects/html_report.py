@@ -2,6 +2,7 @@ from typing import Dict, List
 from functools import reduce
 
 from bluer_objects import file
+from bluer_objects.logger import logger
 
 
 class HTMLReport:
@@ -9,7 +10,6 @@ class HTMLReport:
         self,
         template: str = "",
         log: bool = True,
-        dummy: bool = False,
     ):
         self.log = log
         self.dummy: bool = template == ""
@@ -20,17 +20,19 @@ class HTMLReport:
         if self.dummy:
             return
 
-        self.valid, self.content = file.load_text(
+        success, self.content = file.load_text(
             filename=template,
             log=self.log,
         )
+        if not success:
+            logger.warning(f"{self.__class__.__name__} is dummy now.")
 
     def replace(
         self,
         macros: Dict[str, List[str]],
         contains: bool = False,
     ) -> "HTMLReport":
-        if self.dummy or not self.valid:
+        if self.dummy:
             return self
 
         for this, that in macros.items():
@@ -52,9 +54,6 @@ class HTMLReport:
     ) -> bool:
         if self.dummy:
             return True
-
-        if not self.valid:
-            return False
 
         return file.save_text(
             filename,
