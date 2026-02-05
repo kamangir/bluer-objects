@@ -41,9 +41,7 @@ def test_html_report(
             contains=True,
         )
         .save(
-            filename=objects.path_of(
-                object_name=objects.unique_object("test_html_report"),
-                filename="report.html",
-            )
+            object_name=objects.unique_object("test_html_report"),
+            filename="report.html",
         )
     )

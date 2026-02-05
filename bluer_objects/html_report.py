@@ -1,7 +1,10 @@
 from typing import Dict, List
 from functools import reduce
 
+from bluer_options.timing import ElapsedTimer
+
 from bluer_objects import file
+from bluer_objects import objects
 from bluer_objects.logger import logger
 
 
@@ -11,6 +14,8 @@ class HTMLReport:
         template: str = "",
         log: bool = True,
     ):
+        self.elapsed_timer = ElapsedTimer()
+
         self.log = log
         self.dummy: bool = template == ""
 
@@ -50,10 +55,23 @@ class HTMLReport:
 
     def save(
         self,
-        filename: str,
+        object_name: str,
+        filename: str = "report.html",
     ) -> bool:
         if self.dummy:
             return True
+
+        self.replace(
+            {
+                "elapsed_time:::": self.elapsed_timer.as_str(),
+                "objects_signature:::": " | ".join(
+                    objects.signature(
+                        object_name=object_name,
+                        info=filename,
+                    )
+                ),
+            }
+        )
 
         return file.save_text(
             filename,
