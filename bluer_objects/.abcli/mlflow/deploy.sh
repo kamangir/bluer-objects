@@ -27,7 +27,7 @@ function bluer_objects_mlflow_deploy() {
     [[ "$MLFLOW_DEPLOYMENT" != "local" ]] &&
         bluer_ai_log_warning "MLFLOW_DEPLOYMENT is not local".
 
-    bluer_ai_badge "🤖"
+    bluer_ai_badge save "🤖"
 
     bluer_ai_eval dryrun=$do_dryrun \
         mlflow ui \
@@ -36,5 +36,5 @@ function bluer_objects_mlflow_deploy() {
         --host 0.0.0.0 \
         --port $port
 
-    bluer_ai_badge "💻"
+    bluer_ai_badge reset
 }
