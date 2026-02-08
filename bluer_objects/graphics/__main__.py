@@ -6,6 +6,7 @@ from blueness.argparse.generic import sys_exit
 
 from bluer_objects import NAME, objects
 from bluer_objects.graphics.gif import generate_animated_gif
+from bluer_objects.graphics import qrcode
 from bluer_objects.graphics import screen
 from bluer_objects.logger import logger
 
@@ -17,7 +18,12 @@ parser.add_argument(
     "task",
     type=str,
     default="",
-    help="generate_animated_gif|get_screen_size",
+    help="generate_animated_gif | generate_qrcode | get_screen_size",
+)
+parser.add_argument(
+    "--filename",
+    type=str,
+    default="qrcode.png",
 )
 parser.add_argument(
     "--object_name",
@@ -26,6 +32,10 @@ parser.add_argument(
 parser.add_argument(
     "--suffix",
     default=".png",
+    type=str,
+)
+parser.add_argument(
+    "--url",
     type=str,
 )
 parser.add_argument(
@@ -81,6 +91,12 @@ if args.task == "generate_animated_gif":
         frame_count=args.frame_count,
         frame_duration=args.frame_duration,
         scale=args.scale,
+    )
+elif args.task == "generate_qrcode":
+    success = qrcode.generate(
+        url=args.url,
+        object_name=args.object_name,
+        filename=args.filename,
     )
 elif args.task == "get_screen_size":
     success = True

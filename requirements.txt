@@ -1,8 +1,9 @@
 bluer_ai
 
 boto3
-webdavclient3
 dill
 mlflow
 pandas
+qrcode[pil]
 urllib3
+webdavclient3
