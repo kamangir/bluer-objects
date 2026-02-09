@@ -1,6 +1,11 @@
 #! /usr/bin/env bash
 
 function bluer_objects_upload() {
+    if [[ "$BLUER_AI_CLOUD_IS_ACCESSIBLE" == 0 ]]; then
+        bluer_ai_log_warning "cloud is not available, skipping upload."
+        return 0
+    fi
+
     local options=$1
     local filename=$(bluer_ai_option "$options" filename)
     local public=$(bluer_ai_option_int "$options" public 0)

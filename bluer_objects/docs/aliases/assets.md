@@ -12,7 +12,7 @@ asset management in [github/kamangir/assets](https://github.com/kamangir/assets)
 	mv \
 	[~create,extension=<jpg>,vol=<2>] \
 	[<this/that>] \
-	[push,browse,~increment_version,offline,rpi=<machine-name>,scp,~status,test,]
+	[push,browse,~increment_version,~offline,rpi=<machine-name>,scp,~status,test,]
  . mv assets to volume.
 @assets \
 	publish \
