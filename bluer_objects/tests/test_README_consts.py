@@ -7,6 +7,7 @@ from bluer_objects.README.consts import (
     designs_repo,
     designs_url,
     github_kamangir,
+    object_gif_url,
 )
 
 
@@ -69,3 +70,20 @@ def test_README_designs_url(suffix):
     assert isinstance(url, str)
     assert url.startswith(designs_repo)
     assert url.endswith(suffix)
+
+
+@pytest.mark.parametrize(
+    ["object_name"],
+    [
+        ["swallow-debug-2026-02-08-15-29-19-tmggnk"],
+    ],
+)
+def test_README_object_gif_url(object_name: str):
+    url = object_gif_url(
+        object_name=object_name,
+        volume="",
+        blob=False,
+    )
+
+    assert isinstance(url, str)
+    assert object_name in url

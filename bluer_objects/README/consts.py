@@ -42,3 +42,13 @@ def assets_path(
             f"/{suffix}" if suffix else "",
         ),
     )
+
+
+def object_gif_url(
+    object_name: str = "",
+    **kw_args,
+):
+    return assets_url(
+        suffix=f"{object_name}/{object_name}.gif?raw=true",
+        **kw_args,
+    )
