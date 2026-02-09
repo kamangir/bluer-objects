@@ -2,7 +2,7 @@ import pytest
 
 from bluer_options import string
 from bluer_options.options import Options
-from bluer_options.testing import is_list_of_str
+from bluer_options.testing.lists import is_list_of_str
 
 from bluer_objects import env
 from bluer_objects.objects import unique_object
