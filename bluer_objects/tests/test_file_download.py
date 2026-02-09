@@ -1,6 +1,7 @@
 import pytest
 
 from bluer_options.env import BLUER_AI_WEB_IS_ACCESSIBLE
+from bluer_ai.env import BLUER_AI_WEB_CHECK_URL
 
 from bluer_objects import objects, file
 
@@ -8,7 +9,7 @@ from bluer_objects import objects, file
 @pytest.mark.parametrize(
     ["url"],
     [
-        ["https://raw.githubusercontent.com/jbrownlee/Datasets/master/shampoo.csv"],
+        [BLUER_AI_WEB_CHECK_URL],
     ],
 )
 def test_file_download(url: str):
