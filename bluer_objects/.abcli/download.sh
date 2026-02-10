@@ -1,6 +1,11 @@
 #! /usr/bin/env bash
 
 function bluer_objects_download() {
+    if [[ "$BLUER_AI_CLOUD_IS_ACCESSIBLE" == 0 ]]; then
+        bluer_ai_log_warning "cloud is not available, skipping download."
+        return 0
+    fi
+
     local options=$1
     local filename=$(bluer_ai_option "$options" filename)
     local policy=$(bluer_ai_option "$options" policy none)
