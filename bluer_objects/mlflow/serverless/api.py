@@ -21,12 +21,13 @@ def write(
     if log:
         logger.info(f"{NAME}.update({object_name}/{filename})")
 
-    if not storage.download(
-        object_name=object_name,
-        filename=filename,
-        log=log,
-    ):
-        return False
+    if env.SERVERLESS_MLFLOW_SYNC == 1:
+        if not storage.download(
+            object_name=object_name,
+            filename=filename,
+            log=log,
+        ):
+            return False
 
     full_filename = objects.path_of(
         object_name=object_name,
