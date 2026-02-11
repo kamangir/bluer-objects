@@ -22,6 +22,7 @@ def test_bluer_objects_env():
     assert are_01(
         [
             env.MLFLOW_IS_SERVERLESS,
+            env.SERVERLESS_MLFLOW_SYNC,
         ]
     )
 
