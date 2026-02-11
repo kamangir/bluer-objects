@@ -10,7 +10,7 @@ from bluer_options import string
 from bluer_options.logger import crash_report
 
 from bluer_objects import NAME
-from bluer_objects.env import abcli_object_path
+from bluer_objects import env
 from bluer_objects.logger import logger
 
 NAME = module.name(__file__, NAME)
@@ -69,10 +69,20 @@ def auxiliary(
     nickname: str,
     extension: str,
     add_timestamp: bool = True,
+    object_name: str = ".",
 ) -> str:
     filename = os.path.join(
-        abcli_object_path,
-        "auxiliary",
+        (
+            os.path.join(
+                env.abcli_object_path,
+                "auxiliary",
+            )
+            if object_name == "."
+            else os.path.join(
+                env.ABCLI_OBJECT_ROOT,
+                object_name,
+            )
+        ),
         "-".join(
             [nickname]
             + (
