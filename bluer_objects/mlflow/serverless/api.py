@@ -3,6 +3,7 @@ from typing import Dict, Tuple
 from blueness import module
 
 from bluer_objects import NAME
+from bluer_objects import env
 from bluer_objects import file
 from bluer_objects import objects
 from bluer_objects import storage
@@ -54,14 +55,14 @@ def write(
     ):
         return False
 
-    if not storage.upload(
+    if env.SERVERLESS_MLFLOW_SYNC == 0:
+        return True
+
+    return storage.upload(
         object_name=object_name,
         filename=filename,
         log=log,
-    ):
-        return False
-
-    return True
+    )
 
 
 def read(
@@ -69,12 +70,13 @@ def read(
     filename: str,
     verbose: bool = False,
 ) -> Tuple[bool, Dict]:
-    if not storage.download(
-        object_name=object_name,
-        filename=filename,
-        log=verbose,
-    ):
-        return True, {}
+    if env.SERVERLESS_MLFLOW_SYNC == 1:
+        if not storage.download(
+            object_name=object_name,
+            filename=filename,
+            log=verbose,
+        ):
+            return True, {}
 
     _, data = file.load_yaml(
         objects.path_of(
