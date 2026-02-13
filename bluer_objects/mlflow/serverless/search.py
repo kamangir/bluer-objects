@@ -30,6 +30,7 @@ def search(
                 False if isinstance(value, bool) else None,
             )
             == value
+            and object_name
         ]
 
     return True, [] if output is None else output
