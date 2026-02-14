@@ -17,6 +17,7 @@ NAME = module.name(__file__, NAME)
 def publish(
     object_name: str,
     list_of_extensions: List[str],
+    volume: str,
     prefix: str = "",
     asset_name: str = "",
     log: bool = True,
@@ -24,11 +25,12 @@ def publish(
     if not asset_name:
         asset_name = object_name
     logger.info(
-        "{}.publish: {}/{}.* for {} -> {}".format(
+        "{}.publish: {}/{}.* for {} -> assets{}/{}".format(
             NAME,
             object_name,
             prefix,
             ", ".join(list_of_extensions),
+            volume,
             asset_name,
         )
     )
@@ -42,7 +44,7 @@ def publish(
         ):
             published_filename = os.path.join(
                 abcli_path_git,
-                "assets",
+                f"assets{volume}",
                 asset_name,
                 file.name_and_extension(filename).replace(
                     object_name,
@@ -57,6 +59,8 @@ def publish(
             ):
                 return False
 
-    logger.info(f"🔗  https://github.com/kamangir/assets/tree/main/{asset_name}")
+    logger.info(
+        f"🔗  https://github.com/kamangir/assets{volume}/tree/main/{asset_name}"
+    )
 
     return True

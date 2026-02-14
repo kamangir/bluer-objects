@@ -9,10 +9,11 @@ function bluer_objects_assets_publish() {
     do_pull=$(bluer_ai_option_int "$options" pull $do_pull)
     local do_push=$(bluer_ai_option_int "$options" push 0)
     local extensions=$(bluer_ai_option "$options" extensions png)
+    local volume=$(bluer_ai_option "$options" vol $BLUER_OBJECTS_DEFAULT_ASSETS_VOL)
 
     [[ "$do_pull" == 1 ]] &&
         bluer_ai_git \
-            assets \
+            assets$volume \
             pull \
             ~all
 
@@ -26,12 +27,13 @@ function bluer_objects_assets_publish() {
         publish \
         --object_name $object_name \
         --extensions $extensions \
+        --volume $volume \
         "${@:3}"
     [[ $? -ne 0 ]] && return 1
 
     [[ "$do_push" == 1 ]] &&
         bluer_ai_git \
-            assets \
+            assets$volume \
             push \
             "$object_name update."
 

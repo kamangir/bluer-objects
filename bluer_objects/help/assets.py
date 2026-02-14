@@ -33,7 +33,12 @@ def help_mv(
     tokens: List[str],
     mono: bool,
 ) -> str:
-    options = xtra("~create,extension=<jpg>,vol=<2>", mono=mono)
+    options = "".join(
+        [
+            xtra("~create,extension=<jpg>,", mono=mono),
+            "vol=<{}>".format(env.BLUER_OBJECTS_DEFAULT_ASSETS_VOL),
+        ]
+    )
 
     return show_usage(
         [
@@ -64,7 +69,7 @@ def help_publish(
             xtra("download,", mono=mono),
             "extensions=<png+txt>",
             xtra(",~pull,", mono=mono),
-            "push",
+            "push,vol=<{}>".format(env.BLUER_OBJECTS_DEFAULT_ASSETS_VOL),
         ]
     )
 
