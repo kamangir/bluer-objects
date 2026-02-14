@@ -16,7 +16,7 @@ asset management in [github/kamangir/assets](https://github.com/kamangir/assets)
  . mv assets to volume.
 @assets \
 	publish \
-	[download,extensions=<png+txt>,~pull,push] \
+	[download,extensions=<png+txt>,~pull,push,vol=<2>] \
 	[.|<object-name>] \
 	[--asset_name <other-object-name>] \
 	[--prefix <prefix>]
