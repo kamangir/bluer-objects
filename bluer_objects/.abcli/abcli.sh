@@ -3,7 +3,7 @@
 bluer_ai_source_caller_suffix_path /tests
 
 bluer_ai_env_dot_load \
-    caller,plugin=bluer_objects,suffix=/../..
+    plugin=bluer_objects,suffix=/../..
 
 if [[ "$MLFLOW_DEPLOYMENT" == "local" ]]; then
     export MLFLOW_TRACKING_URI=$HOME/mlflow
@@ -12,4 +12,4 @@ else
 fi
 
 bluer_ai_env_dot_load \
-    caller,filename=config.env,suffix=/..
+    filename=config.env,suffix=/..
