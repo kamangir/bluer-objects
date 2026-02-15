@@ -10,9 +10,10 @@ from bluer_objects.README.items import Items
 from bluer_objects.help.functions import help_functions
 
 
-def build_me() -> bool:
+def build_me(args) -> bool:
     return all(
         build(
+            args=args,
             items=readme.get("items", []),
             path=os.path.join(file.path(__file__), readme["path"]),
             ICON=ICON,

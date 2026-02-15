@@ -1,13 +1,16 @@
 from typing import List, Dict, Union, Callable
 import os
 import yaml
+import pathlib
 
 from blueness import module
 from bluer_options.logger import shorten_text
 from bluer_options.env import BLUER_AI_CLOUD_IS_ACCESSIBLE
+
 from bluer_objects import NAME as MY_NAME
 from bluer_objects import file
 from bluer_objects import markdown
+from bluer_objects.env import abcli_path_git
 from bluer_objects.metadata import get_from_object
 from bluer_objects.README.process.assets import process_assets
 from bluer_objects.README.process.details import process_details
@@ -19,14 +22,15 @@ from bluer_objects.README.process.mermaid import process_mermaid
 from bluer_objects.README.process.national_internet import process_national_internet
 from bluer_objects.README.process.objects import process_objects
 from bluer_objects.README.process.title import process_title
-from bluer_objects.README.process.variables import process_variable, variables
 from bluer_objects.README.process.signature import signature
+from bluer_objects.README.process.variables import process_variable, variables
 from bluer_objects.logger import logger
 
 MY_NAME = module.name(__file__, MY_NAME)
 
 
 def build(
+    args,
     NAME: str,
     VERSION: str,
     REPO_NAME: str,
@@ -36,7 +40,6 @@ def build(
     path: str = "",
     cols: int = 3,
     ICON: str = "",
-    MODULE_NAME: str = "",
     macros: Dict[str, str] = {},
     help_function: Union[Callable[[List[str]], str], None] = None,
     legacy_mode: bool = True,
@@ -52,19 +55,33 @@ def build(
             filename = os.path.join(path, "README.md")
             template_filename = os.path.join(path, "template.md")
 
-    if not MODULE_NAME:
-        MODULE_NAME = REPO_NAME
+    root: str = args.root if hasattr(args, "root") else "root"
+    if root != "root":
+        if not str(pathlib.Path(filename).resolve()).startswith(
+            os.path.join(
+                abcli_path_git,
+                REPO_NAME,
+                NAME,
+                "docs",
+                root,
+            )
+        ):
+            logger.info(f"ignored {path}")
+            return True
+
+    use_ai: bool = args.ai == 1 if hasattr(args, "ai") else 0
 
     logger.info(
-        "{}.build: {}-{}: {}[{}]: {} -{}{}> {}".format(
+        "{}.build: {}:{}-{} | {} -{}{}{}{}> {}".format(
             MY_NAME,
             NAME,
             VERSION,
             REPO_NAME,
-            MODULE_NAME,
             template_filename,
             "+legacy-" if legacy_mode else "",
             "download-" if download else "",
+            f"{root}-",
+            "🪄 ai-" if use_ai else "",
             filename,
         )
     )
@@ -158,7 +175,6 @@ def build(
                 REPO_NAME,
                 NAME,
                 ICON,
-                MODULE_NAME,
                 VERSION,
             )
             continue

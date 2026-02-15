@@ -10,7 +10,7 @@ main(
     VERSION=VERSION,
     main_filename=__file__,
     tasks={
-        "build_README": lambda _: README.build_me(),
+        "build_README": README.build_me,
     },
     logger=logger,
 )
