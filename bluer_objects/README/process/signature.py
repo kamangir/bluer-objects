@@ -24,7 +24,7 @@ def signature(
         "built by {} [`{}`]({}), based on {}[`{}-{}`]({}).".format(
             MY_ICON,
             "bluer README",
-            "https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/README",
+            "https://github.com/kamangir/bluer-objects/tree/main/bluer_objects/docs/bluer-README",
             f"{ICON} " if ICON else "",
             NAME,
             VERSION,
