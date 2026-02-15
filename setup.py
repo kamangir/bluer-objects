@@ -25,6 +25,7 @@ setup(
         f"{NAME}.README",
         f"{NAME}.README.build",
         f"{NAME}.README.process",
+        f"{NAME}.README.process.ai",
         f"{NAME}.storage",
         f"{NAME}.testing",
         f"{NAME}.tests",

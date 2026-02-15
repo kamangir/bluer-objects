@@ -1,9 +1,6 @@
 # bluer-README: syntax
 
-link to `<filename>` in an `<object-name>` in an assets repo.
-```python
-assets:::<object-name>/<filename>
-```
+## details
 
 add details, such as this,
 
@@ -23,20 +20,28 @@ details:::<summary>
 details:::
 ```
 
+## environment variables
+
 use the environment variable `ENV_NAME`.
 ```python
 env:::ENV_NAME
 ```
 
-get `<object-name>` as set before (see ⬇️).
-```python
-get:::<object_name>
-```
+## help
 
 show help about `<command>`.
 ```python
 help::: <command>
 ```
+
+## images
+
+clickable menu of images with descriptions.
+```python
+items:::
+```
+
+## include a file
 
 include `<filename>`.
 ```python
@@ -44,15 +49,13 @@ include::: <filename>
 include:::noref <filename>
 ```
 
-clickable menu of images with descriptions.
-```python
-items:::
-```
+## links
 
-show metadata from `<object-name>`.
+to show images, or to make files downloadable.
+
+link to `<filename>` in an `<object-name>` in an assets repo.
 ```python
-metadata:::<object-name>
-metadata:::<object-name>:::this.that
+assets:::<object-name>/<filename>
 ```
 
 downloadable link to `<object-name>`.
@@ -61,17 +64,36 @@ object:::<object-name>
 object:::<object-name>:::<filename>
 ```
 
-set `<object-mame>` to use with `get` (see ⬆️).
+## metadata
+
+show metadata from `<object-name>`.
+```python
+metadata:::<object-name>
+metadata:::<object-name>:::this.that
+```
+
+## objects
+
+get `<object-name>` as set before (see ⬇️).
+```python
+get:::<object_name>
+```
+
+set `<object-mame>` to use with get (see ⬆️).
 ```python
 set:::<object_name> <object-name>
 set:::<object_name> env:::ENV_NAME
 set:::<object_name> metadata:::<object-name>:::this.that
 ```
 
+## signature
+
 add signature.
 ```python
 signature:::
 ```
+
+## title
 
 add title.
 ```python

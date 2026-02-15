@@ -12,6 +12,7 @@ from bluer_objects import file
 from bluer_objects import markdown
 from bluer_objects.env import abcli_path_git
 from bluer_objects.metadata import get_from_object
+from bluer_objects.README.process.ai.process import process_ai
 from bluer_objects.README.process.assets import process_assets
 from bluer_objects.README.process.details import process_details
 from bluer_objects.README.process.envs import process_envs
@@ -69,7 +70,7 @@ def build(
             logger.info(f"ignored {path}")
             return True
 
-    use_ai: bool = args.ai == 1 if hasattr(args, "ai") else 0
+    ai_enabled: bool = args.ai == 1 if hasattr(args, "ai") else 0
 
     logger.info(
         "{}.build: {}:{}-{} | {} -{}{}{}{}> {}".format(
@@ -81,7 +82,7 @@ def build(
             "+legacy-" if legacy_mode else "",
             "download-" if download else "",
             f"{root}-",
-            "🪄 ai-" if use_ai else "",
+            "🪄 ai-" if ai_enabled else "",
             filename,
         )
     )
@@ -203,6 +204,10 @@ def build(
                 return success
 
             content += updated_content
+            continue
+
+        if ai_enabled and template_line.startswith("ai:::"):
+            content += process_ai(template_line)
             continue
 
         content_section = [template_line]

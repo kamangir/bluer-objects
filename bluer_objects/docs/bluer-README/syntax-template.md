@@ -1,9 +1,6 @@
 title:::
 
-link to `<filename>` in an `<object-name>` in an assets repo.
-```python
-ignore::: assets:::<object-name>/<filename>
-```
+## details
 
 add details, such as this,
 
@@ -18,20 +15,28 @@ ignore::: details:::<summary>
 ignore::: details:::
 ```
 
+## environment variables
+
 use the environment variable `ENV_NAME`.
 ```python
 ignore::: env:::ENV_NAME
 ```
 
-get `<object-name>` as set before (see ⬇️).
-```python
-ignore::: get:::<object_name>
-```
+## help
 
 show help about `<command>`.
 ```python
 ignore::: help::: <command>
 ```
+
+## images
+
+clickable menu of images with descriptions.
+```python
+ignore::: items:::
+```
+
+## include a file
 
 include `<filename>`.
 ```python
@@ -39,15 +44,13 @@ ignore::: include::: <filename>
 ignore::: include:::noref <filename>
 ```
 
-clickable menu of images with descriptions.
-```python
-ignore::: items:::
-```
+## links
 
-show metadata from `<object-name>`.
+to show images, or to make files downloadable.
+
+link to `<filename>` in an `<object-name>` in an assets repo.
 ```python
-ignore::: metadata:::<object-name>
-ignore::: metadata:::<object-name>:::this.that
+ignore::: assets:::<object-name>/<filename>
 ```
 
 downloadable link to `<object-name>`.
@@ -56,17 +59,36 @@ ignore::: object:::<object-name>
 ignore::: object:::<object-name>:::<filename>
 ```
 
-set `<object-mame>` to use with `get` (see ⬆️).
+## metadata
+
+show metadata from `<object-name>`.
+```python
+ignore::: metadata:::<object-name>
+ignore::: metadata:::<object-name>:::this.that
+```
+
+## objects
+
+get `<object-name>` as set before (see ⬇️).
+```python
+ignore::: get:::<object_name>
+```
+
+set `<object-mame>` to use with get (see ⬆️).
 ```python
 ignore::: set:::<object_name> <object-name>
 ignore::: set:::<object_name> env:::ENV_NAME
 ignore::: set:::<object_name> metadata:::<object-name>:::this.that
 ```
 
+## signature
+
 add signature.
 ```python
 ignore::: signature:::
 ```
+
+## title
 
 add title.
 ```python
