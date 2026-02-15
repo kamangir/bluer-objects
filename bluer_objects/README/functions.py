@@ -206,8 +206,11 @@ def build(
             content += updated_content
             continue
 
-        if ai_enabled and template_line.startswith("ai:::"):
-            content += process_ai(template_line)
+        if template_line.startswith("ai:::"):
+            content += process_ai(
+                template_line,
+                enabled=ai_enabled,
+            )
             continue
 
         content_section = [template_line]
