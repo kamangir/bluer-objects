@@ -69,8 +69,10 @@ def build(
             logger.info(f"ignored {path}")
             return True
 
+    use_ai: bool = args.ai == 1 if hasattr(args, "ai") else 0
+
     logger.info(
-        "{}.build: {}:{}-{} | {} -{}{}{}> {}".format(
+        "{}.build: {}:{}-{} | {} -{}{}{}{}> {}".format(
             MY_NAME,
             NAME,
             VERSION,
@@ -79,6 +81,7 @@ def build(
             "+legacy-" if legacy_mode else "",
             "download-" if download else "",
             f"{root}-",
+            "🪄 ai-" if use_ai else "",
             filename,
         )
     )
