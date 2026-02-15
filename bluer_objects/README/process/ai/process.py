@@ -13,6 +13,9 @@ def process_ai(
     download: bool = False,
     upload: bool = False,
 ) -> Tuple[bool, List[str]]:
+    if not any("ai:::" in line for line in content):
+        return True, content
+
     logger.info("ai processing...")
 
     variables.ignore_started = False
