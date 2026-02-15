@@ -1,4 +1,5 @@
 from typing import List, Tuple, Dict, Any
+from functools import reduce
 
 from bluer_objects.README.process.ai import variables
 
@@ -57,12 +58,21 @@ def complete(
     ]
     variables.context = []
 
+    # markdown normalization
+    reply_lines = reply.split("$$")
+    for index in range(len(reply_lines)):
+        if index % 2 == 1:
+            reply_lines[index] = f"$${reply_lines[index]}$$"
+    reply_lines = reduce(
+        lambda x, y: x + y,
+        [[line, ""] for line in reply_lines],
+        [],
+    )
+
     return True, (
         [
-            f"> {query_prompt}",
+            f"> {query_prompt} - 🧠 `{query_id}`",
             "",
-            reply,
-            "",
-            f"🧠 query id: `{query_id}`",
         ]
+        + reply_lines
     )
