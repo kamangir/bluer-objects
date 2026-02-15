@@ -5,18 +5,18 @@ asset management in [github/kamangir/assets](https://github.com/kamangir/assets)
 ```bash
 @assets \
 	cd \
-	[create,vol=<2>] \
+	[create,vol=<3>] \
 	[<path>]
  . cd assets volume.
 @assets \
 	mv \
-	[~create,extension=<jpg>,vol=<2>] \
+	[~create,extension=<jpg>,vol=<3>] \
 	[<this/that>] \
 	[push,browse,~increment_version,offline,rpi=<machine-name>,scp,~status,test,]
  . mv assets to volume.
 @assets \
 	publish \
-	[download,extensions=<png+txt>,~pull,push,vol=<2>] \
+	[download,extensions=<png+txt>,~pull,push,vol=<3>] \
 	[.|<object-name>] \
 	[--asset_name <other-object-name>] \
 	[--prefix <prefix>]
