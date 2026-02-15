@@ -1,17 +1,14 @@
 from typing import List, Dict, Union, Callable
 import os
-import yaml
 import pathlib
 
 from blueness import module
-from bluer_options.logger import shorten_text
 from bluer_options.env import BLUER_AI_CLOUD_IS_ACCESSIBLE
 
 from bluer_objects import NAME as MY_NAME
 from bluer_objects import file
 from bluer_objects import markdown
 from bluer_objects.env import abcli_path_git
-from bluer_objects.metadata import get_from_object
 from bluer_objects.README.process.ai.process import process_ai
 from bluer_objects.README.process.assets import process_assets
 from bluer_objects.README.process.details import process_details
@@ -20,6 +17,7 @@ from bluer_objects.README.process.help import process_help
 from bluer_objects.README.process.include import process_include
 from bluer_objects.README.process.legacy import apply_legacy
 from bluer_objects.README.process.mermaid import process_mermaid
+from bluer_objects.README.process.metadata import process_metadata
 from bluer_objects.README.process.national_internet import process_national_internet
 from bluer_objects.README.process.objects import process_objects
 from bluer_objects.README.process.title import process_title
@@ -46,6 +44,7 @@ def build(
     legacy_mode: bool = True,
     assets_repo: str = "kamangir/assets",
     download: bool = bool(BLUER_AI_CLOUD_IS_ACCESSIBLE),
+    upload: bool = bool(BLUER_AI_CLOUD_IS_ACCESSIBLE),
     verbose: bool = False,
 ) -> bool:
     if path:
@@ -116,37 +115,11 @@ def build(
             )
 
         if "metadata:::" in template_line:
-            object_name_and_key = template_line.split("metadata:::", 1)[1]
-            if " " in object_name_and_key:
-                object_name_and_key = object_name_and_key.split(" ", 1)[0]
-            if ":::" not in object_name_and_key:
-                object_name_and_key += ":::"
-            object_name, key = object_name_and_key.split(":::", 1)
-
-            value = get_from_object(
-                object_name,
-                key,
-                {},
+            content += process_metadata(
+                template_line,
                 download=download,
             )
-
-            logger.info(shorten_text(f"metadata[{object_name_and_key}] = {value}"))
-
-            if template_line.startswith("metadata:::"):
-                content += (
-                    ["```yaml"]
-                    + yaml.dump(
-                        value,
-                        default_flow_style=False,
-                    ).split("\n")
-                    + ["```"]
-                )
-                continue
-
-            template_line = template_line.replace(
-                f"metadata:::{object_name}:::{key}",
-                str(value),
-            )
+            continue
 
         if template_line.startswith("set:::"):
             process_variable(template_line)
@@ -206,13 +179,6 @@ def build(
             content += updated_content
             continue
 
-        if template_line.startswith("ai:::"):
-            content += process_ai(
-                template_line,
-                enabled=ai_enabled,
-            )
-            continue
-
         content_section = [template_line]
         if template_line.startswith("```mermaid"):
             mermaid_started = True
@@ -252,5 +218,14 @@ def build(
         filename,
         content,
     )
+
+    success, content = process_ai(
+        content,
+        enabled=ai_enabled,
+        download=download,
+        upload=upload,
+    )
+    if not success:
+        return success
 
     return file.save_text(filename, content)

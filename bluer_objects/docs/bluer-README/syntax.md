@@ -7,11 +7,9 @@
 ignore in the conversation with ai.
 
 ```python
-ai:::ignore
 
 some text
 
-ai:::ignore
 ```
 
 ### objects
@@ -19,7 +17,28 @@ ai:::ignore
 use `<object-name>` to store ai results.
 
 ```python
-ai:::object <object-name>
+```
+
+### prompt completion
+
+complete `<prompt>`.
+
+```python
+> <prompt>
+
+⚠️ not available yet.
+
+🧠 query id: `<unique-id>`
+```
+
+document the completed `<prompt>`.
+
+```python
+> <prompt>
+
+⚠️ not available yet.
+
+🧠 query id: `<unique-id>`
 ```
 
 ## details

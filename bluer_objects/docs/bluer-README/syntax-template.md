@@ -22,6 +22,20 @@ use `<object-name>` to store ai results.
 ignore::: ai:::object <object-name>
 ```
 
+### prompt completion
+
+complete `<prompt>`.
+
+```python
+ignore::: ai:::complete <unique-id> <prompt>
+```
+
+document the completed `<prompt>`.
+
+```python
+ignore::: ai:::completed <unique-id> <prompt>
+```
+
 ## details
 
 add details, such as this,
