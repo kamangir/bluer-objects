@@ -63,11 +63,11 @@ def process_ai(
 
             logger.error(f"unknown task: ai:::{task}.")
             return False, []
-        else:
-            output.append(line)
 
-            if not variables.ignore_started:
-                variables.context.append(line)
+        output.append(line)
+
+        if not variables.ignore_started:
+            variables.context.append(line)
 
     return (
         (
