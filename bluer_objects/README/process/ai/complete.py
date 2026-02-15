@@ -71,8 +71,13 @@ def complete(
 
     return True, (
         [
-            f"> {query_prompt} - 🧠 `{query_id}`",
+            f"> {query_prompt}",
             "",
+            "<details>",
+            f"<summary>{query_id}</summary>",
         ]
         + reply_lines
+        + [
+            f"</details>",
+        ]
     )

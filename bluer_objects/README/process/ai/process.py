@@ -1,6 +1,5 @@
 from typing import List, Tuple, Dict, Any
 
-
 from bluer_objects.metadata import get_from_object, post_to_object
 from bluer_objects.README.process.ai import variables
 from bluer_objects.README.process.ai.complete import complete
@@ -58,6 +57,23 @@ def process_ai(
                     download=download,
                 )
                 assert isinstance(metadata, dict)
+
+                continue
+
+            if task == "signature":
+                signature: List[str] = []
+                try:
+                    from bluer_agent import ICON, env, host
+
+                    signature = [
+                        f"{ICON} {env.BLUER_AGENT_CHAT_MODEL_NAME}",
+                    ] + host.signature()
+                except:
+                    from bluer_objects import host
+
+                    signature = host.signature()
+
+                output += [" | ".join(signature)]
 
                 continue
 
