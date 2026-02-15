@@ -73,7 +73,11 @@ def process_ai(
 
                     signature = host.signature()
 
-                output += [" | ".join(signature)]
+                output += [
+                    "",
+                    "---",
+                    " | ".join(signature),
+                ]
 
                 continue
 
