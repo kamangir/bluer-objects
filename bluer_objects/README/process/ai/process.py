@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Dict, Any
 
 
 from bluer_objects.metadata import get_from_object, post_to_object
@@ -18,16 +18,11 @@ def process_ai(
 
     logger.info("ai processing...")
 
+    variables.object_name = ""
     variables.ignore_started = False
     variables.context = []
 
-    metadata = get_from_object(
-        variables.object_name,
-        "bluer-README-metadata",
-        {},
-        download=download,
-    )
-    assert isinstance(metadata, dict)
+    metadata: Dict[str, Any] = {}
 
     output: List[str] = []
     for line in content:
@@ -55,6 +50,15 @@ def process_ai(
             if task == "object":
                 variables.object_name = task_info
                 logger.info(f"object_name={variables.object_name}")
+
+                metadata = get_from_object(
+                    variables.object_name,
+                    "bluer-README-metadata",
+                    {},
+                    download=download,
+                )
+                assert isinstance(metadata, dict)
+
                 continue
 
             logger.error(f"unknown task: ai:::{task}.")
@@ -66,11 +70,15 @@ def process_ai(
                 variables.context.append(line)
 
     return (
-        post_to_object(
-            variables.object_name,
-            "bluer-README-metadata",
-            metadata,
-            upload=upload,
+        (
+            post_to_object(
+                variables.object_name,
+                "bluer-README-metadata",
+                metadata,
+                upload=upload,
+            )
+            if variables.object_name
+            else True
         ),
         output,
     )
