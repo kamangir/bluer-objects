@@ -69,16 +69,13 @@ def process_ai(
         if not variables.ignore_started:
             variables.context.append(line)
 
-    return (
-        (
-            post_to_object(
-                variables.object_name,
-                "bluer-README-metadata",
-                metadata,
-                upload=upload,
-            )
-            if variables.object_name
-            else True
-        ),
-        output,
-    )
+    if variables.object_name:
+        if not post_to_object(
+            variables.object_name,
+            "bluer-README-metadata",
+            metadata,
+            upload=upload,
+        ):
+            return False, []
+
+    return True, output
