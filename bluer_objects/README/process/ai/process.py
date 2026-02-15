@@ -9,8 +9,8 @@ def process_ai(
     enabled: bool = True,
 ) -> List[str]:
     pieces = template_line.split("ai:::", 1)[1].split(" ", 1)
-    if len(pieces) < 2:
-        logger.warning(f"bad template line: {template_line}")
+    if len(pieces) < 1 if task in ["ignore"] else 2:
+        logger.error(f"bad template line: {template_line}")
         return [
             f"⚠️ bad template line: {template_line}",
         ]
