@@ -22,8 +22,6 @@ use `<object-name>` to store ai results.
 ai:::object <object-name>
 ```
 
-🔥
-
 ## details
 
 add details, such as this,
