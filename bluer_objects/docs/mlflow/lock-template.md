@@ -1,6 +1,6 @@
-# 🔒 Lock
+title:::
 
-Exclusive access control to shared objects through named locks.
+> exclusive access control to shared objects through named locks.
 
 ## concept
 
