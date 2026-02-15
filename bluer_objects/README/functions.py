@@ -103,7 +103,7 @@ def build(
     mermaid_started: bool = False
     for template_line in template:
         if template_line.startswith("ignore:::"):
-            content += [template_line.split(":::", 1)[1].strip()]
+            content.append(template_line)
             continue
 
         template_line = process_envs(template_line)
@@ -138,10 +138,14 @@ def build(
             continue
 
         if "include:::" in template_line:
-            content += process_include(
+            success, updated_content = process_include(
                 template_line,
                 file.path(template_filename),
             )
+            if not success:
+                return success
+
+            content += updated_content
             continue
 
         if "signature:::" in template_line:
@@ -227,5 +231,10 @@ def build(
     )
     if not success:
         return success
+
+    content = [
+        line.split("ignore:::", 1)[1].strip() if line.startswith("ignore:::") else line
+        for line in content
+    ]
 
     return file.save_text(filename, content)

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple
 
 from bluer_objects import file
 from bluer_objects import NAME as MY_NAME
@@ -8,7 +8,7 @@ from bluer_objects.logger import logger
 def process_include(
     template_line: str,
     template_path: str,
-) -> List[str]:
+) -> Tuple[bool, List[str]]:
     include_filename_relative = template_line.split(" ")[1].strip()
     include_filename = file.absolute(
         include_filename_relative,
@@ -17,7 +17,7 @@ def process_include(
 
     success, content_section = file.load_text(include_filename)
     if not success:
-        return success
+        return success, []
 
     content_section = [
         line for line in content_section if not line.startswith("used by:")
@@ -37,4 +37,4 @@ def process_include(
 
     logger.info(f"{MY_NAME}.build: including {include_filename} ...")
 
-    return content_section
+    return True, content_section
