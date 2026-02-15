@@ -60,9 +60,9 @@ def complete(
 
     # markdown normalization
     reply_lines = reply.split("$$")
-    for index in range(len(reply_lines)):
+    for index, line_ in enumerate(reply_lines):
         if index % 2 == 1:
-            reply_lines[index] = f"$${reply_lines[index]}$$"
+            reply_lines[index] = f"$${line_}$$"
     reply_lines = reduce(
         lambda x, y: x + y,
         [[line, ""] for line in reply_lines],
@@ -78,6 +78,6 @@ def complete(
         ]
         + reply_lines
         + [
-            f"</details>",
+            "</details>",
         ]
     )
