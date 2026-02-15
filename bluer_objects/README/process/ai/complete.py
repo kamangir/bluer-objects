@@ -75,9 +75,11 @@ def complete(
             "",
             "<details>",
             f"<summary>{query_id}</summary>",
+            "",
         ]
         + reply_lines
         + [
+            "",
             "</details>",
         ]
     )
