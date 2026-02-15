@@ -13,6 +13,9 @@ def process_ai(template_line: str) -> List[str]:
         ]
 
     task = pieces[0]
+    if task == "ignore":
+        return []
+
     if task == "object":
         variables.object_name = pieces[1]
         logger.info(f"object_name={variables.object_name}")

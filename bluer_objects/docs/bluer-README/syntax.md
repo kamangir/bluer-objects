@@ -2,6 +2,20 @@
 
 ## ai
 
+### ignore
+
+ignore in the conversation with ai.
+
+```python
+ai:::ignore
+
+some text
+
+ai:::ignore
+```
+
+### objects
+
 use `<object-name>` to store ai results.
 
 ```python
