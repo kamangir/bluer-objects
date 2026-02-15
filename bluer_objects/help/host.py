@@ -56,8 +56,23 @@ def help_shutdown(
     )
 
 
+def help_tensor_processing_signature(
+    tokens: List[str],
+    mono: bool,
+) -> str:
+    return show_usage(
+        [
+            "@host",
+            "tensor_processing_signature",
+        ],
+        "show tensor_processing_signature.",
+        mono=mono,
+    )
+
+
 help_functions = {
     "get": help_get,
     "reboot": help_reboot,
     "shutdown": help_shutdown,
+    "tensor_processing_signature": help_tensor_processing_signature,
 }

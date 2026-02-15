@@ -40,6 +40,13 @@ function bluer_objects_host() {
         return
     fi
 
+    if [[ "$task" == "tensor_processing_signature" ]]; then
+        python3 -m bluer_options.host \
+            tensor_processing_signature \
+            "${@:3}"
+        return
+    fi
+
     bluer_ai_log_error "@host: $task: command not found."
     return 1
 }

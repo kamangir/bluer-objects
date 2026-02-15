@@ -46,6 +46,7 @@ function test_bluer_objects_help() {
         "@host get" \
         "@host reboot" \
         "@host shutdown" \
+        "@host tensor_processing_signature" \
         \
         "@lock" \
         "@lock lock" \

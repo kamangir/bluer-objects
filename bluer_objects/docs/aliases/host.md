@@ -15,4 +15,7 @@
 	[dryrun,rpi] \
 	[<machine-name>]
  . shutdown.
+@host \
+	tensor_processing_signature
+ . show tensor_processing_signature.
 ```
