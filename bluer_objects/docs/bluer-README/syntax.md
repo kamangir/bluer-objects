@@ -1,5 +1,15 @@
 # bluer-README: syntax
 
+## ai
+
+use `<object-name>` to store ai results.
+
+```python
+ai:::object <object-name>
+```
+
+🔥
+
 ## details
 
 add details, such as this,
