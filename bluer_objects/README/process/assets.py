@@ -8,7 +8,7 @@ def process_token(
     if not token.startswith("assets:::"):
         return token
 
-    suffix: str = token.split(":::")[1].strip()
+    suffix: str = token.split(":::", 1)[1].strip()
     volume: str = ""
 
     if ":::" in suffix:
