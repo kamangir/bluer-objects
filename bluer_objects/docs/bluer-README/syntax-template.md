@@ -87,6 +87,7 @@ to show images, or to make files downloadable.
 link to `<filename>` in an `<object-name>` in an assets repo.
 ```python
 ignore::: assets:::<object-name>/<filename>
+ignore::: assets:::<volume>:::<object-name>/<filename>
 ```
 
 downloadable link to `<object-name>`.
