@@ -92,6 +92,7 @@ to show images, or to make files downloadable.
 link to `<filename>` in an `<object-name>` in an assets repo.
 ```python
 assets:::<object-name>/<filename>
+assets:::<volume>:::<object-name>/<filename>
 ```
 
 downloadable link to `<object-name>`.
